@@ -17,7 +17,6 @@
                 <th class="column-title">{{ __('user.index.username') }}</th>
                 <th class="column-title">{{ __('user.index.email') }} </th>
                 <th class="column-title">{{ __('user.index.fullname') }}</th>
-                <th class="column-title">{{ __('user.index.address') }}</th>
                 <th class="column-title">{{ __('user.index.gender') }}</th>
                 <th class="column-title">{{ __('user.index.is_active') }}</th>
                 <th class="column-title no-link last"><span class="nobr">{{ __('user.index.action') }}</span>
@@ -27,20 +26,26 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="even pointer">
-                <td class=" ">1</td>
-                <td class=" ">MaiLuong </td>
-                <td class=" ">mailuong@gmail.com </td>
-                <td class=" ">Lương Thị Mai</td>
-                <td class=" ">Quảng Nam</td>
-                <td class="a-right a-right ">Nữ</td>
-                <td class=" ">0</td>
-                <td class=" last"><a href="#">{{ __('user.index.edit') }} | {{ __('user.index.add') }}</a>
-                <td class=" last"><a href="{{ route('admin.users.show', array('id' => 1)) }}">{{ __('user.index.detail') }}</a>
-                </td>
-              </tr>
+              @foreach ($result as $user)
+                <tr class="even pointer">
+                  <td class=" ">{{ $user->id }}</td>
+                  <td class=" ">{{ $user->username }}</td>
+                  <td class=" ">{{ $user->email }}</td>
+                  <td class=" ">{{ $user->userInfo['full_name'] }}</td>
+                  @if ( $user->userInfo['gender'] == 1 )
+                    <td class="a-right a-right ">{{ __('user.index.female') }}</td>
+                  @else 
+                    <td class="a-right a-right ">{{ __('user.index.male') }}</td>
+                  @endif
+                  <td class=" ">0</td>
+                  <td class="last"><a href="#"><i class="fa fa-edit"></i></a>|<a href=""><i class="fa fa-trash"></i></a>
+                  <td class="last"><a href="{{ route('admin.users.show', array('id' => $user->id)) }}">{{ __('user.index.detail') }}</a>
+                  </td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
+          {{$result->render()}}
         </div>
       </div>
     </div>

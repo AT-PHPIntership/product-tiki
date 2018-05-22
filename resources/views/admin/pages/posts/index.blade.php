@@ -1,6 +1,8 @@
 @extends('admin.layout.master')
 @section('title', __('post.admin.list.title') )
 @section('content')
+<script src="/js/messages.js"></script>
+<script src="/js/post.js"></script>
   <div class="right_col" role="main" class="index-main">
     <div class="">
       <div class="page-title">
@@ -45,6 +47,8 @@
               </h2>
               <div class="clearfix"></div>
             </div>
+              <h2 id="info-message">@if (session()->has('message')) {{ session()->pull('message', 'default') }} @endif</h2>
+            
             <div class="x_content" class="list-table">
               <table class="table table-hover">
                 <thead>
@@ -71,7 +75,7 @@
                       @endif
                     </td>
                     <td>{{ $post['content'] }}</td>
-                    <td>
+                    <td id='status{{ $post['id'] }}'>
                         @if ($post['status'] ) 
                           {{ __('common.approve') }}
                         @else
@@ -80,11 +84,21 @@
                     </td>
                     <td>{{ $post['rating'] }}</td>
                     <td>
-                      <form action="" class="col-md-4">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-edit icon-size" ></i></button>
+                      <form action="" class="col-md-4" method="POST">
+                        @method('PUT')
+                        @csrf
+                        <button id="update{{ $post['id'] }}" onclick="updateStatus(event, {{ $post['id'] }}, '{{ route('admin.posts.update.status', ['id' => $post['id']]) }}')" class="btn btn-primary update-btn" type="button">
+                          @if ($post['status'])
+                            <i class="fa fa-times-circle icon-size" ></i>
+                          @else
+                            <i class="fa fa-check-circle icon-size" ></i>
+                          @endif
+                        </button>
                       </form>
-                      <form action="" class="col-md-4">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-trash icon-size" ></i></button>
+                      <form action="{{ route('admin.posts.destroy', ['id' => $post['id']]) }}" class="col-md-4" method="POST" id="delete{{ $post['id'] }}">
+                        @csrf
+                        @method('DELETE')
+                        <button onclick="deletePost(event, {{ $post['id'] }})" class="btn btn-danger" type="submit"><i class="fa fa-trash icon-size" ></i></button>
                       </form>
                       <form action="{{ route('admin.posts.show', ['id' => $post['id']]) }}" class="col-md-4">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-eye icon-size" ></i></button>

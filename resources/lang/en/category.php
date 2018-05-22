@@ -17,6 +17,9 @@ return [
             'title' => 'Add Category',
             'name' => 'Name Category',
             'parent_category' => 'Parent Category',
+            'submit' => 'Submit',
+            'reset' => 'Reset',
+            'placeholder_name' => 'Name Category',
         ],
     ]
 ];

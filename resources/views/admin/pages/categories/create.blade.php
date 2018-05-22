@@ -16,7 +16,7 @@
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ __('category.admin.add.name') }}</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <input type="text" class="form-control" placeholder="Name Category">
+                  <input type="text" class="form-control" placeholder="{{ __('category.admin.add.placeholder_name') }}">
                 </div>
               </div>
               <div class="form-group">
@@ -33,9 +33,8 @@
               </div>
               <div class="form-group">
                 <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                  <button type="button" class="btn btn-primary">Cancel</button>
-                  <button type="reset" class="btn btn-primary">Reset</button>
-                  <button type="submit" class="btn btn-success">Submit</button>
+                  <button type="reset" class="btn btn-primary">{{ __('category.admin.add.reset') }}</button>
+                  <button type="submit" class="btn btn-success">{{ __('category.admin.add.submit') }}</button>
                 </div>
               </div>
             </form>

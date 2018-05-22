@@ -12,7 +12,11 @@ return [
             'type_comments' => 'Comments',
             'product_id' => 'Product ID',
             'user_id' => 'User ID',
-            'rate' => 'Reviews Rating'
+            'rate' => 'Reviews Rating',
+            'updated' => 'Updated!!!!',
+            'deleted' => 'Deleted!!!!',
+            'delete_msg' => 'Do you want to delete posts with ID ',
+            'id_not_found' => 'ID not found'
         ],
         'list' => [
             'title' => 'Admin Posts Management',
