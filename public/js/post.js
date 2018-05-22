@@ -21,16 +21,16 @@ function loadAjax(url, id) {
       if ( xmlhttp.readyState === 4 && xmlhttp.status === 200 ) {
         json_data = JSON.parse(xmlhttp.responseText);
         status = json_data['status'];
-        var btnStatus = document.getElementById('update'+id).innerHTML;
-        var textStatus = document.getElementById('update'+id).innerHTML;
-        btnStatus = '';
+        var btnStatus = document.getElementById('update'+id);
+        var textStatus = document.getElementById('status'+id);
+        btnStatus.innerHTML = '';
         if (status == 1) {
-            btnStatus = pending;
-            textStatus = Lang.get('common.approve');
+            btnStatus.innerHTML = pending;
+            textStatus.innerHTML = Lang.get('common.approve');
         }
         if (status == 0) {
-            btnStatus = approved;
-            textStatus = Lang.get('common.pending');
+            btnStatus.innerHTML = approved;
+            textStatus.innerHTML = Lang.get('common.pending');
         }
         document.getElementById('info-message').innerHTML = json_data['msg'];
       }
