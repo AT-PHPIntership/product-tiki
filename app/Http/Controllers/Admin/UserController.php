@@ -67,7 +67,6 @@ class UserController extends Controller
             $userInfo->full_name = $request->full_name;
             $userInfo->address = $request->address;
             $userInfo->phone = $request->phone;
-            $userInfo->identity_card = $request->identity_card;
             if ($request->gender) {
                 $userInfo->gender = $request->gender;
             }
