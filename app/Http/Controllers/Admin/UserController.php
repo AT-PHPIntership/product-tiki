@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserRequest;
 use App\Models\User;
+use App\Models\UserInfo;
 
 class UserController extends Controller
 {
@@ -32,5 +34,15 @@ class UserController extends Controller
         $result = User::with('userinfo')->find($id);
         $data['result'] = $result;
         return view('admin.pages.users.show', $data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.pages.users.create');
     }
 }
