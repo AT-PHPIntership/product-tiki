@@ -62,31 +62,20 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
+        $updatedUser = $request->except(["_token", "_method", "submit", "username", "email"]);
         try {
-            $userInfo = UserInfo::where('user_id', $id)->firstOrFail();
-            $userInfo->full_name = $request->full_name;
-            $userInfo->address = $request->address;
-            $userInfo->phone = $request->phone;
-            if ($request->gender) {
-                $userInfo->gender = $request->gender;
-            }
-            $userInfo->dob = $request->dob;
             if ($request->hasFile('avatar')) {
                 $image = $request->file('avatar');
                 $nameNew = time().'.'.$image->getClientOriginalExtension();
                 $destinationPath = public_path('/images/avatar/');
-                $userInfo->avatar = $nameNew;
-                $userInfo->save();
+                $updatedUser['avatar'] = $nameNew;
                 $image->move($destinationPath, $nameNew);
-            } else {
-                $userInfo->avatar = $request->avatar;
-                $userInfo->save();
             }
-            $msg = trans('messages.update_user_success');
-            return redirect()->route('admin.users.index')->with('message', $msg);
+            $updatedUser["user_id"] = $id;
+            UserInfo::firstOrCreate($updatedUser);
+            return redirect()->route('admin.users.index')->with('message', trans('messages.update_user_success'));
         } catch (ModelNotFoundException $e) {
-            $msg = trans('messages.update_user_fail');
-            return redirect()->back()->with('message', $msg);
+            return redirect()->back()->with('message', trans('messages.update_user_fail'));
         }
     }
 

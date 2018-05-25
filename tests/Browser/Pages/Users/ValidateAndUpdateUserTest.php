@@ -27,7 +27,7 @@ class ValidateAndUpdateUserTest extends DuskTestCase
      *
      * @return void
      */
-    public function testCreateUserUrl()
+    public function testUpdateUserUrl()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/users')
@@ -63,6 +63,7 @@ class ValidateAndUpdateUserTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/users/2/edit')
                     ->assertSee(__('user.index.updateuser'))
+                    ->screenshot('abc')
                     ->type('full_name', 'mai luong')
                     ->type('address', 'quang nam')
                     ->type('phone', '0123345454')
