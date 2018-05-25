@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     protected $table = 'products';
+    use SoftDeletes;
     const AVAILABLE = 1;
 
     /**
@@ -17,6 +19,8 @@ class Product extends Model
     protected $fillable = [
         'category_id', 'name', 'description', 'total_rate', 'rate_count', 'avg_rating', 'price', 'quantity', 'status',
     ];
+
+    protected $dates = ['deleted_at'];
 
     /**
      * Get OrderDetail Object
@@ -47,7 +51,7 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\Post', 'product_id', 'id');
     }
-    
+
     /**
      * Get Category Object
      *

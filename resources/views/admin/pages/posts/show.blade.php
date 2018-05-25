@@ -9,12 +9,14 @@
         </div>
         <div class="title_right">
           <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="{{ __('post.admin.list.search') }}">
-              <span class="input-group-btn">
-                <button class="btn btn-default" type="button">{{ __('post.admin.list.go') }}</button>
-              </span>
-            </div>
+            <form action="{{ route('admin.posts.show', ['id' => $post_id]) }}" method="GET">
+              <div class="input-group">
+                <input type="text" name="content" class="form-control" placeholder="{{ __('post.admin.list.search') }}">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit">{{ __('post.admin.list.go') }}</button>
+                </span>
+              </div>
+            </form>
           </div>
         </div>
       </div>

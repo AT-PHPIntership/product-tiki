@@ -61,28 +61,30 @@
                   </li>
                   <li class=""><a><i class="fa fa-table"></i> {{ __('messages.categories') }} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
-                      <li class=""><a href="{{ route('admin.categories.index') }}"> @lang('messages.show_all') <i class="fa fa-th-list"></i> </a></li>
-                      <li class=""><a href="{{ route('admin.categories.create') }}"> @lang('messages.add') <i class="fa fa-plus-circle"></i></a></li>
+                      <li class=""><a href="{{ route('admin.categories.index') }}"> @lang('messages.show_category') <i class="fa fa-th-list"></i> </a></li>
+                      <li class=""><a href="{{ route('admin.categories.create') }}"> @lang('messages.add_category') <i class="fa fa-plus-circle"></i></a></li>
                     </ul>
                   </li>
                   <li class=""><a><i class="fa fa-ellipsis-h"></i> {{ __('messages.products') }} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
-                      <li class=""><a href="{{ route('admin.products.index') }}"> @lang('messages.show_all')  <i class="fa fa-th-list"></i></a></li>
-                      <li class=""><a href="{{ route('admin.products.create') }}"> @lang('messages.add') <i class="fa fa-plus-circle"></i></a></li>
+                      <li class=""><a href="{{ route('admin.products.index') }}"> @lang('messages.show_product')  <i class="fa fa-th-list"></i></a></li>
+                      <li class=""><a href="{{ route('admin.products.create') }}"> @lang('messages.add_product') <i class="fa fa-plus-circle"></i></a></li>
                     </ul>
                   </li>
                   <li class=""><a><i class="fa fa-bookmark"></i> {{ __('messages.posts') }} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
-                      <li class=""><a href="{{ route('admin.posts.index') }}"> @lang('messages.show_all') <i class="fa fa-th-list"></i></a></li>
-                      <li class=""><a href="{{ route('admin.posts.index') }}"> @lang('messages.comments') <i class="fa fa-comments"></i></a></li>
-                      <li class=""><a href="{{ route('admin.posts.index') }}"> @lang('messages.reviews') <i class="fa fa-star"></i></a></li>
-                      <li class=""><a href="{{ route('admin.posts.create') }}"> @lang('messages.add') <i class="fa fa-plus-circle"></i></a></li>
+                      <li class=""><a href="{{ route('admin.posts.index') }}"> @lang('messages.show_post') <i class="fa fa-th-list"></i></a></li>
                     </ul>
                   </li>
                   <li class=""><a><i class="fa fa-users"></i> {{ __('messages.users') }} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
                       <li class=""><a href="{{ route('admin.users.index') }}"> @lang('messages.show_all') <i class="fa fa-th-list"></i></a></li>
                       <li class=""><a href="{{ route('admin.users.create') }}"> @lang('messages.add') <i class="fa fa-plus-circle"></i></a></li>
+                    </ul>
+                  </li>
+                  <li class=""><a><i class="fa fa-list-alt"></i> {{ __('messages.orders') }} <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu" style="display: none;">
+                      <li class=""><a href="{{ route('admin.orders.index') }}"> @lang('messages.show_order') <i class="fa fa-th-list"></i></a></li>
                     </ul>
                   </li>
                 </ul>

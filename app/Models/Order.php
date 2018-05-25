@@ -8,6 +8,11 @@ class Order extends Model
 {
     protected $table = 'orders';
 
+    const APPROVED = 1;
+    const UNAPPROVED = 0;
+    const ORDER_DESC = 'DESC';
+    const ORDER_ASC = 'ASC';
+    
     /**
      * The attributes that are mass assignable.
      *

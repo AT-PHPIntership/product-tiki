@@ -28,6 +28,9 @@
                   <th class="column-title no-link last">
                     <span class="nobr"> @lang('product.index.action') </span>
                   </th>
+                  <th class="column-title no-link last">
+                    <span class="nobr"> @lang('product.index.action') </span>
+                  </th>
                 </tr>
               </thead>
 
@@ -44,8 +47,16 @@
                     <td class=" ">
                       <img src="" alt="">
                     </td>
+                    <td class=" ">
+                      <a href="#"><i class="fa fa-edit"></i></a>
+                    </td>
                     <td class=" last">
-                      <a href="#"> @lang('product.index.edit') </a>
+                      <a href="{!! route('admin.products.edit', ['id' => $product['id']]) !!}"> @lang('product.index.edit') </a>
+                      <form id="delete-prd{{ $product->id }}" action="{!! route('admin.products.destroy', ['id' => $product['id']]) !!}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <button onclick="deleteProduct(event, {{ $product->id }})" type="submit"><i class="fa fa-trash btn-danger"></i></button>
+                      </form>
                     </td>
                   </tr>
                 </tbody>
@@ -59,5 +70,5 @@
     </div>
   </div>
 </div>
-
+<script src="/js/product.js"></script>
 @endsection

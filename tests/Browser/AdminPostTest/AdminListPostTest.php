@@ -19,7 +19,7 @@ class AdminListPostTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/posts')
-                    ->assertSee(__('post.admin.list.subtitle_index'));
+                    ->assertSee('All Posts');
         });
     }
 
@@ -40,7 +40,7 @@ class AdminListPostTest extends DuskTestCase
         $this->browse(function (Browser $browser) use ($testContent) {
             $browser->visit('/admin/posts')
                     ->type('content', $testContent)
-                    ->press(__('post.admin.list.go'))
+                    ->press('Go!')
                     ->assertSee($testContent);
         });
     }

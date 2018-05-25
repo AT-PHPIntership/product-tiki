@@ -33,14 +33,19 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id post id
+     * @param \Illuminate\Http\Request $request request
+     * @param int                      $id      post id
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $perPage = config('define.post.limit_rows');
-        $comments = Post::find($id)->comments()->with('user')->paginate($perPage);
+        $comments = Post::find($id)->comments()->when(isset($request->content), function ($query) use ($request) {
+            return $query->where('content', 'like', "%$request->content%");
+        })
+        ->with('user')->paginate($perPage);
+        $comments->appends(request()->query());
         $data['comments'] = $comments;
         $data['post_id'] = $id;
         return view('admin.pages.posts.show', $data);

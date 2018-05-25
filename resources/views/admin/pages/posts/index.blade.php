@@ -101,7 +101,7 @@
                         <button onclick="deletePost(event, {{ $post['id'] }})" class="btn btn-danger" type="submit"><i class="fa fa-trash icon-size" ></i></button>
                       </form>
                       <form action="{{ route('admin.posts.show', ['id' => $post['id']]) }}" class="col-md-4">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-eye icon-size" ></i></button>
+                        <button class="btn btn-primary" type="submit" id='view{{ $post['id'] }}'><i class="fa fa-eye icon-size" ></i></button>
                       </form>
                     </td>
                   </tr>

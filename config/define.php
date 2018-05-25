@@ -13,6 +13,9 @@ return [
     ],
     'category' => [
         'limit_rows' => 10
+    ],
+    'order' => [
+        'limit_rows' => 5
     ]
 
 ];
