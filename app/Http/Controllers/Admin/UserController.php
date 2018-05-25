@@ -88,4 +88,22 @@ class UserController extends Controller
     {
         return view('admin.pages.users.create');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        if ($user) {
+            $user->delete();
+            session(['message' => __('user.admin.form.deleted')]);
+            return redirect()->route('admin.posts.index');
+        } else {
+            session(['message' => __('user.admin.form.id_not_found')]);
+        }
+    }
 }
