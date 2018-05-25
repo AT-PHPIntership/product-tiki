@@ -102,7 +102,7 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $user->delete();
         } catch (ModelNotFoundException $e) {
-            session()->flash('message', trans('messages.delete_fail'));
+            session()->flash('message', trans('messages.delete_user_fail'));
         }
         return back();
     }
