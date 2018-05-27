@@ -1,6 +1,6 @@
 function deleteUser(e, id) {
     e.preventDefault();
-    msg = "Do you want to delete User ID = " + id;
+    msg = "Do you want to delete ?";
     if (confirm(msg)) {
         document.getElementById('delete-user'+id).submit();
     }
