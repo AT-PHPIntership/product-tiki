@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $listCategories = Category::paginate(config('define.category.limit_rows'));
+        $listCategories = Category::with('parentCategories')->withCount('products')->paginate(config('define.category.limit_rows'));
         $data['listCategories'] = $listCategories;
         return view('admin.pages.categories.index', $data);
     }
@@ -80,7 +80,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $itemCategory = Category::find($id);
+        $itemCategory = Category::with('parentCategories')->find($id);
         $childCategory = Category::with('categories')->where('parent_id', $id)->get();
         $data['itemCategory'] = $itemCategory;
         $data['childCategory'] = $childCategory;

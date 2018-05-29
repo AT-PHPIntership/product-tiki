@@ -14,6 +14,7 @@ return [
             'updated_at' => 'Updated At',
             'action' => 'Action',
             'child_category' => 'Child Category',
+            'sum_product' => 'Sum Product',
         ],
         'add' => [
             'title' => 'Add Category',
@@ -25,6 +26,9 @@ return [
         ],
         'edit' => [
             'title' => 'Edit Category',
+        ],
+        'show' => [
+            'title' => 'Show Category',
         ],
         'message' => [
             'add' => 'Create New Category Successfull!',

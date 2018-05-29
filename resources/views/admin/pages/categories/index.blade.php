@@ -16,24 +16,32 @@
             <table class="table table-striped jambo_table bulk_action">
               <thead>
                 <tr class="headings">
-                  <th class="column-title" style="display: table-cell;">{{ __('category.admin.table.id') }}</th>
-                  <th class="column-title" style="display: table-cell;">{{ __('category.admin.table.name') }}</th>
-                  <th class="column-title" style="display: table-cell;">{{ __('category.admin.table.parent_id') }}</th>
-                  <th class="column-title" style="display: table-cell;">{{ __('category.admin.table.created_at') }}</th>
-                  <th class="column-title" style="display: table-cell;">{{ __('category.admin.table.updated_at') }}</th>
-                  <th class="column-title no-link last" style="display: table-cell;"><span class="nobr">{{ __('category.admin.table.action') }}</span>
-                  </th>
+                  <th class="column-title col-md-3">{{ __('category.admin.table.name') }}</th>
+                  <th class="column-title col-md-3">{{ __('category.admin.add.parent_category') }}</th>
+                  <th class="column-title col-md-3">{{ __('category.admin.table.sum_product') }}</th>
+                  <th class="column-title no-link last"><span class="nobr">{{ __('category.admin.table.action') }}</span></th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($listCategories as $list)
                 <tr class="even pointer">
-                  <td class=" ">{{ $list->id }}</td>
-                  <td><a href="{{ route('admin.categories.show', ['id' => $list->id]) }}">{{ $list->name }}</td>
-                  <td class=" ">{{ $list->parent_id }}</td>
-                  <td class=" ">{{ $list->created_at }}</td>
-                  <td class="a-right a-right ">{{ $list->updated_at }}</td>
-                  <td class="last "><a href="{{ route('admin.categories.edit', ['id' => $list->id] ) }}"><i class="fa fa-edit"></i></a> | <a href=""><i class="fa fa-trash"></i></a>
+                  <td>{{ $list->name }}</td>
+                  <td class=" ">
+                    @foreach ($list->parentCategories as $cat)
+                      {{ $cat->name }}
+                    @endforeach
+                  </td>
+                  <td>{{ $list->products_count }}</td>
+                  <td>
+                    <form class="col-md-4">
+                      <a class="btn btn-primary" href="{{ route('admin.categories.edit', ['id' => $list->id] ) }}"><i class="fa fa-edit"></i></a>
+                    </form>
+                    <form action="" class="col-md-4" method="POST" id="">
+                      <button class="btn btn-danger" type="submit"><i class="fa fa-trash icon-size" ></i></button>
+                    </form>
+                    <form class="col-md-4">
+                      <a class="btn btn-primary" href="{{ route('admin.categories.show', ['id' => $list->id]) }}"><i class="fa fa-eye icon-size" ></i></a>
+                    </form>
                   </td>
                 </tr>
                 @endforeach

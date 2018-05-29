@@ -10,7 +10,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>{{ __('category.admin.list.title') }}</h2>
+          <h2>{{ __('category.admin.show.title') }}</h2>
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
@@ -18,25 +18,26 @@
             <table class="table table-striped jambo_table bulk_action">
               <thead>
                 <tr class="headings">
-                  <th class="column-title" style="display: table-cell;">{{ __('category.admin.table.id') }}</th>
                   <th class="column-title" style="display: table-cell;">{{ __('category.admin.table.name') }}</th>
                   <th class="column-title" style="display: table-cell;">{{ __('category.admin.table.child_category') }}</th>
-                  <th class="column-title" style="display: table-cell;">{{ __('category.admin.table.created_at') }}</th>
-                  <th class="column-title" style="display: table-cell;">{{ __('category.admin.table.updated_at') }}</th>
+                  <th class="column-title" style="display: table-cell;">{{ __('category.admin.add.parent_category') }}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="even pointer">
-                  <td>{{ $itemCategory->id }}</td>
                   <td>{{ $itemCategory->name }}</td>
                   <td></td>
-                  <td>{{ $itemCategory->created_at }}</td>
-                  <td class="a-right a-right ">{{ $itemCategory->updated_at }}</td>
-                  </td>
+                  <td></td>
                 </tr>
+                @foreach ($itemCategory->parentCategories as $parent)
+                <tr class="even pointer">
+                  <td></td>
+                  <td></td>
+                  <td>{{ $parent->name }}</td>
+                </tr>
+                @endforeach
                 @foreach ($childCategory as $child)
                 <tr class="even pointer">
-                  <td>{{ $child->id }}</td>
                   <td></td>
                   <td id="showChild">
                   {{ $child->name }}
@@ -46,9 +47,7 @@
                     @endforeach
                     </ul>
                   </td>
-                  <td>{{ $child->created_at }}</td>
-                  <td class="a-right a-right ">{{ $child->updated_at }}</td>
-                  </td>
+                  <td></td>
                 </tr>
                 @endforeach
               </tbody>
