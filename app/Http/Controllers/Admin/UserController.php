@@ -71,8 +71,7 @@ class UserController extends Controller
                 $updatedUser['avatar'] = $nameNew;
                 $image->move($destinationPath, $nameNew);
             }
-            $updatedUser["user_id"] = $id;
-            UserInfo::firstOrCreate($updatedUser);
+            UserInfo::updateOrCreate(['user_id' => $id] ,$updatedUser);
             return redirect()->route('admin.users.index')->with('message', trans('messages.update_user_success'));
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with('message', trans('messages.update_user_fail'));
