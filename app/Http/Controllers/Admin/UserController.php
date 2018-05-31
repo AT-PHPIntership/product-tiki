@@ -92,18 +92,17 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id id
+     * @param App\Models\User $user user
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         try {
-            $user = User::findOrFail($id);
             $user->delete();
         } catch (ModelNotFoundException $e) {
             session()->flash('message', trans('messages.delete_user_fail'));
         }
-        return back();
+        return redirect()->back()->with('message', trans('messages.delete_user_success'));;
     }
 }

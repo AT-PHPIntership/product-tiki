@@ -25,5 +25,6 @@ return [
     'show_order' => 'Show Order',
 
     'delete_fail' => 'Delete Failed',
-    'delete_user_fail' => 'Delete User Failed',
+    'delete_user_success' => 'Delete User Successfully',
+    'delete_user_fail' => 'Delete User Fail',
 ];
