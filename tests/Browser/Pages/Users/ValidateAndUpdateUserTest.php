@@ -32,7 +32,7 @@ class ValidateAndUpdateUserTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/users')
                     ->visit('/admin/users/2/edit')
-                    ->assertSee( __('user.index.updateuser'));
+                    ->assertSee( __('Update User'));
         });
     }
 
@@ -46,10 +46,10 @@ class ValidateAndUpdateUserTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/users/2/edit')
                 ->press( __('user.index.update') )
-                ->pause(1000)
                 ->assertSee('The full name must be a string.')
                 ->assertSee('The address must be a string.')
-                ->assertSee('The phone format is invalid.');
+                ->assertSee('The phone format is invalid.')
+                ->assertSee('The identity card format is invalid.');
         });
     }
 
@@ -62,7 +62,7 @@ class ValidateAndUpdateUserTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/users/2/edit')
-                    ->assertSee(__('user.index.updateuser'))
+                    ->assertSee(__('Update User'))
                     ->screenshot('abc')
                     ->type('full_name', 'mai luong')
                     ->type('address', 'quang nam')
