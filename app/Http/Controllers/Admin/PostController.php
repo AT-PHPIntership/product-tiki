@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PostController extends Controller
 {
@@ -33,14 +35,19 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id post id
+     * @param \Illuminate\Http\Request $request request
+     * @param int                      $id      post id
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $perPage = config('define.post.limit_rows');
-        $comments = Post::find($id)->comments()->with('user')->paginate($perPage);
+        $comments = Post::find($id)->comments()->when(isset($request->content), function ($query) use ($request) {
+            return $query->where('content', 'like', "%$request->content%");
+        })
+        ->with('user')->paginate($perPage);
+        $comments->appends(request()->query());
         $data['comments'] = $comments;
         $data['post_id'] = $id;
         return view('admin.pages.posts.show', $data);
@@ -55,13 +62,14 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
-        if ($post) {
+        try {
+            $post = Post::findOrFail($id);
             $post->delete();
             session(['message' => __('post.admin.form.deleted')]);
-            return redirect()->route('admin.posts.index');
-        } else {
+        } catch (ModelNotFoundException $e) {
             session(['message' => __('post.admin.form.id_not_found')]);
+        } finally {
+            return redirect()->route('admin.posts.index');
         }
     }
 }

@@ -26,12 +26,15 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules(Request $request)
     {
-        $userInfo = UserInfo::find($request->id);
+        $user = $this->route()->parameter('user');
+        $userInfo = User::with('userInfo')->where('id', $user->id)->get();
         return [
-            'full_name'      => 'string|min:0|max:255',
+            'full_name'       => 'string|max:255',
             'avatar'         => 'image|mimes:png,jpg,jpeg',
-            'address'        => 'string|min:0|max:255',
+            'birthday'       => 'date_format:"Y-m-d"',
+            'address'        => 'string|max:255',
             'phone'          => 'regex:/\(?([0-9]{3})\)?([ . -]?)([0-9]{3})\2([0-9]{4})/',
+            'identity_card'  => 'regex:/\(?([0-9]{3})\)?([ . -]?)([0-9]{3})\2([0-9]{3})/|unique:user_info,identity_card,' . $userInfo[0]['userInfo']->identity_card .',identity_card',
         ];
     }
 }

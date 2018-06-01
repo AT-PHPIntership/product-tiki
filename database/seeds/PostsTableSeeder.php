@@ -11,7 +11,7 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory('App\Models\Post', 5)->states('rating')->create();
-        factory('App\Models\Post', 5)->states('comment')->create();
+        factory('App\Models\Post', 50)->states('rating')->create();
+        factory('App\Models\Post', 30)->states('comment')->create();
     }
 }

@@ -3,10 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
 {
+    use SoftDeletes;
     protected $table = 'orders';
+
+    const APPROVED = 1;
+    const UNAPPROVED = 0;
+    const ORDER_DESC = 'DESC';
+    const ORDER_ASC = 'ASC';
+    
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that are mass assignable.

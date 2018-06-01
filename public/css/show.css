@@ -1,0 +1,17 @@
+#showChild {
+  position: relative;
+}
+#showChild ul {
+  position: absolute;
+  text-align: left;
+  left: 40%;
+  width: 100%;
+  visibility: hidden;
+  top: 25%;
+}
+#showChild ul li {
+  list-style: none;
+}
+#showChild:hover .child {
+  visibility: visible!important;
+}

@@ -23,69 +23,75 @@
               </div>
             </div>
           @endif
-          <form id="demo-form2" method="POST" action="{!! route('admin.users.update', array('id' => $result->id)) !!}" enctype="multipart/form-data" class="form-horizontal form-label-left">
+          <form id="demo-form2" method="POST" action="{!! route('admin.users.update', array('id' => $user->id)) !!}" enctype="multipart/form-data" class="form-horizontal form-label-left">
             @csrf
             @method('PUT')
 
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">{{ __('user.index.username') }}<span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">{{ __('user.index.username') }}<span class="required">{{ __('user.index.requied') }}</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="username" name="username" readonly="readonly" value="{{ $result->username }}" class="form-control col-md-7 col-xs-12" >
+                <input type="text" id="username" name="username" readonly="readonly" value="{{ $user->username }}" class="form-control col-md-7 col-xs-12" >
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">{{ __('user.index.email') }}<span class="required">*</span>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">{{ __('user.index.email') }}<span class="required">{{ __('user.index.requied') }}</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="email" name="email" value="{{ $result->email }}" readonly="readonly" class="form-control col-md-7 col-xs-12" >
+                <input type="text" id="email" name="email" value="{{ $user->email }}" readonly="readonly" class="form-control col-md-7 col-xs-12" >
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fullname">{{ __('user.index.fullname') }}<span class="required">*</span></label>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fullname">{{ __('user.index.fullname') }}<span class="required">{{ __('user.index.requied') }}</span></label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="full_name" name="full_name" value="{{ $result->userInfo['full_name'] }}" class="form-control col-md-7 col-xs-12">
+                <input type="text" id="full_name" name="full_name" value="{{ old('full_name', $user->userInfo['full_name']) }}" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">{{ __('user.index.address') }}<span class="required">*</span></label>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">{{ __('user.index.address') }}<span class="required">{{ __('user.index.requied') }}</span></label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="address" name="address" value="{{ $result->userInfo['address'] }}" class="form-control col-md-7 col-xs-12">
+                <input type="text" id="address" name="address" value="{{ old('address', $user->userInfo['address']) }}" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">{{ __('user.index.phone') }}<span class="required">*</span></label>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="phone">{{ __('user.index.phone') }}<span class="required">{{ __('user.index.requied') }}</span></label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="tel" id="phone" name="phone" value="{{ $result->userInfo['phone'] }}" class="form-control col-md-7 col-xs-12">
+                <input type="text" id="phone" name="phone" value="{{ old('phone', $user->userInfo['phone']) }}" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="avatar">{{ __('user.index.avatar') }}<span class="required">*</span></label>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="identity_card">{{ __('user.index.indentity_card') }}<span class="required">{{ __('user.index.requied') }}</span></label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="file" id="avatar" name="avatar" value="{{ $result->userInfo['avatar_url'] }}" class="form-control col-md-7 col-xs-12">
-                <img src="{{ $result->userInfo['avatar_url'] }}" alt="" >
+                <input type="text" id="identity_card" name="identity_card" value="{{ old('identity_card', $user->userInfo['identity_card']) }}" class="form-control col-md-7 col-xs-12">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ __('user.index.gender') }}<span class="required">*</span></label>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="avatar">{{ __('user.index.avatar') }}</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <input type="file" id="avatar" name="avatar" value="{{ old('avatar', $user->userInfo['avatar_url']) }}" class="form-control col-md-7 col-xs-12">
+                <img src="{{ $user->userInfo['avatar_url'] }}" alt="" >
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ __('user.index.gender') }}</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div id="gender" class="btn-group" data-toggle="buttons">
-                
-                  <label class="btn btn-default @if (!$result->userInfo['gender']) active @endif" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                    <input type="radio" name="gender" value="{{ $result->userInfo['gender'] }}" data-parsley-multiple="gender">&nbsp; {{ __('user.index.male') }}&nbsp; 
-                  </label>
-               
-                  <label class="btn btn-default @if ($result->userInfo['gender']) active @endif" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                    <input type="radio" name="gender" value="{{ $result->userInfo['gender'] }}" data-parsley-multiple="gender"> {{ __('user.index.female') }}
-                  </label>
-                
+                  @if ($user->userInfo['gender'] == 0)
+                    <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                      <input type="radio" name="gender" value="{{ old('gender', $user->userInfo['gender']) }}" data-parsley-multiple="gender">&nbsp; {{ __('user.index.male') }}&nbsp; 
+                    </label>
+                  @else
+                    <label class="btn btn-default active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                      <input type="radio" name="gender" value="{{ old('gender', $user->userInfo['gender']) }}" data-parsley-multiple="gender"> {{ __('user.index.female') }}
+                    </label>
+                  @endif
                 </div>
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ __('user.index.dob') }}<span class="required">*</span></label>
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ __('user.index.dob') }}</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="dob" name="dob" value="{{ $result->userInfo['dob'] }}" class="form-control col-md-7 col-xs-12" type="date">
+                <input id="dob" name="dob" value="{{ old('dob', $user->userInfo['dob']) }}" class="form-control col-md-7 col-xs-12" type="date">
               </div>
             </div>
             <div class="ln_solid"></div>
