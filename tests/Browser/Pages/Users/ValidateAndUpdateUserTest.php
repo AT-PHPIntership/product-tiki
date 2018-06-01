@@ -37,19 +37,74 @@ class ValidateAndUpdateUserTest extends DuskTestCase
     }
 
     /**
-     * Test validate for input Update User
+     * List case for test update user validate for input
      *
      * @return array
      */
-    public function testUserValidateForInput()
+    public function listCaseTestUpdateValidateForInput()
     {
-        $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/users/2/edit')
-                ->press( __('user.index.update') )
-                ->assertSee('The full name must be a string.')
-                ->assertSee('The address must be a string.')
-                ->assertSee('The phone format is invalid.')
-                ->assertSee('The identity card format is invalid.');
+        return [
+            ['address', '', 'The address must be a string.'],
+            ['phone', '', 'The phone format is invalid.'],
+            ['identity_card', '', 'The identity card format is invalid.'],
+        ];
+    }
+
+    /**
+     * Dusk test validate for input
+     *
+     * @param string $name name of field
+     * @param string $content content
+     * @param string $message message show when validate
+     * @param string $listUser list info user
+     * 
+     * @dataProvider listCaseTestUpdateValidateForInput
+     *
+     * @return void
+     */
+    public function testUpdateValidateForInput($name, $content, $message)
+    {
+        $this->browse(function (Browser $browser) use ($name, $content, $message) {
+            $browser->visit('admin/users/create')
+                ->press('Submit')                   
+                ->assertSee($message);
+        });
+    }
+
+    /**
+     * List case for test update user validate for input
+     *
+     * @return array
+     */
+    public function listCaseUpdateAlreadyTestValidateForInput()
+    {
+        return [
+            ['identity_card', '', 'The username has already been taken.'],
+        ];
+    }
+
+    /**
+     * Dusk test validate for input
+     *
+     * @param string $name name of field
+     * @param string $content content
+     * @param string $message message show when validate
+     * @param string $listUser list info user
+     * 
+     * @dataProvider listCaseAlreadyTestValidateForInput
+     *
+     * @return void
+     */
+    public function testUpdateValidateaAlreadyForInput($name, $content, $message)
+    {
+        factory('App\Models\UserInfo', 1)->create([
+            'idetity_card ' => '',
+        ]);       
+        $this->browse(function (Browser $browser) use ($name, $content, $message) {
+            $browser->visit('admin/users/create')
+                ->type('idetity_card', $content)
+                ->press('Submit')                   
+                ->assertSee($message);
         });
     }
 
