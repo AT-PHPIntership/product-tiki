@@ -19,6 +19,11 @@ function deleteImage(url, e) {
       data: {},
       success: function (result) {
         document.getElementById('img-' + result.id).remove();
+      },
+      statusCode: {
+        400: function (result) {
+          alert(result.responseText);
+        }
       }
     });
   }

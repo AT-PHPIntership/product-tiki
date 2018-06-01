@@ -5,7 +5,6 @@ namespace Tests\Browser\ProductTest;
 use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use App\Models\Product;
 
 class ListProductTest extends DuskTestCase
 {
@@ -86,14 +85,13 @@ class ListProductTest extends DuskTestCase
             ];
 
             foreach ($sorts as $sort) {
-                // dd($sort['sortBy']);
+
                 if($sort['sortBy'] == 'category_id'){
                     $productsASC = \DB::table('products')
                                         ->join('categories', 'products.category_id' , '=', 'categories.id')
                                         ->orderBy($sort['sortBy'],'ASC')
                                         ->pluck('categories.name')
                                         ->toArray();
-                    // dd($productsASC);
                     $productsDESC = \DB::table('products')
                                         ->join('categories', 'products.category_id' , '=', 'categories.id')
                                         ->orderBy($sort['sortBy'],'DESC')
@@ -118,6 +116,30 @@ class ListProductTest extends DuskTestCase
                     $this->assertEquals($browser->text($elements), $productsDESC[$i - 1]);
                 }
             }
+        });
+    }
+
+    /**
+     * Test search product.
+     *
+     * @return void
+     */
+    public function testSearchProduct()
+    {
+        $this->browse(function (Browser $browser) {
+
+            $name = 'lorem';
+            factory('App\Models\Category', 5)->create();
+            factory('App\Models\Product', 10)->create();
+            factory('App\Models\Product', 1)->create([
+                'name' => $name
+            ]);
+
+            $elements = $browser->visit('/admin/products')
+                                ->type('content', $name)
+                                ->press('Go')
+                                ->assertSee($name);
+
         });
     }
 }

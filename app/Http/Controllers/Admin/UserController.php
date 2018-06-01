@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Models\UserInfo;
+use Exeption;
 use App\Mail\SendMailUser;
 use Mail;
 
@@ -49,6 +51,32 @@ class UserController extends Controller
     {
         $data['user'] = $user;
         return view('admin.pages.users.edit', $data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request request
+     * @param App\Models\User          $user    user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        $updatedUser = $request->except(["_token", "_method", "submit", "username", "email"]);
+        try {
+            if ($request->hasFile('avatar')) {
+                $image = $request->file('avatar');
+                $newImage = time() . '-' . str_random(8) . '.' . $image->getClientOriginalExtension();
+                $destinationPath = public_path(config('define.images_path_users'));
+                $updatedUser['avatar'] = $newImage;
+                $image->move($destinationPath, $newImage);
+            }
+            UserInfo::updateOrCreate(['user_id' => $user->id], $updatedUser);
+            return redirect()->route('admin.users.index')->with('message', trans('messages.update_user_success'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('message', trans('messages.update_user_fail'));
+        }
     }
 
     /**

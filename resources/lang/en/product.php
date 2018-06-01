@@ -36,6 +36,7 @@ return [
     'update' => [
         'title' => 'Update Product',
         'table-title' => 'Update Product',
+        'delete_last_file_fail' => 'Can\'t delete the last image',
         'delete_confirm' => 'Do you want to delete this Image?',
         'update' => 'Update'
     ]
