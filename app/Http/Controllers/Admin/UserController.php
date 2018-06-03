@@ -142,9 +142,9 @@ class UserController extends Controller
     {
         try {
             $user->delete();
-        } catch (ModelNotFoundException $e) {
+        } catch (Exception $e) {
             session()->flash('message', trans('messages.delete_user_fail'));
         }
-        return redirect()->back()->with('message', trans('messages.delete_user_success'));
+        return redirect()->route('admin.users.index')->with('message', trans('messages.delete_user_success'));
     }
 }
