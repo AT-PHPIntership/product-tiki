@@ -24,7 +24,7 @@ class UpdateUserRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(Request $request)
+    public function rules()
     {
         $user = $this->route()->parameter('user');
         $userInfo = User::with('userInfo')->where('id', $user->id)->get();

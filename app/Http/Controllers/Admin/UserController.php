@@ -145,7 +145,6 @@ class UserController extends Controller
         } catch (ModelNotFoundException $e) {
             session()->flash('message', trans('messages.delete_user_fail'));
         }
-        return redirect()->back()->with('message', trans('messages.delete_user_success'));;
+        return redirect()->back()->with('message', trans('messages.delete_user_success'));
     }
 }
-
