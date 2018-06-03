@@ -6,6 +6,7 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Models\User;
+use App\Models\UserInfo;
 
 class ValidateAndUpdateUserTest extends DuskTestCase
 {
@@ -19,7 +20,10 @@ class ValidateAndUpdateUserTest extends DuskTestCase
     public function setUp()
     {
         parent::setUp();
-        factory(User::class, 2)->create();
+        $users = factory(User::class)->create();
+        factory(UserInfo::class)->create([
+            'user_id' => $users->id,
+        ]);
     }
 
     /**
@@ -31,7 +35,7 @@ class ValidateAndUpdateUserTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/users')
-                    ->visit('/admin/users/2/edit')
+                    ->visit('/admin/users/1/edit')
                     ->assertSee( __('Update User'));
         });
     }
@@ -44,11 +48,32 @@ class ValidateAndUpdateUserTest extends DuskTestCase
     public function listCaseTestUpdateValidateForInput()
     {
         return [
-            ['full_name', '', 'TThe full name must be a string.'],
+            ['full_name', '', 'The full name must be a string.'],
             ['address', '', 'The address must be a string.'],
             ['phone', '', 'The phone format is invalid'],
-            ['identity_card', '', 'The identity card format is invalid.'],
+            ['identity_card', 'hgfg', 'The identity card format is invalid.'],
         ];
+    }
+
+    /**
+     * Dusk test validate for input
+     *
+     * @param string $name name of field
+     * @param string $content content
+     * @param string $message message show when validate
+     * 
+     * @dataProvider listCaseTestUpdateValidateForInput
+     *
+     * @return void
+     */
+    public function testUpdateValidateForInput($name, $content, $message)
+    {
+        $this->browse(function (Browser $browser) use ($name, $content, $message) {
+            $browser->visit('/admin/users/1/edit')
+                ->type($name, $content)
+                ->press('Update')                   
+                ->assertSee($message);
+        });
     }
 
     /**
@@ -59,9 +84,8 @@ class ValidateAndUpdateUserTest extends DuskTestCase
     public function testUpdateUserSuccess()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/users/2/edit')
-                    ->assertSee(__('Update User'))
-                    ->screenshot('abc')
+            $browser->visit('/admin/users/1/edit')
+                    ->assertSee('Update User')
                     ->type('full_name', 'mai luong')
                     ->type('address', 'quang nam')
                     ->type('phone', '0123345454')
