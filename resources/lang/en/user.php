@@ -28,7 +28,7 @@ return [
         'delete' => 'Delete',
         'user_info' => 'User Info',
         'detail' => 'Detail',
-        'showuser' => 'Show User',
+        'showuser' => 'Show Users',
         'back' => 'Back',
         'userinfo' => 'Detail User Information',
         'male' => 'Male',

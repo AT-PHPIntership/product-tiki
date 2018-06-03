@@ -1,4 +1,7 @@
 @extends('admin.layout.master')
+@section('css')
+<link rel="stylesheet" href="/css/product-admin.css">
+@endsection
 @section('title', __('product.update.title'))
 @section('content')
 <div class="right_col" role="main">
@@ -15,6 +18,11 @@
 
             @csrf
             @method('PUT')
+            @include('admin.layout.errors')
+
+            <div class="form-group">
+              @include('admin.layout.message')
+            </div>
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">@lang('product.create.category')</label>
@@ -48,7 +56,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="price" name="price" class="form-control col-md-7 col-xs-12" required="required" type="text" value="{{ $product->price }}">
+                <input id="price" name="price" class="form-control col-md-7 col-xs-12" required="required" type="number" value="{{ $product->price }}">
               </div>
             </div>
 
@@ -57,7 +65,7 @@
                 <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="quantity" name="quantity" class="form-control col-md-7 col-xs-12" required="required" type="text" value="{{ $product->quantity }}">
+                <input id="quantity" name="quantity" class="form-control col-md-7 col-xs-12" required="required" type="number" value="{{ $product->quantity }}">
               </div>
             </div>
 
@@ -68,8 +76,19 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div id="image" class="btn-group">
                   <label class="control-label col-md-3 col-sm-3 col-xs-12" for="imageInput">@lang('product.create.file-input')</label>
-                  <input name="input_img" type="file" id="imageInput">
+                  <input name="input_img[]" type="file" id="imageInput" multiple>
                 </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                @foreach($product->images as $image)
+                  <div id="img-{{ $image->id }}" class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="update-img"><img class="img-responsive" src="{{ $image->img_url }}" alt=""></div>
+                    <button onclick="deleteImage('{{ route('admin.api.images.destroy', ['id' => $image->id]) }}', event)" class="delete-img-btn"><i class="fa fa-trash btn-danger"></i></button>
+                  </div>
+                @endforeach
               </div>
             </div>
 
@@ -87,5 +106,6 @@
     </div>
   </div>
 </div>
-
+<script src="/js/product.js"></script>
+<script src="/js/messages.js"></script>
 @endsection

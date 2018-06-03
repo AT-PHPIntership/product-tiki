@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class PostController extends Controller
 {
@@ -60,13 +62,14 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
-        if ($post) {
+        try {
+            $post = Post::findOrFail($id);
             $post->delete();
             session(['message' => __('post.admin.form.deleted')]);
-            return redirect()->route('admin.posts.index');
-        } else {
+        } catch (ModelNotFoundException $e) {
             session(['message' => __('post.admin.form.id_not_found')]);
+        } finally {
+            return redirect()->route('admin.posts.index');
         }
     }
 }

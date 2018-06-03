@@ -26,4 +26,14 @@ class Image extends Model
     {
         return $this->belongsTo('App\Models\Product', 'product_id', 'id');
     }
+
+    /**
+     * Get the Product's image.
+     *
+     * @return string
+     */
+    public function getImageUrlAttribute()
+    {
+        return asset(config('define.product.upload_image_url') . $this->img_url);
+    }
 }

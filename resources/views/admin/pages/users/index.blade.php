@@ -3,7 +3,7 @@
 @section('content')
 <div class="right_col" role="main">
   <div class="col-md-12 col-sm-12 col-xs-12">
-  @include('admin.layout.message')
+    @include('admin.layout.message')
     <div class="x_panel">
       <div class="x_title">
         <h2>{{ __('user.index.showuser') }}</h2>
@@ -38,7 +38,7 @@
                   @else 
                     <td class="a-right a-right ">{{ __('user.index.male') }}</td>
                   @endif
-                  <td class=" ">0</td>
+                  <td class=""><i class="fa fa-times-circle icon-size fa-2x"></i></td>
                   <td class="last"><a class="col-md-3" href="{{ route('admin.users.edit', array('id' => $user->id)) }}"><button class="btn-success"><i class="fa fa-edit"></i></button></a>
                   <form class="col-md-3" id="delete-user{{ $user->id }}" action="{!! route('admin.users.destroy', ['id' => $user['id']]) !!}" method="POST">
                     @csrf

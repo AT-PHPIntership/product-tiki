@@ -13,5 +13,6 @@ class CategoriesTableSeeder extends Seeder
     {
         factory('App\Models\Category', 5)->create();
         factory('App\Models\Category', 10)->states('parent')->create();
+        factory('App\Models\Category', 10)->states('parent')->create();
     }
 }

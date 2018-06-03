@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('parent_id')->nullable();
             $table->string('name', 100)->charset('utf8')->collation('utf8_unicode_ci');
+            $table->unsignedInteger('level')->default(0);
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });

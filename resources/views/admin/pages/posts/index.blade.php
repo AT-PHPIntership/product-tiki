@@ -87,7 +87,7 @@
                       <form action="" class="col-md-4" method="POST">
                         @method('PUT')
                         @csrf
-                        <button id="update{{ $post['id'] }}" onclick="updateStatus(event, {{ $post['id'] }}, '{{ route('admin.posts.update.status', ['id' => $post['id']]) }}')" class="btn btn-primary update-btn" type="button">
+                        <button id="update{{ $post['id'] }}" onclick="updateStatus(event, {{ $post['id'] }}, '{{ route('admin.api.posts.update.status', ['id' => $post['id']]) }}')" class="btn btn-primary update-btn" type="button">
                           @if ($post['status'])
                             <i class="fa fa-times-circle icon-size" ></i>
                           @else

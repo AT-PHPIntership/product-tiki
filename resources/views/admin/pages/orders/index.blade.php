@@ -1,6 +1,9 @@
 @extends('admin.layout.master')
 @section('title', __('orders.admin.list.title') )
 @section('content')
+<script src="/js/messages.js"></script>
+<script src="/js/order.js"></script>
+<script src="/js/post.js"></script>
   <div class="right_col" role="main" class="index-main">
     <div class="">
       <div class="page-title">
@@ -76,7 +79,7 @@
                       <form action="" class="col-md-4" method="POST">
                         @method('PUT')
                         @csrf
-                        <button id="update{{ $order['id'] }}" onclick="updateStatus(event, {{ $order['id'] }}, '{{ route('admin.posts.update.status', ['id' => $order['id']]) }}')" class="btn btn-primary update-btn" type="button">
+                        <button id="update{{ $order['id'] }}" onclick="updateStatus(event, {{ $order['id'] }}, '{{ route('admin.api.orders.update.status', ['id' => $order['id']]) }}')" class="btn btn-primary update-btn" type="button">
                           @if ($order['status'])
                             <i class="fa fa-times-circle icon-size" ></i>
                           @else
@@ -87,7 +90,7 @@
                       <form action="{{ route('admin.orders.destroy', ['id' => $order['id']]) }}" class="col-md-4" method="POST" id="delete{{ $order['id'] }}">
                         @csrf
                         @method('DELETE')
-                        <button onclick="deletePost(event, {{ $order['id'] }})" class="btn btn-danger" type="submit"><i class="fa fa-trash icon-size" ></i></button>
+                        <button onclick="deleteOrder(event, {{ $order['id'] }})" class="btn btn-danger" type="submit"><i class="fa fa-trash icon-size" ></i></button>
                       </form>
                       <form action="{{ route('admin.orders.show', ['id' => $order['id']]) }}" class="col-md-4">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-eye icon-size" ></i></button>

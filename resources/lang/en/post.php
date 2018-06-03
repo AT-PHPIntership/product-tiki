@@ -16,7 +16,8 @@ return [
             'updated' => 'Updated!!!!',
             'deleted' => 'Deleted!!!!',
             'delete_msg' => 'Do you want to delete posts with ID ',
-            'id_not_found' => 'ID not found'
+            'id_not_found' => 'ID not found',
+            'delete_comment_msg' => 'Do you want to delete comments with ID '
         ],
         'list' => [
             'title' => 'Admin Posts Management',

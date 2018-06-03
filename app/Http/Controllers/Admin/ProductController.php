@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Image;
+use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests\PostProductRequest;
 
@@ -15,11 +16,17 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param \Illuminate\Http\Request $request request content
+     *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::paginate(config('define.product.limit_rows'));
+        $products = Product::when(isset($request->content), function ($query) use ($request) {
+            return $query->where('name', 'like', "%$request->content%");
+        })->with('category', 'images')->paginate(config('define.product.limit_rows'));
+
+        $products->appends(request()->query());
         $data['products'] = $products;
         return view('admin.pages.products.index', $data);
     }
@@ -53,7 +60,7 @@ class ProductController extends Controller
         $img->move(config('define.product.upload_image_url'), $imgName);
         Image::create([
             'product_id' => $product->id,
-            'img_url' => config('define.product.upload_image_url') . $imgName
+            'img_url' => '/' . config('define.product.upload_image_url') . $imgName
         ]);
 
         return redirect()->route('admin.products.index')->with('message', trans('messages.create_product_success'));
@@ -81,7 +88,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         $categories = Category::all();
-        $product = Product::find($id);
+        $product = Product::with('images')->find($id);
         $data['product'] = $product;
         $data['categories'] = $categories;
         return view('admin.pages.products.edit', $data);
@@ -95,10 +102,27 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
-        dd($request);
-        dd($id);
+        $request['status'] = $request->quantity ? 1 : 0;
+        $product = Product::find($id);
+        $product->update($request->all());
+
+        if (request()->file('input_img')) {
+            $imagesData = [];
+            foreach (request()->file('input_img') as $img) {
+                $imgName = time() . '-' . $img->getClientOriginalName();
+                $img->move(config('define.product.upload_image_url'), $imgName);
+                $image = array(
+                    'product_id' => $product->id,
+                    'img_url' => '/' . config('define.product.upload_image_url') . $imgName
+                );
+                array_push($imagesData, $image);
+            }
+            $product->images()->createMany($imagesData);
+        }
+
+        return back()->with('message', trans('messages.update_product_success'));
     }
 
     /**

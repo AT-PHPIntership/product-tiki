@@ -1,0 +1,10 @@
+.update-img {
+  overflow: hidden;
+  height: 100px;
+}
+
+.delete-img-btn {
+  margin-top: 10px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}

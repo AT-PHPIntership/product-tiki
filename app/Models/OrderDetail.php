@@ -3,11 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class OrderDetail extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'order_details';
 
+    protected $dates = ['deleted_at'];
+    
     /**
      * The attributes that are mass assignable.
      *

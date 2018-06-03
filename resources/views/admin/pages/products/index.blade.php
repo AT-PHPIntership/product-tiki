@@ -11,6 +11,19 @@
           <div class="clearfix"></div>
         </div>
 
+        <div class="form-group pull-right top_search">
+          <form action="{{ route('admin.products.index') }}" method="GET">
+            <div class="">
+              <div class="col-md-6">
+                <input type="text" name="content" class="form-control" placeholder="{{ __('post.admin.list.search') }}">
+              </div>
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="submit">@lang('product.index.go')</button>
+              </span>
+            </div>
+          </form>
+        </div>
+
         <div class="x_content">
 
           <div class="table-responsive">
@@ -18,13 +31,13 @@
               <thead>
                 <tr class="headings">
                   <th class="column-title"> @lang('product.index.id') </th>
-                  <th class="column-title"> @lang('product.index.category_id') </th>
+                  <th class="column-title"> @lang('product.index.category') </th>
                   <th class="column-title"> @lang('product.index.name') </th>
                   <th class="column-title col-md-3"> @lang('product.index.description') </th>
+                  <th class="column-title"> @lang('product.create.quantity') </th>
                   <th class="column-title"> @lang('product.index.avg_rating') </th>
                   <th class="column-title"> @lang('product.index.price') </th>
                   <th class="column-title"> @lang('product.index.status') </th>
-                  <th class="column-title"> @lang('product.index.image') </th>
                   <th class="column-title no-link last">
                     <span class="nobr"> @lang('product.index.action') </span>
                   </th>
@@ -34,33 +47,30 @@
                 </tr>
               </thead>
 
-              @foreach ($products as $product)
-                <tbody>
+              <tbody>
+                @foreach ($products as $product)
                   <tr class="odd pointer">
                     <td class=" ">{{ $product->id }}</td>
-                    <td class=" ">{{ $product->category_id }}</td>
+                    <td class=" ">{{ $product->category->name }}</td>
                     <td class=" ">{{ $product->name }}</td>
                     <td class=" ">{{ $product->description }}</td>
+                    <td class=" ">{{ $product->quantity }}</td>
                     <td class=" ">{{ $product->avg_rating }}</td>
                     <td class=" ">{{ $product->price }}</td>
                     <td class=" ">{{ $product->status }}</td>
                     <td class=" ">
-                      <img src="" alt="">
-                    </td>
-                    <td class=" ">
-                      <a href="#"><i class="fa fa-edit"></i></a>
+                      <a class="btn btn-primary" href="{!! route('admin.products.edit', ['id' => $product['id']]) !!}"><i class="fa fa-edit"></i></a>
                     </td>
                     <td class=" last">
-                      <a href="{!! route('admin.products.edit', ['id' => $product['id']]) !!}"> @lang('product.index.edit') </a>
                       <form id="delete-prd{{ $product->id }}" action="{!! route('admin.products.destroy', ['id' => $product['id']]) !!}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button onclick="deleteProduct(event, {{ $product->id }})" type="submit"><i class="fa fa-trash btn-danger"></i></button>
+                        <button class="btn btn-primary" onclick="deleteProduct(event, {{ $product->id }})" type="submit"><i class="fa fa-trash btn-danger"></i></button>
                       </form>
                     </td>
                   </tr>
-                </tbody>
-              @endforeach
+                @endforeach
+              </tbody>
 
             </table>
           </div>
@@ -71,4 +81,5 @@
   </div>
 </div>
 <script src="/js/product.js"></script>
+<script src="/js/messages.js"></script>
 @endsection

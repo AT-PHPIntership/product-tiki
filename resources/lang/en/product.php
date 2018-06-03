@@ -6,12 +6,15 @@ return [
         'table-title' => 'Product List',
         'id' => 'Id',
         'category_id' => 'Category Id',
+        'category' => 'Category',
         'name' => 'Name',
         'description' => 'Description',
         'avg_rating' => 'Avg Rating',
         'price' => 'Price',
         'status' => 'Status',
         'image' => 'Image',
+        'go' => 'Go',
+        'delete_confirm' => 'Do you want to delete Product ID = ',
         'created_at' => 'Created At',
         'update_at' => 'Update At',
         'action' => 'Action',
@@ -33,6 +36,8 @@ return [
     'update' => [
         'title' => 'Update Product',
         'table-title' => 'Update Product',
+        'delete_last_file_fail' => 'Can\'t delete the last image',
+        'delete_confirm' => 'Do you want to delete this Image?',
         'update' => 'Update'
     ]
 ];
