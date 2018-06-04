@@ -86,7 +86,7 @@ class ListProductTest extends DuskTestCase
 
             foreach ($sorts as $sort) {
 
-                if($sort['sortBy'] == 'category_id'){
+                if ($sort['sortBy'] == 'category_id') {
                     $productsASC = \DB::table('products')
                                         ->join('categories', 'products.category_id' , '=', 'categories.id')
                                         ->orderBy($sort['sortBy'],'ASC')
@@ -94,12 +94,12 @@ class ListProductTest extends DuskTestCase
                                         ->toArray();
                     $productsDESC = \DB::table('products')
                                         ->join('categories', 'products.category_id' , '=', 'categories.id')
-                                        ->orderBy($sort['sortBy'],'DESC')
+                                        ->orderBy($sort['sortBy'], 'DESC')
                                         ->pluck('categories.name')
                                         ->toArray();
                 } else {
-                    $productsASC = \DB::table('products')->orderBy($sort['sortBy'],'ASC')->pluck($sort['sortBy'])->toArray();
-                    $productsDESC = \DB::table('products')->orderBy($sort['sortBy'],'DESC')->pluck($sort['sortBy'])->toArray();
+                    $productsASC = \DB::table('products')->orderBy($sort['sortBy'], 'ASC')->pluck($sort['sortBy'])->toArray();
+                    $productsDESC = \DB::table('products')->orderBy($sort['sortBy'], 'DESC')->pluck($sort['sortBy'])->toArray();
                 }
 
                 $browser->visit(route('admin.products.index', ['sortBy' => $sort['sortBy'], 'dir' => 'ASC']));

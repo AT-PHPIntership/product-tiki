@@ -30,7 +30,7 @@
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">@lang('product.create.name')
-                <span class="required">*</span>
+                <span class="required">@lang('product.required')</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12" value="{{ old('name') }}">
@@ -46,7 +46,7 @@
 
             <div class="form-group">
               <label for="price" class="control-label col-md-3 col-sm-3 col-xs-12">@lang('product.create.price')
-                <span class="required">*</span>
+                <span class="required">@lang('product.required')</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input id="price" name="price" class="form-control col-md-7 col-xs-12" required="required" type="number" value="{{ old('price') }}">
@@ -55,7 +55,7 @@
 
             <div class="form-group">
               <label for="quantity" class="control-label col-md-3 col-sm-3 col-xs-12">@lang('product.create.quantity')
-                <span class="required">*</span>
+                <span class="required">@lang('product.required')</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <input id="quantity" name="quantity" class="form-control col-md-7 col-xs-12" required="required" type="number" value="{{ old('quantity') }}">
@@ -64,7 +64,7 @@
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">@lang('product.create.image')
-                <span class="required">*</span>
+                <span class="required">@lang('product.required')</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div id="image" class="btn-group">

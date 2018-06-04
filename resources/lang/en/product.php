@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'required' => '*',
     'index' => [
         'title' => 'Product',
         'table-title' => 'Product List',
