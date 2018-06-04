@@ -20,7 +20,7 @@
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ __('category.admin.add.name') }}</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <input type="text" class="form-control" placeholder="{{ __('category.admin.add.placeholder_name') }}" name="name">
+                  <input type="text" class="form-control" placeholder="{{ __('category.admin.add.placeholder_name') }}" name="name" value="{{ old('name') }}">
                 </div>
               </div>
               <div class="form-group">
@@ -29,7 +29,7 @@
                   <select class="form-control" name="parent_id">
                     <option value=""></option>
                     @foreach ($listCategoriesParent as $list)
-                    <option value="{{ $list->id }}">{{ $list->name }}</option>
+                    <option value="{{ $list->id }}" {{ (collect(old('parent_id'))->contains($list->id)) ? 'selected':'' }}>{{ $list->name }}</option>
                     @endforeach
                   </select>
                 </div>
