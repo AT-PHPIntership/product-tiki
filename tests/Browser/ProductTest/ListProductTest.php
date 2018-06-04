@@ -64,57 +64,84 @@ class ListProductTest extends DuskTestCase
     }
 
     /**
-     * Test sort product.
+     * Make cases for test.
+     *
+     * @return array
+     */
+    public function dataForTest()
+    {
+        return [
+            ['category_id' , 2],
+            ['name' , 3],
+            ['quantity' , 5],
+            ['avg_rating' , 6],
+            ['price' , 7],
+            ['status' , 8],
+        ];
+    }
+
+    /**
+     * Test sort product asc.
+     *
+     * @dataProvider dataForTest
      *
      * @return void
      */
-    public function testSortProductByName()
+    public function testSortProductAsc($sortBy, $column)
     {
-        $this->browse(function (Browser $browser) {
+        $this->browse(function (Browser $browser) use ($sortBy, $column) {
 
             factory('App\Models\Category', 5)->create();
             factory('App\Models\Product', 10)->create();
 
-            $sorts = [
-                [ 'sortBy' => 'category_id' , 'column' => 2 ],
-                [ 'sortBy' => 'name' , 'column' => 3 ],
-                [ 'sortBy' => 'quantity' , 'column' => 5 ],
-                [ 'sortBy' => 'avg_rating' , 'column' => 6 ],
-                [ 'sortBy' => 'price' , 'column' => 7 ],
-                [ 'sortBy' => 'status' , 'column' => 8 ],
-            ];
+            if ($sortBy == 'category_id') {
+                $productsAsc = \DB::table('products')
+                                    ->join('categories', 'products.category_id' , '=', 'categories.id')
+                                    ->orderBy($sortBy, 'ASC')
+                                    ->pluck('categories.name')
+                                    ->toArray();
+            } else {
+                $productsAsc = \DB::table('products')->orderBy($sortBy, 'ASC')->pluck($sortBy)->toArray();
+            }
 
-            foreach ($sorts as $sort) {
+            $browser->visit(route('admin.products.index', ['sortBy' => $sortBy, 'dir' => 'ASC']));
 
-                if ($sort['sortBy'] == 'category_id') {
-                    $productsASC = \DB::table('products')
-                                        ->join('categories', 'products.category_id' , '=', 'categories.id')
-                                        ->orderBy($sort['sortBy'],'ASC')
-                                        ->pluck('categories.name')
-                                        ->toArray();
-                    $productsDESC = \DB::table('products')
-                                        ->join('categories', 'products.category_id' , '=', 'categories.id')
-                                        ->orderBy($sort['sortBy'], 'DESC')
-                                        ->pluck('categories.name')
-                                        ->toArray();
-                } else {
-                    $productsASC = \DB::table('products')->orderBy($sort['sortBy'], 'ASC')->pluck($sort['sortBy'])->toArray();
-                    $productsDESC = \DB::table('products')->orderBy($sort['sortBy'], 'DESC')->pluck($sort['sortBy'])->toArray();
-                }
+            for ($i = 1; $i <= 5; $i++) {
+                $elements = ".table-responsive table tbody tr:nth-child($i) td:nth-child($column)";
+                $this->assertEquals($browser->text($elements), $productsAsc[$i - 1]);
+            }
+        });
+    }
 
-                $browser->visit(route('admin.products.index', ['sortBy' => $sort['sortBy'], 'dir' => 'ASC']));
+    /**
+     * Test sort product desc.
+     *
+     * @dataProvider dataForTest
+     *
+     * @return void
+     */
+    public function testSortProductDesc($sortBy, $column)
+    {
+        $this->browse(function (Browser $browser) use ($sortBy, $column) {
 
-                for ($i = 1; $i <= 5; $i++) {
-                    $elements = '.table-responsive table tbody tr:nth-child(' . $i . ') td:nth-child(' . $sort['column'] . ')';
-                    $this->assertEquals($browser->text($elements), $productsASC[$i - 1]);
-                }
+            factory('App\Models\Category', 5)->create();
+            factory('App\Models\Product', 10)->create();
 
-                $browser->visit(route('admin.products.index', ['sortBy' => $sort['sortBy'], 'dir' => 'DESC']));
+            if ($sortBy == 'category_id') {
+                $productsDesc = \DB::table('products')
+                                    ->join('categories', 'products.category_id' , '=', 'categories.id')
+                                    ->orderBy($sortBy, 'DESC')
+                                    ->pluck('categories.name')
+                                    ->toArray();
+            } else {
+                $productsDesc = \DB::table('products')->orderBy($sortBy, 'DESC')->pluck($sortBy)->toArray();
+            }
 
-                for ($i = 1; $i <= 5; $i++) {
-                    $elements = '.table-responsive table tbody tr:nth-child(' . $i . ') td:nth-child(' . $sort['column'] . ')';
-                    $this->assertEquals($browser->text($elements), $productsDESC[$i - 1]);
-                }
+            $browser->visit(route('admin.products.index', ['sortBy' => $sortBy, 'dir' => 'DESC']));
+
+            for ($i = 1; $i <= 5; $i++) {
+                $elements = ".table-responsive table tbody tr:nth-child($i) td:nth-child($column)";
+                $this->assertEquals($browser->text($elements), $productsDesc[$i - 1]);
             }
         });
     }

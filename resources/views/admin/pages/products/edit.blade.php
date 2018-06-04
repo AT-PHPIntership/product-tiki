@@ -106,6 +106,8 @@
     </div>
   </div>
 </div>
+@endsection
+@section('js')
 <script src="/js/messages.js"></script>
 <script src="/js/product.js"></script>
 @endsection
