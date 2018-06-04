@@ -32,68 +32,68 @@
                 <tr class="headings">
                   <th class="column-title"> @lang('product.index.id') </th>
                   <th class="column-title"> @lang('product.index.category')
-                    @if (app('request')->input('sortBy') == 'category_id' && app('request')->input('dir') == 'DESC')
-                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => 'category_id', 'dir' => 'ASC']) }}">
+                    @if (app('request')->input('sortBy') == trans('product.index.sort_by_category') && app('request')->input('dir') == trans('product.index.dir_desc'))
+                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => trans('product.index.sort_by_category'), 'dir' => trans('product.index.dir_asc')]) }}">
                         <i class="fa fa-sort-up"></i>
                       </a>
                     @else
-                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => 'category_id', 'dir' => 'DESC']) }}">
+                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => trans('product.index.sort_by_category'), 'dir' => trans('product.index.dir_desc')]) }}">
                         <i class="fa fa-sort-down"></i>
                       </a>
                     @endif
                   </th>
                   <th class="column-title"> @lang('product.index.name')
-                    @if (app('request')->input('sortBy') == 'name' && app('request')->input('dir') == 'DESC')
-                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => 'name', 'dir' => 'ASC']) }}">
+                    @if (app('request')->input('sortBy') == trans('product.index.sort_by_name') && app('request')->input('dir') == trans('product.index.dir_desc'))
+                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => trans('product.index.sort_by_name'), 'dir' => trans('product.index.dir_asc')]) }}">
                         <i class="fa fa-sort-up"></i>
                       </a>
                     @else
-                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => 'name', 'dir' => 'DESC']) }}">
+                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => trans('product.index.sort_by_name'), 'dir' => trans('product.index.dir_desc')]) }}">
                         <i class="fa fa-sort-down"></i>
                       </a>
                     @endif
                   </th>
                   <th class="column-title col-md-3"> @lang('product.index.description') </th>
                   <th class="column-title"> @lang('product.create.quantity')
-                    @if (app('request')->input('sortBy') == 'quantity' && app('request')->input('dir') == 'DESC')
-                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => 'quantity', 'dir' => 'ASC']) }}">
+                    @if (app('request')->input('sortBy') == trans('product.index.sort_by_quantity') && app('request')->input('dir') == trans('product.index.dir_desc'))
+                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => trans('product.index.sort_by_quantity'), 'dir' => trans('product.index.dir_asc')]) }}">
                         <i class="fa fa-sort-up"></i>
                       </a>
                     @else
-                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => 'quantity', 'dir' => 'DESC']) }}">
+                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => trans('product.index.sort_by_quantity'), 'dir' => trans('product.index.dir_desc')]) }}">
                         <i class="fa fa-sort-down"></i>
                       </a>
                     @endif
                   </th>
                   <th class="column-title"> @lang('product.index.avg_rating')
-                    @if (app('request')->input('sortBy') == 'avg_rating' && app('request')->input('dir') == 'DESC')
-                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => 'avg_rating', 'dir' => 'ASC']) }}">
+                    @if (app('request')->input('sortBy') == trans('product.index.sort_by_avg_rating') && app('request')->input('dir') == trans('product.index.dir_desc'))
+                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => trans('product.index.sort_by_avg_rating'), 'dir' => trans('product.index.dir_asc')]) }}">
                         <i class="fa fa-sort-up"></i>
                       </a>
                     @else
-                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => 'avg_rating', 'dir' => 'DESC']) }}">
+                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => trans('product.index.sort_by_avg_rating'), 'dir' => trans('product.index.dir_desc')]) }}">
                         <i class="fa fa-sort-down"></i>
                       </a>
                     @endif
                   </th>
                   <th class="column-title"> @lang('product.index.price')
-                    @if (app('request')->input('sortBy') == 'price' && app('request')->input('dir') == 'DESC')
-                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => 'price', 'dir' => 'ASC']) }}">
+                    @if (app('request')->input('sortBy') == trans('product.index.sort_by_price') && app('request')->input('dir') == trans('product.index.dir_desc'))
+                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => trans('product.index.sort_by_price'), 'dir' => trans('product.index.dir_asc')]) }}">
                         <i class="fa fa-sort-up"></i>
                       </a>
                     @else
-                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => 'price', 'dir' => 'DESC']) }}">
+                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => trans('product.index.sort_by_price'), 'dir' => trans('product.index.dir_desc')]) }}">
                         <i class="fa fa-sort-down"></i>
                       </a>
                     @endif
                   </th>
                   <th class="column-title"> @lang('product.index.status')
-                    @if (app('request')->input('sortBy') == 'status' && app('request')->input('dir') == 'DESC')
-                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => 'status', 'dir' => 'ASC']) }}">
+                    @if (app('request')->input('sortBy') == trans('product.index.sort_by_status') && app('request')->input('dir') == trans('product.index.dir_desc'))
+                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => trans('product.index.sort_by_status'), 'dir' => trans('product.index.dir_asc')]) }}">
                         <i class="fa fa-sort-up"></i>
                       </a>
                     @else
-                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => 'status', 'dir' => 'DESC']) }}">
+                      <a href="{{ route('admin.products.index', ['content' => request('content'), 'sortBy' => trans('product.index.sort_by_status'), 'dir' => trans('product.index.dir_desc')]) }}">
                         <i class="fa fa-sort-down"></i>
                       </a>
                     @endif
