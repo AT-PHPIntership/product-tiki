@@ -4,6 +4,7 @@ return [
     'home' => 'Home',
     'show_all' => 'Show All',
     'add' => 'Add',
+    'adduser' => 'Add User',
     'comments' => 'Comments',
     'reviews' => 'Reviews',
     'title' => 'Admin Dashboard',

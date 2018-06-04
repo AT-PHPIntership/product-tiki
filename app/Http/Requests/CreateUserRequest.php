@@ -33,6 +33,7 @@ class CreateUserRequest extends FormRequest
             'fullname'       => 'string|max:255',
             'avatar'         => 'image|mimes:png,jpg,jpeg',
             'birthday'       => 'date_format:"Y-m-d"',
+            'gender'         => 'required|integer|min:0|max:1',
             'address'        => 'string|max:255',
             'phone'          => 'regex:/\(?([0-9]{3})\)?([ . -]?)([0-9]{3})\2([0-9]{4})/',
             'identity_card'  => 'regex:/\(?([0-9]{3})\)?([ . -]?)([0-9]{3})\2([0-9]{3})/|unique:user_info',
