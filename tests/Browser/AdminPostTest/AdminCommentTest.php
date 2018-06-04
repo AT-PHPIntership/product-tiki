@@ -32,7 +32,8 @@ class AdminCommentTest extends DuskTestCase
     public function testCommentList()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/posts')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/posts')
                     ->press('#view1')
                     ->assertSee('All subcomments of Post ');
         });
@@ -47,7 +48,8 @@ class AdminCommentTest extends DuskTestCase
     {
         $test = $this->testContent;
         $this->browse(function (Browser $browser) use ($test) {
-            $browser->visit('/admin/posts')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/posts')
                     ->press('#view1')
                     ->type('content', $test)
                     ->press('Go!')
@@ -65,7 +67,8 @@ class AdminCommentTest extends DuskTestCase
     {
         $test = $this->testContent;
         $this->browse(function (Browser $browser) use ($test) {
-            $browser->visit('/admin/posts')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/posts')
                     ->press('#view1')
                     ->click('#delete1 .btn-danger')
                     ->acceptDialog()

@@ -8,8 +8,18 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class ListCategoryTest extends DuskTestCase
 {
-    
+
     use DatabaseMigrations;
+
+    /**
+     * Override function setUp() for make user login
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+    }
 
     /**
      * A Dusk test example.
@@ -19,7 +29,8 @@ class ListCategoryTest extends DuskTestCase
     public function testListCategory()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/categories')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/categories')
                     ->assertSee(__('category.admin.list.title'));
         });
     }
@@ -32,7 +43,8 @@ class ListCategoryTest extends DuskTestCase
     public function testDataEmpty()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/categories')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/categories')
                     ->assertSee(__('category.admin.list.title'));
             $elements = $browser->elements('.table-responsive table tbody tr');
             $numRecord = count($elements);
@@ -49,8 +61,9 @@ class ListCategoryTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             factory('App\Models\Category', 15)->create();
+            $browser->loginAs($this->user);
             $elements = $browser->visit('/admin/categories')
-                ->elements('.table-responsive table tbody tr');
+                                ->elements('.table-responsive table tbody tr');
             $numRecord = count($elements);
             $this->assertTrue($numRecord == 10);
             $elements = $browser->visit('/admin/categories?page=2')

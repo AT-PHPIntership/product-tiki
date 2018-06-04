@@ -11,7 +11,7 @@ class ShowListUserTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
-    const NUMBER_RECORD_CREATE = 10;
+    const NUMBER_RECORD_CREATE = 9;
     const ROW_LIMIT = 5;
 
     /**
@@ -22,7 +22,7 @@ class ShowListUserTest extends DuskTestCase
     public function setUp()
     {
         parent::setUp();
-        
+
         factory(User::class, self::NUMBER_RECORD_CREATE)->create();
     }
 
@@ -34,7 +34,8 @@ class ShowListUserTest extends DuskTestCase
     public function testShowList()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/users')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/users')
                     ->assertPathIs('/admin/users')
                     ->assertSee('Show Users');
         });
@@ -48,7 +49,8 @@ class ShowListUserTest extends DuskTestCase
     public function testShowRecord()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/users')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/users')
                     ->assertSee('Show Users');
             $elements = $browser->elements('.table tbody tr');
             $this->assertCount(self::ROW_LIMIT, $elements);
@@ -63,7 +65,8 @@ class ShowListUserTest extends DuskTestCase
     public function testListUsersPagination()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/admin/users')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/users')
                     ->assertSee('Show Users');
             $paginate_element = $browser->elements('.pagination li');
             $number_page = count($paginate_element) - 2;

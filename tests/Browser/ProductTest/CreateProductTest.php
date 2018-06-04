@@ -11,6 +11,16 @@ class CreateProductTest extends DuskTestCase
     use DatabaseMigrations;
 
     /**
+     * Override function setUp() for make user login
+     *
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+    }
+
+    /**
      * A Dusk test create product success.
      *
      * @return void
@@ -20,7 +30,8 @@ class CreateProductTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             factory('App\Models\Category', 5)->create();
 
-            $browser->visit('/admin/products/create')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/products/create')
                     ->assertSee('Create Product')
                     ->select('category_id')
                     ->type('name', 'Iphone')
@@ -44,7 +55,8 @@ class CreateProductTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             factory('App\Models\Category', 5)->create();
 
-            $browser->visit('/admin/products/create')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/products/create')
                     ->assertSee('Create Product')
                     ->press('Create')
                     ->assertPathIs('/admin/products/create')
@@ -62,7 +74,8 @@ class CreateProductTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             factory('App\Models\Category', 5)->create();
 
-            $browser->visit('/admin/products/create')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/products/create')
                     ->assertSee('Create Product')
                     ->select('category_id')
                     ->type('name', 'Iphone')
@@ -86,7 +99,8 @@ class CreateProductTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             factory('App\Models\Category', 5)->create();
 
-            $browser->visit('/admin/products/create')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/products/create')
                     ->assertSee('Create Product')
                     ->select('category_id')
                     ->type('name', 'Iphone7')

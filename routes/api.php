@@ -22,4 +22,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.api.' , 'namespace' => 'Api'],
     Route::apiResource('images', 'ImageController')->parameters(['images' => 'id']);
     Route::put('orders/{id}/status', 'OrderController@changeStatus')->name('orders.update.status');
     Route::apiResource('comments', 'CommentController')->parameters(['comments' => 'id']);
+
+
+});
+
+Route::post('login', 'Auth\UserLoginController@login');
+Route::post('register', 'Auth\UserLoginController@register');
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::post('details', 'Auth\UserLoginController@details');
+    Route::post('logout', 'Auth\UserLoginController@logout');
 });

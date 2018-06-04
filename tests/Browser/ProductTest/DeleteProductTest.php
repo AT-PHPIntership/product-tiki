@@ -24,7 +24,8 @@ class DeleteProductTest extends DuskTestCase
             factory('App\Models\Product', 3)->create();
 
             $product = Product::find(3);
-            $browser->visit('/admin/products')
+            $browser->loginAs($this->user)
+                    ->visit('/admin/products')
                     ->assertSee('Product List')
                     ->click('tr td #delete-prd' . $product->id . ' > button')
                     ->acceptDialog();
