@@ -36,7 +36,7 @@
                   <td>{{ $list->created_at }}</td>
                   <td class="a-right a-right ">{{ $list->updated_at }}</td>
                   <td class="last">
-                    <a href="{{ route('admin.categories.edit', ['id' => $list->id]) }}" ><button class="btn-success"><i class="fa fa-edit"></i></button></a>| 
+                    <a href="{{ route('admin.categories.edit', ['id' => $list->id]) }}" id="edit{{ $list->id }}"><button class="btn-success"><i class="fa fa-edit"></i></button></a>| 
                     <form method="POST" action="{{ route('admin.categories.destroy', ['id' => $list->id]) }}" style="display:inline;" id="deleted{{ $list->id }}">
                       @method('DELETE')
                       {{ csrf_field() }}

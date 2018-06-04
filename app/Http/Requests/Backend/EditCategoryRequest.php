@@ -25,7 +25,11 @@ class EditCategoryRequest extends FormRequest
     {
         $category = $this->route()->parameter('category');
         return [
-            'name' => 'required|unique:categories,name,' . $category->name . ',name'
+            'name' => [
+                'required',
+                'regex:/(^[A-Za-z0-9 ]+$)+/',
+                'unique:categories,name,' . $category->name . ',name'
+            ]
         ];
     }
 }
