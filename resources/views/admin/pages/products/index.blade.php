@@ -122,10 +122,10 @@
                       <a class="btn btn-primary" href="{!! route('admin.products.edit', ['id' => $product['id']]) !!}"><i class="fa fa-edit"></i></a>
                     </td>
                     <td class=" last">
-                      <form id="delete-prd{{ $product->id }}" action="{!! route('admin.products.destroy', ['id' => $product['id']]) !!}" method="post">
+                      <form id="deleted{{ $product->id }}" action="{!! route('admin.products.destroy', ['id' => $product['id']]) !!}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-primary" onclick="deleteProduct(event, {{ $product->id }}, '{{ $product->name }}')" type="submit"><i class="fa fa-trash btn-danger"></i></button>
+                        <button class="btn btn-primary" onclick="deleteMain(event, {{ $product->id }})" type="submit"><i class="fa fa-trash btn-danger"></i></button>
                       </form>
                     </td>
                   </tr>
@@ -140,10 +140,8 @@
     </div>
   </div>
 </div>
-<script src="/js/messages.js"></script>
-<script src="/js/product.js"></script>
 @endsection
 @section('js')
 <script src="/js/messages.js"></script>
-<script src="/js/product.js"></script>
+<script src="/js/main.js"></script>
 @endsection

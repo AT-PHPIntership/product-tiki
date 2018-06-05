@@ -1,10 +1,3 @@
-function deletePost(e, id) {
-    e.preventDefault();
-    msg = Lang.get('post.admin.form.delete_msg');
-    if (confirm(msg)) {
-        document.getElementById('delete' + id).submit();
-    }
-}
 
 function updateStatus(e, id, url) {
     e.preventDefault();

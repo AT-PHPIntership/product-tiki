@@ -26,7 +26,7 @@ class DeleteProductTest extends DuskTestCase
             $product = Product::find(3);
             $browser->visit('/admin/products')
                     ->assertSee('Product List')
-                    ->click('tr td #delete-prd' . $product->id . ' > button')
+                    ->click('tr td #deleted' . $product->id . ' > button')
                     ->acceptDialog();
 
             $elements = $browser->visit('/admin/products')

@@ -25,6 +25,6 @@ return [
     'show_post' => 'Show Posts',
     'show_order' => 'Show Order',
     'adduser' => 'Add User',
-
+    'main_delete' => 'Do you want to delete ?',
     'delete_fail' => 'Delete Failed',
 ];

@@ -100,10 +100,10 @@
                         @endif
                     </td>
                     <td>
-                      <form action="{{ route('admin.orders.destroy', ['id' => $order['id']]) }}" class="col-md-4" method="POST" id="delete{{ $order['id'] }}">
+                      <form action="{{ route('admin.orders.destroy', ['id' => $order['id']]) }}" class="col-md-4" method="POST" id="deleted{{ $order['id'] }}">
                         @csrf
                         @method('DELETE')
-                        <button onclick="deleteOrder(event, {{ $order['id'] }})" class="btn btn-danger" type="submit"><i class="fa fa-trash icon-size" ></i></button>
+                        <button onclick="deleteMain(event, {{ $order['id'] }})" class="btn btn-danger" type="submit"><i class="fa fa-trash icon-size" ></i></button>
                       </form>
                       <form action="{{ route('admin.orders.show', ['id' => $order['id']]) }}" class="col-md-4">
                         <button class="btn btn-primary" type="submit"><i class="fa fa-eye icon-size" ></i></button>
@@ -122,8 +122,7 @@
     </div>
   </div>
 @section('js')
-  <script src="/js/messages.js"></script>
-  <script src="/js/order.js"></script>
-  <script src="/js/post.js"></script>
+<script src="/js/messages.js"></script>
+<script src="/js/main.js"></script>
 @endsection
 @endsection
