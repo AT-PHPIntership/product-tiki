@@ -40,7 +40,7 @@ class UpdateUserTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/users')
                     ->visit('/admin/users/1/edit')
-                    ->assertSee( __('Update User'));
+                    ->assertSee('Update User');
         });
     }
 
@@ -122,14 +122,14 @@ class UpdateUserTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/admin/users/1/edit')
-                    ->assertSee('Update User')
-                    ->type('full_name', 'mai luong')
-                    ->type('address', 'quang nam')
-                    ->type('phone', '0123345454')
-                    ->type('identity_card', '347368362')
-                    ->press('Update')
-                    ->assertPathIs('/admin/users')
-                    ->assertSee('Update user successfully');                
+                ->assertSee('Update User')
+                ->type('full_name', 'mai luong')
+                ->type('address', 'quang nam')
+                ->type('phone', '0123345454')
+                ->type('identity_card', '347368362')
+                ->press('Update')
+                ->assertPathIs('/admin/users')
+                ->assertSee('Update user successfully');                
             $this->assertDatabaseHas('user_info', [
                 'full_name' => 'mai luong',
                 'address' => 'quang nam',
