@@ -256,5 +256,7 @@
 
     <!-- Custom Theme Scripts -->
     <script src="/bower_components/gentelella/build/js/custom.min.js"></script>
+
+    @yield('js')
   </body>
 </html>

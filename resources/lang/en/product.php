@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'required' => '*',
     'index' => [
         'title' => 'Product',
         'table-title' => 'Product List',
@@ -14,7 +15,7 @@ return [
         'status' => 'Status',
         'image' => 'Image',
         'go' => 'Go',
-        'delete_confirm' => 'Do you want to delete Product ID = ',
+        'delete_confirm' => 'Do you want to delete Product',
         'sort_by_category' => 'category_id',
         'sort_by_name' => 'name',
         'sort_by_quantity' => 'quantity',

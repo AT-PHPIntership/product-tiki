@@ -37,41 +37,41 @@
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">@lang('product.create.name')
-                <span class="required">*</span>
+                <span class="required">@lang('product.required')</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12" value="{{ $product->name }}">
+                <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12" value="{{ old('name', $product->name) }}">
               </div>
             </div>
 
             <div class="form-group">
               <label for="description" class="control-label col-md-3 col-sm-3 col-xs-12">@lang('product.create.description')</label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <textarea class="resizable_textarea form-control" rows='5' name="description" id="description">{{ $product->description }}</textarea>
+                <textarea class="resizable_textarea form-control" rows='5' name="description" id="description">{{ old('description', $product->description) }}</textarea>
               </div>
             </div>
 
             <div class="form-group">
               <label for="price" class="control-label col-md-3 col-sm-3 col-xs-12">@lang('product.create.price')
-                <span class="required">*</span>
+                <span class="required">@lang('product.required')</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="price" name="price" class="form-control col-md-7 col-xs-12" required="required" type="number" value="{{ $product->price }}">
+                <input id="price" name="price" class="form-control col-md-7 col-xs-12" required="required" type="number" value="{{ old('price', $product->price) }}">
               </div>
             </div>
 
             <div class="form-group">
               <label for="quantity" class="control-label col-md-3 col-sm-3 col-xs-12">@lang('product.create.quantity')
-                <span class="required">*</span>
+                <span class="required">@lang('product.required')</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="quantity" name="quantity" class="form-control col-md-7 col-xs-12" required="required" type="number" value="{{ $product->quantity }}">
+                <input id="quantity" name="quantity" class="form-control col-md-7 col-xs-12" required="required" type="number" value="{{ old('quantity', $product->quantity) }}">
               </div>
             </div>
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12">@lang('product.create.image')
-                <span class="required">*</span>
+                <span class="required">@lang('product.required')</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div id="image" class="btn-group">
@@ -83,10 +83,10 @@
 
             <div class="form-group">
               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                @foreach($product->images as $image)
+                @foreach ($product->images as $image)
                   <div id="img-{{ $image->id }}" class="col-lg-4 col-md-4 col-sm-6">
                     <div class="update-img"><img class="img-responsive" src="{{ $image->img_url }}" alt=""></div>
-                    <button onclick="deleteImage('{{ route('admin.api.images.destroy', ['id' => $image->id]) }}', event)" class="delete-img-btn"><i class="fa fa-trash btn-danger"></i></button>
+                    <button onclick="deleteImage('{{ route('admin.api.images.destroy', ['id' => $image->id]) }}', event)" class="delete-img-btn btn-danger"><i class="fa fa-trash"></i></button>
                   </div>
                 @endforeach
               </div>
@@ -106,6 +106,8 @@
     </div>
   </div>
 </div>
-<script src="/js/product.js"></script>
+@endsection
+@section('js')
 <script src="/js/messages.js"></script>
+<script src="/js/product.js"></script>
 @endsection
