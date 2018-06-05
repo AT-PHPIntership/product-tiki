@@ -21,6 +21,7 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')
                     ->references('id')->on('users')
                     ->onDelete('no action');
+            $table->text('note')->nullable();
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });

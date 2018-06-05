@@ -18,7 +18,7 @@ class CreateUserinfoTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('full_name')->charset('utf8')->collation('utf8_unicode_ci');
             $table->string('avatar')->nullable();
-            $table->boolean('gender')->nullable()->default(0)->comment('0: male, 1: female');
+            $table->boolean('gender')->default(0)->comment('0: male, 1: female');
             $table->date('dob')->nullable();
             $table->string('address')->charset('utf8')->collation('utf8_unicode_ci')->nullable();
             $table->string('phone', 50)->nullable();
