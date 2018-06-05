@@ -39,7 +39,12 @@
                     <td class="a-right a-right ">{{ __('user.index.male') }}</td>
                   @endif
                   <td class=""><i class="fa fa-times-circle icon-size fa-2x"></i></td>
-                  <td class="last"><a href="{{ route('admin.users.edit', array('id' => $user->id)) }}"><button class="btn-success"><i class="fa fa-edit"></i></button></a>|<button class="btn-danger"><a href=""><i class="fa fa-trash"></i></a></button>
+                  <td class="last"><a class="col-md-3" href="{{ route('admin.users.edit', array('id' => $user->id)) }}"><button class="btn-success"><i class="fa fa-edit"></i></button></a>
+                  <form class="col-md-3" id="delete-user{{ $user->id }}" action="{!! route('admin.users.destroy', ['id' => $user['id']]) !!}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn-danger" onclick="deleteUser(event, {{ $user->id }})" type="submit"><i class="fa fa-trash"></i></button>
+                  </form>
                   <td class="last"><a href="{{ route('admin.users.show', array('id' => $user->id)) }}">{{ __('user.index.detail') }}</a>
                   </td>
                 </tr>
