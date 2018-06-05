@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Models\User;
 use App\Models\UserInfo;
 
-class ValidateAndUpdateUserTest extends DuskTestCase
+class UpdateUserTest extends DuskTestCase
 {
     use DatabaseMigrations;
 
@@ -20,9 +20,13 @@ class ValidateAndUpdateUserTest extends DuskTestCase
     public function setUp()
     {
         parent::setUp();
-        $users = factory(User::class)->create();
+        $users = factory(User::class, 2)->create();
         factory(UserInfo::class)->create([
-            'user_id' => $users->id,
+            'user_id' => $users->id = 1,
+            'identity_card' => '154599812'
+        ]);
+        $userInfo = factory(UserInfo::class)->create([
+            'user_id' => $users->id = 2
         ]);
     }
 
@@ -70,6 +74,39 @@ class ValidateAndUpdateUserTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) use ($name, $content, $message) {
             $browser->visit('/admin/users/1/edit')
+                ->type($name, $content)
+                ->press('Update')                   
+                ->assertSee($message);
+        });
+    }
+
+    /**
+     * Case for test validate for input
+     *
+     * @return array
+     */
+    public function CaseAlreadyTestValidateForInput()
+    {
+        return [
+            ['identity_card', '154599812', 'The identity card has already been taken.'],
+        ];
+    }
+
+    /**
+     * Dusk test validate for input
+     *
+     * @param string $name name of field
+     * @param string $content content
+     * @param string $message message show when validate
+     * 
+     * @dataProvider CaseAlreadyTestValidateForInput
+     *
+     * @return void
+     */
+    public function testValidateaAlreadyForInput($name, $content, $message)
+    { 
+        $this->browse(function (Browser $browser) use ($name, $content, $message) {
+            $browser->visit('/admin/users/2/edit')
                 ->type($name, $content)
                 ->press('Update')                   
                 ->assertSee($message);
