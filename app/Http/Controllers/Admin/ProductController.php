@@ -24,6 +24,8 @@ class ProductController extends Controller
     {
         $products = Product::when(isset($request->content), function ($query) use ($request) {
             return $query->where('name', 'like', "%$request->content%");
+        })->when(isset($request->sortBy) && isset($request->dir), function ($query) use ($request) {
+            return $query->orderBy($request->sortBy, $request->dir);
         })->with('category', 'images')->paginate(config('define.product.limit_rows'));
 
         $products->appends(request()->query());

@@ -81,7 +81,7 @@
                   <li class=""><a><i class="fa fa-users"></i> {{ __('messages.users') }} <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu" style="display: none;">
                       <li class=""><a href="{{ route('admin.users.index') }}"> @lang('messages.show_all') <i class="fa fa-th-list"></i></a></li>
-                      <li class=""><a href="{{ route('admin.users.create') }}"> @lang('messages.add') <i class="fa fa-plus-circle"></i></a></li>
+                      <li class=""><a href="{{ route('admin.users.create') }}"> @lang('messages.adduser') <i class="fa fa-plus-circle"></i></a></li>
                     </ul>
                   </li>
                   <li class=""><a><i class="fa fa-list-alt"></i> {{ __('messages.orders') }} <span class="fa fa-chevron-down"></span></a>

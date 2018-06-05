@@ -25,6 +25,7 @@ return [
     'add_product' => 'Add Products',
     'show_post' => 'Show Posts',
     'show_order' => 'Show Order',
+    'adduser' => 'Add User',
 
     'delete_fail' => 'Delete Failed',
     'delete_user_success' => 'Delete User Successfully',

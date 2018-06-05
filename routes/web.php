@@ -24,3 +24,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' , 'namespace' => 'Admin'], f
     Route::resource('users', 'UserController');
     Route::resource('orders', 'OrderController')->parameters(['orders' => 'id']);
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -37,8 +37,8 @@ return [
         'reset' => 'Reset',
         'updateuser' => 'Update User',
         'title' => 'USERS',
-        'formdesign' => 'Form Design',
-        'cancel' => 'Cancel',
+        'createuser' => 'Create User',
+        'edituser' => 'Edit User',
         'reset' => 'Reset',
         'submit' => 'Submit',
         'requied' => '*'

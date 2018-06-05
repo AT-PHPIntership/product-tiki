@@ -10,6 +10,7 @@
             <h2>{{ __('category.admin.edit.title') }}</h2>
             <div class="clearfix"></div>
           </div>
+          @include('admin.layout.message')
           <div class="x_content">
             <br />
             <form class="form-horizontal form-label-left" method="POST" action="{{ route('admin.categories.update', ['id' => $category['id']]) }}">
@@ -19,7 +20,7 @@
               <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ __('category.admin.add.name') }}</label>
                 <div class="col-md-9 col-sm-9 col-xs-12">
-                  <input type="text" class="form-control" value="{{ $category->name }}" name="name">
+                  <input type="text" class="form-control" value="{{ old('name', $category->name) }}" name="name">
                 </div>
               </div>
               <div class="form-group">
