@@ -121,8 +121,4 @@
       </div>
     </div>
   </div>
-@section('js')
-<script src="/js/messages.js"></script>
-<script src="/js/main.js"></script>
-@endsection
 @endsection

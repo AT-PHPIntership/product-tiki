@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 @section('title', __('homepage.admin.title'))
 @section('css')
-  <link rel="stylesheet" href="/css/homepage.css">
+  <link rel="stylesheet" href="/css/admin/homepage.css">
 @endsection
 @section('content')
 
@@ -175,6 +175,6 @@
   </div>
 </div>
 @section('js')
-  <script src="/js/homepage.js"></script>
+  <script src="/js/admin/homepage.js"></script>
 @endsection
 @endsection

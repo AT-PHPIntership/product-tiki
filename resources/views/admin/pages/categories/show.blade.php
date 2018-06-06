@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 @section('title', __('category.admin.title') )
 @section('css')
-  <link href="/css/show.css" rel="stylesheet">
+  <link href="/css/admin/show.css" rel="stylesheet">
 @endsection
 @section('content')
 <div class="right_col" role="main">

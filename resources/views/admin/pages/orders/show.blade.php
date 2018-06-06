@@ -91,7 +91,6 @@
     </div>
   </div>
 @section('js')
-  <script src="/js/messages.js"></script>
-  <script src="/js/order.js"></script>
+  <script src="/js/admin/order.js"></script>
 @endsection
 @endsection

@@ -22,7 +22,8 @@
 
     <!-- Custom Theme Style -->
     <link href="/bower_components/gentelella/build/css/custom.min.css" rel="stylesheet">
-
+    <script src="/js/admin/main.js"></script>
+    <script src="/js/messages.js"></script>
     @yield('css')
   </head>
 

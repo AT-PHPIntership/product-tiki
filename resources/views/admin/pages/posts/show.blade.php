@@ -1,8 +1,6 @@
 @extends('admin.layout.master')
 @section('title', __('post.admin.show.title') )
 @section('content')
-<script src="/js/messages.js"></script>
-<script src="/js/post.js"></script>
   <div class="right_col" role="main" class="index-main">
     <div class="">
       <div class="page-title">
@@ -108,4 +106,7 @@
     </div>
   </div>
 
+@endsection
+@section('js')
+<script src="/js/admin/post.js"></script>
 @endsection

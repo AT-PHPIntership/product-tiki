@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('css')
-<link rel="stylesheet" href="/css/product-admin.css">
+  <link rel="stylesheet" href="/css/admin/product-admin.css">
 @endsection
 @section('title', __('product.update.title'))
 @section('content')
@@ -108,6 +108,5 @@
 </div>
 @endsection
 @section('js')
-<script src="/js/messages.js"></script>
-<script src="/js/product.js"></script>
+<script src="/js/admin/product.js"></script>
 @endsection
