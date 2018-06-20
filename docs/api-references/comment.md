@@ -79,6 +79,64 @@ Get list all product's comments
     "code": 200
 }
 ```
+### `GET` Comments of logged in user
+```
+/api/comments
+```
+Get list all user's comments
+#### Request Headers
+| Key | Value |
+|---|---|
+|Accept|application/json
+|Authorization| Bearer $token
 
+#### Query Param
+| Param | Type | Description |
+|---|---|---|
+| perpage | int | number item per page |
+| page | int | paginate comments |
+
+#### Response
+* _Success_
+``` json
+{
+    "result": {
+        "paginator": {
+            "current_page": 1,
+            "first_page_url": "http://product.tiki/api/comments?page=1",
+            "from": 1,
+            "last_page": 2,
+            "last_page_url": "http://product.tiki/api/comments?page=2",
+            "next_page_url": "http://product.tiki/api/comments?page=2",
+            "path": "http://product.tiki/api/comments",
+            "per_page": 5,
+            "prev_page_url": null,
+            "to": 5,
+            "total": 7
+        },
+        "data": [
+            {
+                "id": 1,
+                "user_id": 1,
+                "post_id": 1,
+                "content": "Voluptate doloremque rerum dignissimos dolores rerum. Blanditiis et qui sit ea nobis rem. Qui ullam aut aut a fugit aut.",
+                "diff_time": "1 day ago",
+                "image_path": "http://product-tiki.show/images/upload/",
+                "created_at": "2018-05-31 07:04:58",
+                "updated_at": "2018-05-31 07:04:58",
+                "deleted_at": null
+            }
+        ]
+    },
+    "code": 200
+}
+```
+* _Error_
+``` json
+{
+    "error": "Unauthorised",
+    "code": 401
+}
+```
 
 
