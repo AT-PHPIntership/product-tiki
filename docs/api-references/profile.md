@@ -164,7 +164,7 @@ Get address of user
 ```
 /api/users/profile/address/{address}
 ```
-Get address of user
+Update address of user
 #### Request Headers
 | Key | Value |
 |---|---|
