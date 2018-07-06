@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests\PostProductRequest;
 use DB;
 use App\Models\Meta;
+use App\Models\MetaData;
+use Validator;
 
 class ProductController extends Controller
 {
@@ -103,15 +105,60 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param \App\Models\Product $product product
+     * @param \App\Models\Product $products product
      *
      * @return \Illuminate\Http\Response
      */
-    public function editMeta($product)
+    public function editMeta(Product $products)
     {
         $data['metaList'] = Meta::all();
-
+        $productMeta = MetaData::where('product_id', $products->id)->get();
+        $data['productMeta'] = $productMeta;
         return view('admin.pages.products.editMeta', $data);
+    }
+
+    /**
+     * Updating the specified resource.
+     *
+     * @param \Illuminate\Http\Request $request  request
+     * @param \App\Models\Product      $products product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateMeta(Request $request, Product $products)
+    {
+        $loopCount = count($request['meta-key']);
+        $data = $request->all();
+        unset($data['meta-key'][$loopCount-1]);
+        unset($data['meta-data'][$loopCount-1]);
+
+        $validator = Validator::make($data, [
+            'meta-key.*' => 'required|distinct',
+            'meta-data.*' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $loopCount = count($data['meta-key']);
+        for ($i = 0; $i < $loopCount; $i++) {
+            MetaData::updateOrCreate([
+                'meta_key' => $data['meta-key'][$i],
+                'product_id' => $products->id
+            ], [
+                'meta_data' => $data['meta-data'][$i]
+            ]);
+        }
+
+        $productMeta = MetaData::where('product_id', $products->id)->get();
+
+        $result['metaList'] = Meta::all();
+        $result['productMeta'] = $productMeta;
+
+        return view('admin.pages.products.editMeta', $result);
     }
 
     /**

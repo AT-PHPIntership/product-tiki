@@ -25,23 +25,46 @@
               @include('admin.layout.message')
             </div>
 
-            <div class="form-group">
-              <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">@lang('product.create.name')
-                <select class="meta-key" name="meta">
+            @foreach ($productMeta as $metaData)
+              <div class="form-group rows">
+                <div class="col-md-3">
+                  <select class="form-control meta-key col-md-4" name="meta-key[]">
+                    @foreach ($metaList as $meta)
+                      <option @if ($metaData->meta_key == $meta->key)
+                        selected
+                      @endif value="{{ $meta->key }}">{{ $meta->key }}</option>
+                    @endforeach
+                  </select>
+                </div>
+                <div class="col-md-6 col-sm-8 col-xs-12">
+                  <input type="text" name="meta-data[]" required="required" class="form-control col-md-7 col-xs-12" value="{{ old('meta_data', $metaData->meta_data) }}">
+                </div>
+                <div class="col-md-3">
+                  <button class="btn btn-danger remove-meta" type="button"><i class="fa fa-trash"></i></button>
+                </div>
+              </div>
+            @endforeach
+
+            <div class="form-group rows" id="template-meta" style="display:none">
+              <div class="col-md-3">
+                <select class="form-control meta-key col-md-4" name="meta-key[]">
                   @foreach ($metaList as $meta)
                     <option value="{{ $meta->key }}">{{ $meta->key }}</option>
                   @endforeach
                 </select>
-              </label>
-              <div class="col-md-8 col-sm-8 col-xs-12">
-                {{-- {{ old('name', $product->name) }} --}}
-                <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12" value="">
+              </div>
+              <div class="col-md-6 col-sm-8 col-xs-12">
+                <input type="text" name="meta-data[]" required="required" class="form-control col-md-7 col-xs-12" value="">
+              </div>
+              <div class="col-md-3">
+                <button class="btn btn-danger remove-meta" type="button"><i class="fa fa-trash"></i></button>
               </div>
             </div>
 
-            <div class="ln_solid"></div>
+            <div class="ln_solid" id="last-group"></div>
             <div class="form-group">
               <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                <button type="button" id="add-meta" class="btn btn-info" name="button">Add Meta</button>
                 <button class="btn btn-primary" type="reset">@lang('common.reset')</button>
                 <button type="submit" onclick="submitForm(event)" class="btn btn-success">@lang('product.update.update')</button>
               </div>

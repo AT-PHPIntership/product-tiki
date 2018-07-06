@@ -26,3 +26,13 @@ function submitForm(event) {
   $('#description').html($('#editor-description').html());
   $('#form-editor').submit();
 }
+
+$(document).ready(function () {
+    $(document).on('click', '#add-meta', function() {
+        $('#template-meta').clone().attr({"style":"display: ", "id":''}).insertBefore('#template-meta');
+    });
+
+    $(document).on('click', '.remove-meta', function() {
+        $(this).closest('.form-group').remove();
+    })
+});
