@@ -11,6 +11,7 @@ use App\Http\Requests\UpdateProductRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests\PostProductRequest;
 use DB;
+use App\Models\Meta;
 
 class ProductController extends Controller
 {
@@ -97,6 +98,20 @@ class ProductController extends Controller
         $data['product'] = $product;
         $data['categories'] = $categories;
         return view('admin.pages.products.edit', $data);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param \App\Models\Product $product product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editMeta($product)
+    {
+        $data['metaList'] = Meta::all();
+
+        return view('admin.pages.products.editMeta', $data);
     }
 
     /**

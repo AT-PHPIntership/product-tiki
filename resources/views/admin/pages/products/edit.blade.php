@@ -14,7 +14,7 @@
         </div>
         <div class="x_content">
           <br />
-          <form data-parsley-validate id="form-editor" method="POST" action="{!! route('admin.products.update', ['id' => $product['id']]) !!}" enctype="multipart/form-data" class="form-horizontal form-label-left">
+          <form data-parsley-validate id="form-editor" method="POST" action="{!! route('admin.products.updateMeta', ['product' => $product['id']]) !!}" enctype="multipart/form-data" class="form-horizontal form-label-left">
 
             @csrf
             @method('PUT')
@@ -167,7 +167,7 @@
 
                 <div id="editor-description" class="editor-wrapper placeholderText" contenteditable="true">{{ old('description', $product->description) }}</div>
                 <textarea name="description" id="description" hidden></textarea>
-                  
+
               <!-- -->
               </div>
             </div>
