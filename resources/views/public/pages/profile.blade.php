@@ -259,7 +259,7 @@
                                       </thead>
                                       <tbody >
                                         <tr id='template-address' style="display: none">
-                                          <td><span class="address">dsadasdasda</span></td>
+                                          <td><span class="address"></span></td>
                                           <td><button type="button" class = "btn btn-warning btn-address">{{ __('user/profile.edit_address') }}</button></td>
                                         </tr>
                                       </tbody>

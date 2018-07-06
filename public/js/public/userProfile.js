@@ -94,7 +94,6 @@ $(document).ready(function () {
          "Authorization": "Bearer " + accessToken
      },
      success: function (response) {
-         console.log(response);
          showAddress(response.result);
      }
   });
@@ -104,7 +103,6 @@ $(document).ready(function () {
       action =$(this).attr('data-action');
       if(action == 'view') {
           $('#address-data-'+addr_id).replaceWith(function () {
-              console.log("<input id='input-"+ addr_id +"' type='text' value ='" + $('#address-data-'+addr_id).text() +"' />");
               return "<input class='form-control' id='input-"+ addr_id +"' type='text' value ='" + $('#address-data-'+addr_id).text() +"' />";
           });
           $(this).text(Lang.get('user/profile.edit_address'));
