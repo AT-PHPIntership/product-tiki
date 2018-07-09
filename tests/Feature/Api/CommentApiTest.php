@@ -34,6 +34,11 @@ class CommentApiTest extends TestCase
         $response->assertStatus(200);
     }
 
+    /**
+     * Return structure of json.
+     *
+     * @return array
+     */
     public function listStructureTest()
     {
     	return [
@@ -98,9 +103,9 @@ class CommentApiTest extends TestCase
     }
 
     /**
-     * @dataProvider listStructureTest
-     *
      * Test api structure
+     *
+     * @dataProvider listStructureTest
      *
      * @return void
      */
