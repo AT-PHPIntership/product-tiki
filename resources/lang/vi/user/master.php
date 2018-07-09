@@ -3,7 +3,7 @@
 return [
         'title' => [
             'index' => 'Product Tiki',
-            'product' => 'Infomation Products',
-            'detail' => 'Detail Product',
+            'product' => 'Thông tin sản phẩm',
+            'detail' => 'Chi tiết sản phẩm',
         ]
 ];

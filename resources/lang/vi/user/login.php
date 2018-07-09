@@ -1,13 +1,13 @@
 <?php
 
 return [
-    'login_form' => 'Login Form',
+    'login_form' => 'Đăng nhập',
     'form' => [
-        'register' => 'Register Here',
-        'forgot_password' => 'Forgot Password?',
-        'login' => 'Login',
-        'or_go_back' => '(Or) go back to',
-        'email_hint' => 'Email Address',
-        'password_hint' => 'Password',
+        'register' => 'Đăng ký',
+        'forgot_password' => 'Quên mật khẩu',
+        'login' => 'Đăng nhập',
+        'or_go_back' => 'Quay lại',
+        'email_hint' => 'Email',
+        'password_hint' => 'Mật khẩu',
     ]
 ];

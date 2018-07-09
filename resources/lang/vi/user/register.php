@@ -1,21 +1,21 @@
 <?php
 
 return [
-    'title' => 'Register',
+    'title' => 'Đăng ký',
     'form' => [
-        'information' => 'Profile information',
-        'full_name' => 'Full Name',
-        'address' => 'Address',
-        'gender_default' => 'Gender',
-        'gender_male' => 'Male',
-        'gender_female' => 'Female',
-        'phone' => 'Phone',
-        'id_card' => 'Identity Card',
-        'dob' => 'Date Of Birth',
-        'login_info' => 'Login information',
+        'information' => 'Thông tin cá nhân',
+        'full_name' => 'Tên đầy đủ',
+        'address' => 'Địa chỉ',
+        'gender_default' => 'Giới tính',
+        'gender_male' => 'Nam',
+        'gender_female' => 'Nữ',
+        'phone' => 'Số điện thoại',
+        'id_card' => 'CMND',
+        'dob' => 'Ngày sinh',
+        'login_info' => 'Thông tin đăng nhập',
         'username' => 'Username',
         'email' => 'Email',
-        'password' => 'Password',
-        'password_c' => 'Password Confirmation',
+        'password' => 'Mật khẩu',
+        'password_c' => 'Xác nhận mật khẩu',
     ]
 ];

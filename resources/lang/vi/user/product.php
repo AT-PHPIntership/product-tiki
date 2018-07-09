@@ -2,21 +2,21 @@
 
 return [
     'sort' => [
-        'default' => 'Default Sorting',
-        'popularity' => 'Sort by popularity',
-        'rating' => 'Sort by average rating',
-        'price' => 'Sort by price',
+        'default' => 'Sắp xếp mặc định',
+        'popularity' => 'Sắp xếp theo độ phổ biến',
+        'rating' => 'Sắp xếp theo đánh giá',
+        'price' => 'Sắp xếp theo giá tiền',
     ],
-    'price_filter' => 'Filter By Price',
+    'price_filter' => 'Lọc theo giá tiền',
     'price_range' => [
         '0-5m' => '0 - 5.000.000',
         '5m-10m' => '5.000.000 - 10.000.000',
         '10m-20m' => '10.000.000 - 20.000.000',
-        '20m' => '20.000.000 - max',
+        '20m' => '20.000.000 - tối đa',
     ],
-    'rating_filter' => 'Filter by Rating',
-    'single_page' => 'Singlepage',
+    'rating_filter' => 'Lọc theo đánh giá',
+    'single_page' => 'Chi tiết sản phẩm',
     'show' => [
-        'description' => 'Description',
+        'description' => 'Mô tả sản phẩm',
     ]
 ];
