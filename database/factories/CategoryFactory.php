@@ -9,7 +9,7 @@ $factory->define(App\Models\Category::class, function (Faker $faker) {
 });
 
 $factory->state(App\Models\Category::class, 'parent', function (Faker $faker) {
-    $category = App\Models\Category::all()->random();
+    $category = App\Models\Category::where('level', '=', App\Models\Category::BASELEVEL)->get()->random();
     return [
         'name' => $faker->name,
         'parent_id' => $category->id,

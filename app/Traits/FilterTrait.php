@@ -38,18 +38,20 @@ trait FilterTrait
     /**
      * Get Array id of category
      *
-     * @param array $categoriesArray all categories array
-     * @param int   $id              id of a specific category
+     * @param array  $categoriesArray   all categories array
+     * @param string $categoriesRequest categories's id request array
      *
      * @return array
      */
-    public static function getCategoryId(array $categoriesArray, $id)
+    public static function getCategoryId(array $categoriesArray, $categoriesRequest)
     {
         $categoryId = array();
-        array_push($categoryId, $id);
-        foreach ($categoriesArray as $category) {
-            if ($category['parent_id'] == $id) {
-                array_push($categoryId, $category['id']);
+        foreach (explode(',', $categoriesRequest) as $categoryRequest) {
+            array_push($categoryId, $categoryRequest);
+            foreach ($categoriesArray as $category) {
+                if ($category['parent_id'] == $categoryRequest) {
+                    array_push($categoryId, $category['id']);
+                }
             }
         }
         return $categoryId;
