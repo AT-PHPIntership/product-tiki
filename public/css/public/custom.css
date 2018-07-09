@@ -169,3 +169,20 @@
   color: #000000c2;
   padding-top: 15px;
 }
+
+.login-facebook {
+  outline: none;
+  border: none;
+  padding: 10px 0;
+  font-size: 1em;
+  color: #fff;
+  display: block;
+  width: 100%;
+  background: #3399cc;
+  margin: 1.5em 0 0;
+}
+
+.login-facebook:hover {
+  background: #ff0000;
+  color: #fff;
+}
