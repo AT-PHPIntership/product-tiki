@@ -33,6 +33,7 @@ Route::group(['as' => 'api.', 'namespace' => 'Api\User'], function () {
     Route::apiResource('orders', 'OrderController')->middleware('auth:api');
     Route::get('products/{product}/posts', 'ProductController@getPosts');
     Route::post('products/{product}/posts', 'PostController@store')->middleware('auth:api');
+    Route::get('products/{productBase}/compare/{productCompare}', 'ProductController@compare');
     Route::post('login', 'LoginController@login');
     Route::post('register', 'LoginController@register');
     Route::group(['middleware' => 'auth:api'], function(){

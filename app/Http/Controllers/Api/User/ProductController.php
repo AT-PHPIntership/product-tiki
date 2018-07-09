@@ -38,7 +38,7 @@ class ProductController extends ApiController
         }
 
         $products->appends(request()->query());
-        
+
         $products = $this->formatPaginate($products);
         return $this->showAll($products, Response::HTTP_OK);
     }
@@ -96,5 +96,48 @@ class ProductController extends ApiController
 
         $data = $this->formatPaginate($posts);
         return $this->showAll($data, Response::HTTP_OK);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param \App\Models\Product $productBase    product
+     * @param \App\Models\Product $prodcutCompare prodcut
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function compare(Product $productBase, Product $productCompare)
+    {
+        $metaKeyBase = [];
+        $metaDataBase = [];
+        $metaKeyCompare = [];
+        $metaDataCompare = [];
+        foreach ($productBase->metaData as $value) {
+            array_push($metaKeyBase, $value->meta_key);
+            array_push($metaDataBase, $value->meta_data);
+        }
+        $metaBase = array_combine($metaKeyBase, $metaDataBase);
+        foreach ($productCompare->metaData as $key => $value) {
+            array_push($metaKeyCompare, $value->meta_key);
+            array_push($metaDataCompare, $value->meta_data);
+        }
+        $metaCompare = array_combine($metaKeyCompare, $metaDataCompare);
+        $metaKey = array_merge($metaKeyBase, $metaKeyCompare);
+        $loopCount = count($metaKey);
+
+        for ($i = 0; $i < $loopCount; $i++) {
+            $compareItem = [];
+            if (!isset($metaBase[$metaKey[$i]])) {
+                $metaBase[$metaKey[$i]] = null;
+            }
+            if (!isset($metaCompare[$metaKey[$i]])) {
+                $metaCompare[$metaKey[$i]] = null;
+            }
+        }
+        $data['metaBase'] = $metaBase;
+        $data['metaCompare'] = $metaCompare;
+        $data['metaKey'] = array_unique($metaKey);
+
+        return $this->successResponse($data, 200);
     }
 }
