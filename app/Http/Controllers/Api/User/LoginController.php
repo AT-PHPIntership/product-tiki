@@ -42,6 +42,7 @@ class LoginController extends ApiController
     public function register(CreateUserRequest $request)
     {
         $input = $request->only(['username', 'email', 'password']);
+        $mail = new SendMailUser($input);
         $input['password'] = bcrypt($input['password']);
         $userInfoData = $request->except(['username', 'email', 'password']);
 
@@ -51,7 +52,7 @@ class LoginController extends ApiController
 
         UserInfo::create($userInfoData);
 
-        Mail::to($user->email)->send(new SendMailUser($input));
+        Mail::to($user->email)->send($mail);
 
         $data['token'] =  $user->createToken('token')->accessToken;
         $data['user'] =  $user->load('userInfo');

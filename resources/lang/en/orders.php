@@ -29,6 +29,12 @@ return [
             'on_delivery' => 'On Delivery',
             'canceled' => 'Canceled',
             'update_msg' => 'Confirm Status Change For This Order',
+            'list_note' => 'List Notes',
+            'address' => 'Address',
+            'fill_in_note' => 'Please fill in yours note!',
+            'note_id' => 'Note ID',
+            'note_content' => 'Content',
+            'update_status' => 'Change Status Successfull!',
         ]
     ]
 ];

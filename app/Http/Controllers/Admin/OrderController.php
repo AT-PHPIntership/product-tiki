@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\NoteOrder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Auth;
 
 class OrderController extends Controller
 {
@@ -42,7 +44,7 @@ class OrderController extends Controller
     public function show($id)
     {
         $perPage = config('define.order.limit_rows');
-        $order = Order::with(['user.userInfo'])->withCount('orderdetails')->find($id);
+        $order = Order::with(['noteOrder.user', 'user.userInfo'])->withCount('orderdetails')->find($id);
 
         $orderDetails = Order::find($id)->orderDetails()->with(['product' => function ($query) {
             return $query->with('images');
@@ -71,5 +73,26 @@ class OrderController extends Controller
         } finally {
             return redirect()->route('admin.orders.index');
         }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request get request
+     * @param int                      $id      order id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $order = Order::find($id);
+        $order->status = $request->status;
+        $order->save();
+        NoteOrder::create([
+            'user_id' => Auth::id(),
+            'order_id' => $id,
+            'note' => $request->note
+        ]);
+        return redirect()->route('admin.orders.show', ['id' => $id])->with('message', __('orders.admin.show.update_status'));
     }
 }

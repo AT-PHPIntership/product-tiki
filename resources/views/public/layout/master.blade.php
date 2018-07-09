@@ -57,6 +57,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="agile-login">
           <ul>
             <li>
+              <div class="">
+                <ul>
+                  <li><a class="locale" href="{{ route('locale', ['locale' => 'en']) }}">{{ __('user/locale.en') }}</a></li>
+                  <li><a class="locale" href="{{ route('locale', ['locale' => 'vi']) }}">{{ __('user/locale.vi') }}</a></li>
+                </ul>
+              </div>
+            </li>
+            <li>
               <div id="header-login" hidden>
                 <ul>
                   <li><a href="{{ route('user.register') }}">{{ __('user/layout.register') }}</a></li>
