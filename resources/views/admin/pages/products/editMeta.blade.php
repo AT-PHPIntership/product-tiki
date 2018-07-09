@@ -14,7 +14,6 @@
         </div>
         <div class="x_content">
           <br />
-          {{-- {!! route('admin.products.updateMeta', ['products' => $product->id) !!} --}}
           <form data-parsley-validate id="form-editor" method="POST" action="" enctype="multipart/form-data" class="form-horizontal form-label-left">
 
             @csrf
