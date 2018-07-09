@@ -102,7 +102,7 @@ class ProductController extends ApiController
      * Display a listing of the resource.
      *
      * @param \App\Models\Product $productBase    product
-     * @param \App\Models\Product $prodcutCompare prodcut
+     * @param \App\Models\Product $productCompare product
      *
      * @return \Illuminate\Http\Response
      */
@@ -117,7 +117,7 @@ class ProductController extends ApiController
             array_push($metaDataBase, $value->meta_data);
         }
         $metaBase = array_combine($metaKeyBase, $metaDataBase);
-        foreach ($productCompare->metaData as $key => $value) {
+        foreach ($productCompare->metaData as $value) {
             array_push($metaKeyCompare, $value->meta_key);
             array_push($metaDataCompare, $value->meta_data);
         }
@@ -126,12 +126,11 @@ class ProductController extends ApiController
         $loopCount = count($metaKey);
 
         for ($i = 0; $i < $loopCount; $i++) {
-            $compareItem = [];
             if (!isset($metaBase[$metaKey[$i]])) {
-                $metaBase[$metaKey[$i]] = null;
+                $metaBase[$metaKey[$i]] = '';
             }
             if (!isset($metaCompare[$metaKey[$i]])) {
-                $metaCompare[$metaKey[$i]] = null;
+                $metaCompare[$metaKey[$i]] = '';
             }
         }
         $data['metaBase'] = $metaBase;
