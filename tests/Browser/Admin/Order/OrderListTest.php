@@ -6,6 +6,7 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use App\Models\Order;
+use App\Models\NoteOrder;
 
 class OrderListTest extends DuskTestCase
 {
@@ -88,13 +89,25 @@ class OrderListTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->loginAs($this->user)
                     ->visit('/admin/orders/1')
-                    ->select('order-status', \App\Models\Order::APPROVED)
-                    ->acceptDialog()
-                    ->pause(4000)
-                    ->assertSee('Updated');
+                    ->select('status', \App\Models\Order::APPROVED);
+            $browser->whenAvailable('#fill_in_note', function($modal)
+            {
+                $modal
+                ->type('#note', 'We will delivery!')
+                ->press('Submit');
+            });
+            $browser->pause(1000)
+                ->assertSee('Change Status Successfull!');
+            $noteOrder = NoteOrder::find(1);
             $this->assertDatabaseHas('orders', [
                 'id' => 1,
                 'status' => \App\Models\Order::APPROVED
+            ]);
+            $this->assertDatabaseHas('note_order', [
+                'id' => $noteOrder->id,
+                'order_id' => $noteOrder->order_id,
+                'user_id' => $this->user->id,
+                'note' => $noteOrder->note
             ]);
         });
     }
