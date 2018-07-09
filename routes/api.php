@@ -46,6 +46,7 @@ Route::group(['as' => 'api.', 'namespace' => 'Api\User'], function () {
         Route::put('users/profile', 'UserInfoController@update');
         Route::put('users/orders/{order}/cancel', 'OrderController@cancel');
         Route::get('users/profile/address', 'UserInfoController@listAddress');
+        Route::put('users/profile/address/{address}', 'UserInfoController@updateAddress');
     });
 
 });
