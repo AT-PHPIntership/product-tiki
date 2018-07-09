@@ -6,7 +6,7 @@
 ```
 Get list product
 #### Request Headers
-| Key | Value | 
+| Key | Value |
 |---|---|
 |Accept|application/json
 
@@ -52,7 +52,7 @@ Get list product
                 "id": 1,
                 "category_id": 11,
                 "name": "Alfreda Purdy Jr.",
-                "description": "Ipsum sit quod ut. Ea quia architecto rerum consequatur. Hic delectus consequuntur eligendi. Repudiandae consectetur assumenda corrupti sunt nisi. Quidem numquam consequatur dignissimos velit ut quis nemo. Fugiat voluptatem delectus voluptas in. Magni aperiam aut aut ut a. Debitis sunt quod ut minus recusandae rem et. Officiis consequatur error officiis animi consequuntur qui architecto. Voluptas a expedita voluptatibus quam dolores inventore quidem modi.",
+                "description": "Ipsum sit quod ut. Ea quia architecto rerum consequatur. Hic delectus consequuntur eligendi. Repudiandae consectetur assumenda corrupti sunt nisi. Quidem numquam consequatur dignissimos velit ut quis nemo. Fugiat Chip delectus voluptas in. Magni aperiam Camera Camera ut a. Debitis sunt quod ut minus recusandae rem et. Officiis consequatur error officiis animi consequuntur qui architecto. Voluptas a expedita voluptatibus quam dolores inventore quidem modi.",
                 "total_rate": 11,
                 "rate_count": 3,
                 "avg_rating": 3.7,
@@ -85,6 +85,61 @@ Get list product
                 ]
             }
         ]
+    },
+    "code": 200
+}
+```
+
+### `GET` Products Comparision
+```
+/api/products/{productBase}/compare/{productCompare}
+```
+Get product comparision
+
+#### Request HSD supportders
+| Key | Value |
+|---|---|
+|Accept|application/json
+
+#### Query Param
+| Key | Value | Description |
+|---|---|---|
+| productBase | int | Base Product to compare |
+| productCompare | int | Product to compare |
+
+##### Example
+| URL | Description |
+|---|---|
+| /api/products/1/compare/4 | Compare product with Id 1 with product with Id 4 |
+
+#### Response
+```json
+{
+    "result": {
+        "metaBase": {
+            "SD support": "test",
+            "Camera": "test",
+            "Ram": "test",
+            "Chip": "test",
+            "Screen": null,
+            "Battery": null
+        },
+        "metaCompare": {
+            "Chip": "compare",
+            "Screen": "compare",
+            "Battery": "compare",
+            "Ram": "compare",
+            "SD support": null,
+            "Camera": null
+        },
+        "metaKey": {
+            "0": "SD support",
+            "1": "Camera",
+            "2": "Ram",
+            "3": "Chip",
+            "5": "Screen",
+            "6": "Battery"
+        }
     },
     "code": 200
 }

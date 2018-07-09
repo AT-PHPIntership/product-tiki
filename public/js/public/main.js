@@ -1,5 +1,10 @@
 let productsUri = '/products/';
 let maxStar = 5;
+
+if (window.sessionStorage.getItem('locale')) {
+    Lang.setLocale(window.sessionStorage.getItem('locale'));
+}
+
 function generateProducts(data, selector, style) {
     let htmlProduct = '';
     data.forEach(product => {
@@ -34,6 +39,18 @@ function generateProducts(data, selector, style) {
 }
 
 $(document).ready(function() {
+    $('.locale').on('click', function (event) {
+        event.preventDefault();
+        url = $(this).attr('href');
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(response) {
+                window.sessionStorage.setItem('locale', response.locale);
+                window.location.href = '/';
+            }
+        });
+    });
     $.ajax({
         url: '/api/products?sortBy=quantity_sold&perpage=9',
         type: 'get',
