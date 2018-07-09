@@ -19,4 +19,5 @@ return [
     'three_star' => 'Three Stars',
     'four_star' => 'Four Stars',
     'five_star' => 'Five Stars',
+    'edited_post_note' => 'It will appear after be approved',
 ];

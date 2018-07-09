@@ -19,7 +19,7 @@ function textAreaEdit(id, content, type = TYPE_COMMENT, starRating = maxStar) {
                             '<textarea class="form-control edit-post-comment" placeholder="'+ Lang.get('user/detail_product.placeholder_input') +'" rows="5">' + content + '</textarea><span class="help-block text-left"></span>'+
                             '<div id="replies-errors-' + id + '" class="alert alert-danger" hidden></div>'+
                             '<div class="alert alert-info" hidden></div>'+
-                            '<button id="comment-' + id + '" class="btn btn-primary btn_edit margin-right-10px">'+ Lang.get('user/detail_product.send') +'</button>'+
+                            '<button id="' + id + '" class="btn btn-primary btn_edit margin-right-10px">'+ Lang.get('user/detail_product.send') +'</button>'+
                             '<button type="button" class="btn btn-default js-quick-edit-hide margin-right-10px">'+ Lang.get('user/detail_product.cancel') +'</button>'+
                         '</div>';
     return textAreaHtml;
@@ -55,9 +55,9 @@ function generatePosts(data) {
             ownerAction = '<button class="btn btn-success edit-post margin-right-10px" data-review-id="1105262" id='+ id +'>'+ Lang.get('product.index.edit') +'</button>'+
             '<button class="btn btn-danger delete-post margin-right-10px" data-review-id="1105262" post-id=' + id + '>'+ Lang.get('product.index.delete') +'</button>';
             if (posts.type == TYPE_REVIEW) {
-                editArea = textAreaEdit(id, content, posts.type, rate);
+                editArea = textAreaEdit('post-' + id, content, posts.type, rate);
             } else {
-                editArea = textAreaEdit(id, content);
+                editArea = textAreaEdit('post-' + id, content);
             }
         }
         html += '<div class="item posts" data-id="' + id + '" itemprop="review" itemtype="http://schema.org/Review">'+
@@ -118,7 +118,7 @@ function getComments(id) {
                 let ownerAction = '';
                 let editArea = '';
                 if (user && comments.user_id == user.id) {
-                    editArea = textAreaEdit(comments.id, content);
+                    editArea = textAreaEdit('comment-' + comments.id, content);
                     ownerAction = '<button class="btn btn-success edit-comment margin-right-10px" data-review-id="1105262" id='+ comments.id +'>'+ Lang.get('product.index.edit') +'</button>'+
                                   '<button class="btn btn-danger delete-comment margin-right-10px" data-review-id="1105262" id='+ comments.id +'>'+ Lang.get('product.index.delete') +'</button>';
                 }
@@ -192,6 +192,44 @@ function submitPost(pathName) {
             }
             $('#addReviewFrm .review-content .alert-danger').html(errorMessage);
             $('#addReviewFrm .review-content .alert-danger').show();
+        }
+    });
+}
+
+function editPost(postId) {
+    let typePost = TYPE_COMMENT;
+    if ($('div[class="item posts"][data-id="' + postId + '"] .rating1 .starRating input:checked').val()) {
+        typePost = TYPE_REVIEW;
+    }
+    $('div[class="item posts"][data-id="' + postId + '"] .quick-edit .alert-info').hide();
+    $('div[class="item posts"][data-id="' + postId + '"] #replies-errors-post-' + postId).hide();
+
+    $.ajax({
+        url: '/api/posts/' + postId,
+        type: 'put',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('login-token'),
+        },
+        data: {
+            type: typePost,
+            rating: $('div[class="item posts"][data-id="' + postId + '"] .rating1 .starRating input:checked').val(),
+            content: $('div[class="item posts"][data-id="' + postId + '"] .area-edit-post .edit-post-comment').val(),
+        },
+        success: function(response) {
+            $('div[class="item posts"][data-id="' + postId + '"] .quick-edit .alert-info').html(Lang.get('common.edit_success') + '. ' + Lang.get('user/detail_product.edited_post_note'));
+            $('div[class="item posts"][data-id="' + postId + '"] .quick-edit .alert-info').show();
+        },
+        error: function(response) {
+            errorMessage = response.responseJSON.message + '<br/>';
+            if (response.responseJSON.errors) {
+                errors = Object.keys(response.responseJSON.errors);
+                errors.forEach(error => {
+                    errorMessage += response.responseJSON.errors[error] + '<br/>';
+                });
+            }
+            $('div[class="item posts"][data-id="' + postId + '"] #replies-errors-post-' + postId).html(errorMessage);
+            $('div[class="item posts"][data-id="' + postId + '"] #replies-errors-post-' + postId).show();
         }
     });
 }
@@ -338,6 +376,9 @@ $(document).ready(function() {
         event.preventDefault();
         let id = $(this).attr('id');
         let data = id.split('-');
+        if (data[0] == 'post') {
+            editPost(data[1]);
+        }
         if (data[0] == 'comment') {
             $.ajax({
                 url: '/api/comments/' + data[1],

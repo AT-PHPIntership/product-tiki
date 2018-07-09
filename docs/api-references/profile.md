@@ -6,7 +6,7 @@
 ```
 Get profile user
 #### Request Headers
-| Key | Value | 
+| Key | Value |
 |---|---|
 |Accept|application/json
 |Authorization|Bearer $token
@@ -18,31 +18,33 @@ Get profile user
 
 
 #### Response
-```json
+``` json
 {
     "result": [
         {
-        "user": {
-            "username": "abcde",
-            "email": "abc@abc.abcde",
-            "created_at": "2018-06-13 09:10:01",
-            "updated_at": "2018-06-13 09:10:01",
-            "id": 18,
-            "image_path": "http://192.168.33.10/images/avatar/",
-            "user_info": {
-                "id": 14,
-                "user_id": 18,
-                "full_name": "dsahdkjashd djaskdaskjdh",
-                "avatar": "img.jpg",
-                "gender": 1,
-                "dob": null,
-                "address": "1231 sjhdkshdaksh",
-                "phone": "1234567890",
-                "identity_card": "145789865",
+            "user": {
+                "username": "abcde",
+                "email": "abc@abc.abcde",
                 "created_at": "2018-06-13 09:10:01",
-                "updated_at": "2018-06-13 09:10:01"
-            }
-        },
+                "updated_at": "2018-06-13 09:10:01",
+                "id": 18,
+                "image_path": "http://192.168.33.10/images/avatar/",
+                "user_info": {
+                    "id": 14,
+                    "user_id": 18,
+                    "full_name": "dsahdkjashd djaskdaskjdh",
+                    "avatar": "img.jpg",
+                    "gender": 1,
+                    "dob": null,
+                    "address": "1231 sjhdkshdaksh",
+                    "phone": "1234567890",
+                    "identity_card": "145789865",
+                    "created_at": "2018-06-13 09:10:01",
+                    "updated_at": "2018-06-13 09:10:01"
+                }
+            },
+        }
+    ],
     "code": 200
 }
 ```
@@ -53,7 +55,7 @@ Get profile user
 ```
 Get profile user
 #### Request Headers
-| Key | Value | 
+| Key | Value |
 |---|---|
 |Accept|application/json
 |Authorization|Bearer $token
@@ -118,6 +120,71 @@ Get profile user
             "created_at": "2018-06-18 06:23:52",
             "updated_at": "2018-06-20 03:36:45"
         }
+    },
+    "code": 200
+}
+```
+
+### `GET` Profile User Address
+```
+/api/users/profile/address
+```
+Get address of user
+#### Request Headers
+| Key | Value |
+|---|---|
+|Accept|application/json
+|Authorization|Bearer $token
+
+
+#### Response
+``` json
+{
+    "result": [
+        {
+            "id": 5,
+            "userinfo_id": 11,
+            "address": "1459 Paige Rue Suite 089\nNicolasshire, ME 43281-8362",
+            "created_at": "2018-07-06 02:00:24",
+            "updated_at": "2018-07-06 02:00:24"
+        },
+        {
+            "id": 19,
+            "userinfo_id": 11,
+            "address": "9515 Hyatt Pike Apt. 054\nOlgamouth, DC 17932-8485",
+            "created_at": "2018-07-06 02:00:24",
+            "updated_at": "2018-07-06 02:00:24"
+        }
+    ],
+    "code": 200
+}
+```
+
+### `PUT` Profile User Address
+```
+/api/users/profile/address/{address}
+```
+Update address of user
+#### Request Headers
+| Key | Value |
+|---|---|
+|Accept|application/json
+|Authorization|Bearer $token
+
+#### Query Param
+| Param | Type | Description |
+|---|---|---|
+| address | int | address's id |
+
+#### Response
+``` json
+{
+    "result": {
+        "id": 5,
+        "userinfo_id": 11,
+        "address": "Home",
+        "created_at": "2018-07-06 02:00:24",
+        "updated_at": "2018-07-06 04:06:47"
     },
     "code": 200
 }
