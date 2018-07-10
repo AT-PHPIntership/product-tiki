@@ -114,17 +114,20 @@ class ProductController extends ApiController
 
         $parentCat = $category->parent_id;
         $categoryId = $category->id;
+        $childCat = Category::where('parent_id', $parentCat)->where('id', '!=', $categoryId);
+
         $order = OrderDetail::where('product_id', $product->id)->get();
         $orderArr = OrderDetail::whereIn('order_id', $order->pluck('order_id'))->where('product_id', '!=', $product->id)->groupBy('product_id')->get(['product_id']);
 
-        $sameParentCat = $allProducts->where('category_id', $parentCat)->where('id', '!=', $product->id);
+        $sameParentCat = $allProducts->whereIn('category_id', $childCat->pluck('id'));
+        $inParentCat = $allProducts->where('category_id', $parentCat);
         $sameCat = $allProducts->where('category_id', $categoryId)->where('id', '!=', $product->id);
         $sameOrder = $allProducts->whereIn('id', $orderArr->pluck('product_id'));
 
         $result = collect();
 
         foreach ($allProducts as $product) {
-            if ($sameParentCat->contains($product->id)) {
+            if ($inParentCat->contains($product->id)  || $sameParentCat->contains($product->id)) {
                 $product['point'] += 1;
             }
             if ($sameCat->contains($product->id)) {
