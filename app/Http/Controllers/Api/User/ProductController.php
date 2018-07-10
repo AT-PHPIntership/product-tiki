@@ -8,6 +8,8 @@ use App\Models\Product;
 use App\Models\Post;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
+use App\Models\Category;
+use App\Models\OrderDetail;
 
 class ProductController extends ApiController
 {
@@ -38,7 +40,7 @@ class ProductController extends ApiController
         }
 
         $products->appends(request()->query());
-        
+
         $products = $this->formatPaginate($products);
         return $this->showAll($products, Response::HTTP_OK);
     }
@@ -96,5 +98,51 @@ class ProductController extends ApiController
 
         $data = $this->formatPaginate($posts);
         return $this->showAll($data, Response::HTTP_OK);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param \App\Models\Product $product product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function recommend(Product $product)
+    {
+        $allProducts = Product::withCount('orderDetails')->with('images')->get();
+        $category = $product->category()->first();
+
+        $parentCat = $category->parent_id;
+        $categoryId = $category->id;
+        $order = OrderDetail::where('product_id', $product->id)->get();
+        $orderArr = OrderDetail::whereIn('order_id', $order->pluck('order_id'))->where('product_id', '!=', $product->id)->groupBy('product_id')->get(['product_id']);
+
+        $sameParentCat = $allProducts->where('category_id', $parentCat)->where('id', '!=', $product->id);
+        $sameCat = $allProducts->where('category_id', $categoryId)->where('id', '!=', $product->id);
+        $sameOrder = $allProducts->whereIn('id', $orderArr->pluck('product_id'));
+
+        $result = collect();
+
+        foreach ($allProducts as $product) {
+            if ($sameParentCat->contains($product->id)) {
+                $product['point'] += 1;
+            }
+            if ($sameCat->contains($product->id)) {
+                $product['point'] += 1;
+            }
+            if ($sameOrder->contains($product->id)) {
+                $product['point'] += 1;
+            }
+            if ($product->point) {
+                $product['price_formated'] = number_format($product['price']);
+                $urlEnd = ends_with(config('app.url'), '/') ? '' : '/';
+                $product['image_path'] = config('app.url') . $urlEnd . config('define.product.upload_image_url');
+                $result->push($product->toArray());
+            }
+        }
+
+        $result = $result->sortByDesc('order_details_count')->sortByDesc('point')->values()->all();
+
+        return $this->successResponse($result, Response::HTTP_OK);
     }
 }
