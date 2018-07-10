@@ -38,6 +38,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' , 'namespace' => 'Admin', 'm
     Route::get('/', 'HomeController@index')->name('homepage');
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController')->parameters(['products' => 'id']);
+    Route::get('products/{products}/meta', 'ProductController@editMeta')->name('products.editMeta');
+    Route::put('products/{products}/meta', 'ProductController@updateMeta')->name('products.updateMeta');
     Route::resource('posts', 'PostController')->parameters(['posts' => 'id']);
     Route::post('avatar/{id}', 'UserController@updateAvt')->name('avatar.update');
     Route::resource('users', 'UserController');
