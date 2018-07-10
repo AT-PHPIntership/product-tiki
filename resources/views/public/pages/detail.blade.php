@@ -85,7 +85,7 @@
                     <figure>
                       <div class="snipcart-item block">
                         <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="http://192.168.33.10/images/upload/img.jpg"></a>  
+                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>  
                           <p>Mrs. Daniella Satterfield</p>
                           <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
                           <h4>$ 9,787,960</h4>
@@ -110,7 +110,7 @@
                     <figure>
                       <div class="snipcart-item block">
                         <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="http://192.168.33.10/images/upload/img.jpg"></a>  
+                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>  
                           <p>Mrs. Daniella Satterfield</p>
                           <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
                           <h4>$ 9,787,960</h4>
@@ -135,7 +135,7 @@
                     <figure>
                       <div class="snipcart-item block">
                         <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="http://192.168.33.10/images/upload/img.jpg"></a>  
+                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>  
                           <p>Mrs. Daniella Satterfield</p>
                           <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
                           <h4>$ 9,787,960</h4>
@@ -160,7 +160,7 @@
                     <figure>
                       <div class="snipcart-item block">
                         <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="http://192.168.33.10/images/upload/img.jpg"></a>  
+                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>  
                           <p>Mrs. Daniella Satterfield</p>
                           <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
                           <h4>$ 9,787,960</h4>
@@ -185,7 +185,7 @@
                     <figure>
                       <div class="snipcart-item block">
                         <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="http://192.168.33.10/images/upload/img.jpg"></a>  
+                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>  
                           <p>Mrs. Daniella Satterfield</p>
                           <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
                           <h4>$ 9,787,960</h4>
@@ -210,7 +210,7 @@
                     <figure>
                       <div class="snipcart-item block">
                         <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="http://192.168.33.10/images/upload/img.jpg"></a>  
+                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>  
                           <p>Mrs. Daniella Satterfield</p>
                           <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
                           <h4>$ 9,787,960</h4>
@@ -227,7 +227,6 @@
               </div>
             </div>
           </div>
-        <!-- <div class="clearfix"> </div> -->
       </div>
     </div>
   </div>
