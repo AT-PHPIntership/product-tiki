@@ -58,4 +58,14 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\NoteOrder', 'order_id', 'id');
     }
+
+    /**
+     * Get coupon for order
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function coupon()
+    {
+        return $this->hasOne('App\Models\Coupon', 'coupon_id', 'id');
+    }
 }
