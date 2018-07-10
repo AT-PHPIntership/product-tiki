@@ -169,3 +169,59 @@
   color: #000000c2;
   padding-top: 15px;
 }
+
+.recomment-product {
+  margin-bottom: 30px
+}
+
+.list-recomment-product {
+  position: relative;
+}
+
+.owl-prev, .owl-next {
+  pointer-events: auto!important;
+  font-size: 0;
+  top: 50%;
+  border-radius: 50%!important;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  line-height: 31px;
+  border: 1px solid #ccc;
+  outline: 0;
+  background: #fff!important;
+  color: #464646;
+  z-index: 1523;
+  text-align: center;
+  opacity: 0.5;
+}
+
+.list-recomment-product .owl-theme .owl-controls .owl-nav div.owl-next {
+  right: -32px;
+}
+
+.list-recomment-product .owl-theme .owl-controls .owl-nav div.owl-next:before {
+  background: url(/images/icon/icon1.png) no-repeat center center;
+}
+
+.list-recomment-product .owl-theme .owl-controls .owl-nav div.owl-prev {
+  left: -32px;
+}
+
+.list-recomment-product .owl-theme .owl-controls .owl-nav div.owl-prev:before {
+  background: url(/images/icon/icon2.png) no-repeat center center;
+}
+
+.owl-prev:hover, .owl-next:hover {
+  box-shadow: 0 -2px 0 #cccccc inset!important;
+  transition: none!important;
+  opacity: 1;
+}
+
+.list-recomment-product .owl-theme .owl-controls .owl-nav div.owl-next:hover {
+  background: url(/images/icon/icon1.png) no-repeat center center!important;
+}
+
+.list-recomment-product .owl-theme .owl-controls .owl-nav div.owl-prev:hover {
+  background: url(/images/icon/icon2.png) no-repeat center center!important;
+}
