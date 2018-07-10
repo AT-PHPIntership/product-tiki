@@ -16,6 +16,7 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('login', 'LoginController@showLoginForm')->name('user.login');
     Route::get('/register', 'RegisterController@index')->name('user.register');
     Route::get('profile', 'UserController@index')->name('user.info');
+    
 });
 
 //Api Doc
@@ -25,6 +26,9 @@ Route::get('/api-docs', function () {
 Route::get('/api-doc-builders', function () {
     return view('api-doc-builders.index');
 });
+
+Route::get('/redirect/{social}', 'SocialAuthController@redirect');
+Route::get('/callback/{social}', 'SocialAuthController@callback');
 
 // Todo: add middleware for admin authenticate
 Route::group(['prefix' => 'admin', 'as' => 'admin.' , 'namespace' => 'Admin', 'middleware' => ['auth:web', 'admin']], function () {

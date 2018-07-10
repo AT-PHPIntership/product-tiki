@@ -14,6 +14,7 @@
   						<a href="#">{{ __('user/login.form.forgot_password') }}</a>
   					</div>
   					<input type="submit" value="{{ __('user/login.form.login') }}">
+					<a href="redirect/facebook">FB Login</a>
   				</form>
   			</div>
   			<p><a href="registered.html">{{ __('user/login.form.register') }}</a> {{ __('user/login.form.or_go_back') }} <a href="{{ route('user.home') }}">{{ __('user/layout.home') }}<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>
