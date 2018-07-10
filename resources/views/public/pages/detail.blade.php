@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="col-md-8 agileinfo_single_right">
-        <h2></h2>
+          <h2></h2>
           <div class="rating1">
             <span class="starRating">
 
@@ -36,7 +36,7 @@
             <!-- ID  XRATING -->
           </div>
           <div class="w3agile_description">
-            <h4>@lang('user/product.show.description') :</h4>
+            <h4>@lang('user/product.show.preview') :</h4>
             <p></p>
           </div>
           <div class="snipcart-item block">
@@ -62,6 +62,10 @@
           </div>
         </div>
         <div class="clearfix"> </div>
+        <div class="description-detail">
+          <h4>@lang('user/product.show.description') :</h4>
+          <p></p>
+        </div>
       </div>
     </div>
   </div>

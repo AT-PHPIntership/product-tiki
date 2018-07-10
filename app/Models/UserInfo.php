@@ -30,6 +30,16 @@ class UserInfo extends Model
     }
 
     /**
+     * Get Address of UserInfo
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
+     */
+    public function addressUser()
+    {
+        return $this->hasMany('App\Models\AddressUser', 'user_id', 'id');
+    }
+
+    /**
      * Get the user's avatar.
      *
      * @return string

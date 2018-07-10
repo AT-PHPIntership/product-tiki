@@ -168,6 +168,34 @@
                       </div>
                     </div>
 
+                    <div class="modal fade" id="note_cancel_order" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" hidden>
+                      <div class="modal-dialog note-cancel-order" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            <h4>@lang('user/profile.note_cancel_order')</h4>
+                          </div>
+                          <div class="modal-body">
+
+                              <form id="demo-form2" method="POST" class="form-horizontal form-label-left">
+                                <div class="form-group">
+                                  <div class="col-md-12 col-sm-6 col-xs-12">
+                                    <textarea rows="5" id="note" name="note" class="form-control col-md-7 col-xs-12"></textarea>
+                                  </div>
+                                </div>
+
+                                <div class="form-group">
+                                  <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-5">
+                                    <input type="submit" id="note_cancel_order_submit" class="btn btn-success" value="{{ __('category.admin.add.submit') }}">
+                                  </div>
+                                </div>
+                              </form>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
                   <div class="col-md-9 col-sm-9 col-xs-12">
                     <div class="row" role="tabpanel" data-example-id="togglable-tabs">
@@ -209,9 +237,38 @@
                               <div class="message_wrapper">
                                 <h4 class="heading">{{ __('user/profile.address_col') }}</h4>
                                 <blockquote id="address" class="message"></blockquote>
+                                <a id="btn-show-address" class="btn btn-success" data-toggle="modal" data-target="#show-address">{{ __('user/profile.view_address_list') }}</a>
                                 <br />
                               </div>
                             </li>
+
+                            <div class="modal fade" id="show-address" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" hidden>
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content row">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">{{ __('orders.admin.show.list_note') }}</h4>
+                                  </div>
+                                  <div class="modal-body col-md-10 col-md-offset-1">
+                                    <table class="table table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th class="center-col col-md-8">{{ __('user/profile.address') }}</th>
+                                          <th class="center-col col-md-4">{{ __('user/profile.profile_action') }}</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody >
+                                        <tr id='template-address' style="display: none">
+                                          <td><span class="address"></span></td>
+                                          <td><button type="button" class = "btn btn-warning btn-address">{{ __('user/profile.edit_address') }}</button></td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
                             <li>
                               <div class="message_wrapper">
                                 <h4 class="heading">{{ __('user/profile.gender_col') }}</h4>

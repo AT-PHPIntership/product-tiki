@@ -83,6 +83,16 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\NoteOrder', 'user_id', 'id');
     }
 
+    /**
+     * Get social networks of User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function socialNetwork()
+    {
+        return $this->hasMany('App\Models\SocialNetwork', 'user_id', 'id');
+    }
+
     public $sortable = ['id'];
 
     /**

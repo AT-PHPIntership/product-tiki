@@ -63,4 +63,14 @@ class Product extends Model
     {
         return $this->belongsTo('App\Models\Category', 'category_id', 'id');
     }
+
+    /**
+     * Get Meta Data Object
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function metaData()
+    {
+        return $this->hasMany('App\Models\MetaData', 'product_id', 'id');
+    }
 }
