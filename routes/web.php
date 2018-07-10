@@ -15,6 +15,8 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/', 'HomeController@index')->name('user.home');
     Route::get('login', 'LoginController@showLoginForm')->name('user.login');
     Route::get('/register', 'RegisterController@index')->name('user.register');
+    Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
     Route::get('profile', 'UserController@index')->name('user.info');
     Route::get('/locale/{locale}', function ($locale) {
         session(['locale' => $locale]);
