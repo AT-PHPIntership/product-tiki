@@ -29,7 +29,7 @@ function submitForm(event) {
 
 $(document).ready(function () {
     $(document).on('click', '#add-meta', function() {
-        $('#template-meta').clone().attr({"style":"display: ", "id":''}).insertBefore('#template-meta');
+        $('#template-meta').clone().attr({"style":"display: ", "id":''}).insertBefore('#last-group');
     });
 
     $(document).on('click', '.remove-meta', function() {

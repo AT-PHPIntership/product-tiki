@@ -8,12 +8,12 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Image;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\UpdateMetaRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests\PostProductRequest;
 use DB;
 use App\Models\Meta;
 use App\Models\MetaData;
-use Validator;
 
 class ProductController extends Controller
 {
@@ -120,36 +120,20 @@ class ProductController extends Controller
     /**
      * Updating the specified resource.
      *
-     * @param \Illuminate\Http\Request $request  request
-     * @param \App\Models\Product      $products product
+     * @param \App\Http\Requests\UpdateMetaRequest $request  request
+     * @param \App\Models\Product                  $products product
      *
      * @return \Illuminate\Http\Response
      */
-    public function updateMeta(Request $request, Product $products)
+    public function updateMeta(UpdateMetaRequest $request, Product $products)
     {
         $loopCount = count($request['meta-key']);
-        $data = $request->all();
-        unset($data['meta-key'][$loopCount-1]);
-        unset($data['meta-data'][$loopCount-1]);
-
-        $validator = Validator::make($data, [
-            'meta-key.*' => 'required|distinct',
-            'meta-data.*' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()
-                        ->withErrors($validator)
-                        ->withInput();
-        }
-
-        $loopCount = count($data['meta-key']);
         for ($i = 0; $i < $loopCount; $i++) {
             MetaData::updateOrCreate([
-                'meta_key' => $data['meta-key'][$i],
+                'meta_key' => $request['meta-key'][$i],
                 'product_id' => $products->id
             ], [
-                'meta_data' => $data['meta-data'][$i]
+                'meta_data' => $request['meta-data'][$i]
             ]);
         }
 
