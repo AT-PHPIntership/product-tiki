@@ -190,7 +190,7 @@ class ProductController extends ApiController
             $result->push($product->toArray());
         }
 
-        $result = $result->filter(function ($value, $key) {
+        $result = $result->filter(function ($value) {
             return isset($value['point']);
         })->sortByDesc('order_details_count')->sortByDesc('point')->values()->all();
 
