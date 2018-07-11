@@ -83,6 +83,6 @@ class ResetPasswordController extends ApiController
             'message' => trans($response),
             'request' => $request->all()
         ];
-        return $this->errorResponse($message, Response::HTTP_UNPROCESSABLE_ENTITY);
+        return $this->errorResponse($message, Response::HTTP_NOT_FOUND);
     }
 }

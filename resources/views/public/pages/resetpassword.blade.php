@@ -2,17 +2,17 @@
 @section('title', __('user/resetpassword.title'))
 @section('content')
   <!-- mail -->
-  	<div class="login">
-  		<div class="container">
-  			<h2>{{ __('user/resetpassword.title') }}</h2>
+    <div class="login">
+      <div class="container">
+        <h2>{{ __('user/resetpassword.title') }}</h2>
 
-  			<div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
-  				<form id="reset_password_form">
+        <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
+          <form id="reset_password_form">
             <div class="alert alert-success" hidden></div>
 
             <input id="reset_token" type="hidden" name="token" value="{{ $token }}">
 
-  					<input id="email_account" type="email" placeholder="{{ __('user/login.form.email_hint') }}" value="{{ $email }}" required="">
+            <input id="email_account" type="email" placeholder="{{ __('user/login.form.email_hint') }}" value="{{ $email }}" required="">
 
             <div class="alert alert-danger invalid-feedback-email" hidden></div>
 
@@ -22,11 +22,11 @@
 
             <input id="new_password_confirm" type="password" placeholder="{{ __('user/register.form.password_c') }}" required="">
 
-  					<input id="reset_password_btn" type="submit" value="{{ __('user/resetpassword.reset_form.reset_password_btn') }}">
-  				</form>
-  			</div>
-  		</div>
-  	</div>
+            <input id="reset_password_btn" type="submit" value="{{ __('user/resetpassword.reset_form.reset_password_btn') }}">
+          </form>
+        </div>
+      </div>
+    </div>
   <!-- //mail -->
 @endsection
 @section('js')

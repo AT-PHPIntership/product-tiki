@@ -18,6 +18,11 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
     Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
     Route::get('profile', 'UserController@index')->name('user.info');
+    Route::get('/locale/{locale}', function ($locale) {
+        session(['locale' => $locale]);
+
+        return response()->json(['locale' => session('locale')], 200);
+    })->name('locale');
 });
 
 //Api Doc
@@ -33,6 +38,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.' , 'namespace' => 'Admin', 'm
     Route::get('/', 'HomeController@index')->name('homepage');
     Route::resource('categories', 'CategoryController');
     Route::resource('products', 'ProductController')->parameters(['products' => 'id']);
+    Route::get('products/{products}/meta', 'ProductController@editMeta')->name('products.editMeta');
+    Route::put('products/{products}/meta', 'ProductController@updateMeta')->name('products.updateMeta');
     Route::resource('posts', 'PostController')->parameters(['posts' => 'id']);
     Route::post('avatar/{id}', 'UserController@updateAvt')->name('avatar.update');
     Route::resource('users', 'UserController');

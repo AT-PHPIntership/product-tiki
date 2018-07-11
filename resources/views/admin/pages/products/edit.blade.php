@@ -167,7 +167,7 @@
 
                 <div id="editor-description" class="editor-wrapper placeholderText" contenteditable="true">{{ old('description', $product->description) }}</div>
                 <textarea name="description" id="description" hidden></textarea>
-                  
+
               <!-- -->
               </div>
             </div>

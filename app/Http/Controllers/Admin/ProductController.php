@@ -8,9 +8,12 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Image;
 use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\UpdateMetaRequest;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests\PostProductRequest;
 use DB;
+use App\Models\Meta;
+use App\Models\MetaData;
 
 class ProductController extends Controller
 {
@@ -97,6 +100,49 @@ class ProductController extends Controller
         $data['product'] = $product;
         $data['categories'] = $categories;
         return view('admin.pages.products.edit', $data);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param \App\Models\Product $products product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editMeta(Product $products)
+    {
+        $data['metaList'] = Meta::all();
+        $productMeta = MetaData::where('product_id', $products->id)->get();
+        $data['productMeta'] = $productMeta;
+        return view('admin.pages.products.editMeta', $data);
+    }
+
+    /**
+     * Updating the specified resource.
+     *
+     * @param \App\Http\Requests\UpdateMetaRequest $request  request
+     * @param \App\Models\Product                  $products product
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateMeta(UpdateMetaRequest $request, Product $products)
+    {
+        $loopCount = count($request['meta-key']);
+        for ($i = 0; $i < $loopCount; $i++) {
+            MetaData::updateOrCreate([
+                'meta_key' => $request['meta-key'][$i],
+                'product_id' => $products->id
+            ], [
+                'meta_data' => $request['meta-data'][$i]
+            ]);
+        }
+
+        $productMeta = MetaData::where('product_id', $products->id)->get();
+
+        $result['metaList'] = Meta::all();
+        $result['productMeta'] = $productMeta;
+
+        return view('admin.pages.products.editMeta', $result);
     }
 
     /**
