@@ -44,3 +44,41 @@ function loadPage() {
 }
 
 loadPage();
+function recommendProduct() {
+    $('.list-recomment-product').each(function(){
+        if ( $().owlCarousel ) {
+            $(this).find('.owl-carousel').owlCarousel({
+                loop: true,                   
+                nav: true,
+                dots: false, 
+                margin: 15,                    
+                autoplay: true,                    
+                responsive:{
+                    0:{
+                        items: 1
+                    },
+                    767:{
+                        items: 2
+                    },
+                    991:{
+                        items: 3
+                    },
+                    1200: {
+                        items: 4
+                    }
+                }
+            });
+        }
+    });
+};
+$(document).ready(function() {
+    $(document).on('mousewheel', '.owl-stage', function (e) {
+        if (e.delta>0) {
+            $('.owl-stage').trigger('next.owl');
+        } else {
+            $('.owl-stage').trigger('prev.owl');
+        }
+        e.preventDefault();
+    });
+    recommendProduct();
+});

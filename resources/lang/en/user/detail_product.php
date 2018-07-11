@@ -20,4 +20,5 @@ return [
     'four_star' => 'Four Stars',
     'five_star' => 'Five Stars',
     'edited_post_note' => 'It will appear after be approved',
+    'recommend_product' => 'Recommend Product',
 ];
