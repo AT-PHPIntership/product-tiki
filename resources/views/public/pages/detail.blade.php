@@ -44,7 +44,7 @@
             <div class="snipcart-thumb agileinfo_single_right_snipcart">
               <h4 class="m-sing"></h4>
             </div>
-            <div class="snipcart-details agileinfo_single_right_details">
+            <div class="snipcart-details agileinfo_single_right_details width-50">
               <form action="#" method="post">
                 <fieldset>
                   <input type="hidden" name="cmd" value="_cart">
@@ -56,7 +56,8 @@
                   <input type="hidden" name="currency_code" value="USD">
                   <input type="hidden" name="return" value="">
                   <input type="hidden" name="cancel_return" value="">
-                  <input type="submit" name="submit" value="Add to cart" class="button">
+                  <input type="submit" name="submit" value="Add to cart" class="button width-49">
+                  <input id="product_compare_btn" type="submit" value="Compare" class="button btn-success width-49">
                 </fieldset>
               </form>
             </div>
@@ -85,7 +86,7 @@
                     <figure>
                       <div class="snipcart-item block">
                         <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>  
+                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>
                           <p>Mrs. Daniella Satterfield</p>
                           <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
                           <h4>$ 9,787,960</h4>
@@ -110,7 +111,7 @@
                     <figure>
                       <div class="snipcart-item block">
                         <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>  
+                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>
                           <p>Mrs. Daniella Satterfield</p>
                           <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
                           <h4>$ 9,787,960</h4>
@@ -135,7 +136,7 @@
                     <figure>
                       <div class="snipcart-item block">
                         <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>  
+                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>
                           <p>Mrs. Daniella Satterfield</p>
                           <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
                           <h4>$ 9,787,960</h4>
@@ -160,7 +161,7 @@
                     <figure>
                       <div class="snipcart-item block">
                         <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>  
+                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>
                           <p>Mrs. Daniella Satterfield</p>
                           <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
                           <h4>$ 9,787,960</h4>
@@ -185,7 +186,7 @@
                     <figure>
                       <div class="snipcart-item block">
                         <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>  
+                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>
                           <p>Mrs. Daniella Satterfield</p>
                           <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
                           <h4>$ 9,787,960</h4>
@@ -210,7 +211,7 @@
                     <figure>
                       <div class="snipcart-item block">
                         <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>  
+                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>
                           <p>Mrs. Daniella Satterfield</p>
                           <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
                           <h4>$ 9,787,960</h4>
@@ -301,7 +302,68 @@
   </div>
 </div>
 </div>
+<!-- modal -->
+<div class="modal fade" id="product_compare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" hidden>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{ __('user/detail_product.compare_product_title') }}</h4>
+      </div>
+      <div class="modal-body">
 
+          <form id="demo-form2" method="GET" class="form-horizontal form-label-left">
+
+            <div class="form-group">
+              <label class="control-label col-md-3 col-sm-3 col-xs-12">{{ __('user/detail_product.select_product') }}</label>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+
+                <div class="btn-group dropdown category_select">
+                  <button class="btn btn-primary btn-sm dropdown-toggle font-14" type="button" data-toggle="dropdown" aria-expanded="false"><span class="title">{{ __('messages.categories') }}</span><span class="caret"></span></button>
+                  <ul class="category-list dropdown-menu" role="menu">
+
+                  </ul>
+                </div>
+
+                <div class="btn-group dropdown product_select hidden">
+                  <button class="btn btn-success btn-sm dropdown-toggle font-14" type="button" data-toggle="dropdown" aria-expanded="false"><span class="title">{{ __('messages.products') }}</span><span class="caret"></span></button>
+                  <ul class="product-list dropdown-menu multi-column columns-3" role="menu">
+
+                    <div class="row">
+                      <ul class="multi-column-dropdown">
+
+                      </ul>
+                    </div>
+
+                    <a id="get_more_product" href="#" hidden>{{ __('user/profile.next') }}</a>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
+
+            <div id="product_compare_table" class="form-group" hidden>
+              <table class="data table table-striped no-margin">
+                <thead>
+                  <tr>
+                    <th class="col-md-2 key-compare">{{ __('user/detail_product.keys') }}</th>
+                    <th class="col-md-4 product-base"></th>
+                    <th class="col-md-4 product-compare"></th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+            </div>
+
+          </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- //modal -->
 @endsection
 @section('js')
 <script src="/js/public/details.js"></script>
