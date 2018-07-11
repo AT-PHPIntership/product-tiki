@@ -103,10 +103,56 @@ class ProductController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @param \Illuminate\Http\Request $request request
+     * @param \App\Models\Product $productBase    product
+     * @param \App\Models\Product $productCompare product
      *
      * @return \Illuminate\Http\Response
      */
+    public function compare(Product $productBase, Product $productCompare)
+    {
+        $metaKeyBase = [];
+        $metaDataBase = [];
+        $metaKeyCompare = [];
+        $metaDataCompare = [];
+
+        foreach ($productBase->metaData as $value) {
+            array_push($metaKeyBase, $value->meta_key);
+            array_push($metaDataBase, $value->meta_data);
+        }
+        $metaBase = array_combine($metaKeyBase, $metaDataBase);
+
+        foreach ($productCompare->metaData as $value) {
+            array_push($metaKeyCompare, $value->meta_key);
+            array_push($metaDataCompare, $value->meta_data);
+        }
+        $metaCompare = array_combine($metaKeyCompare, $metaDataCompare);
+
+        $metaKey = array_merge($metaKeyBase, $metaKeyCompare);
+        $loopCount = count($metaKey);
+
+        for ($i = 0; $i < $loopCount; $i++) {
+            if (!isset($metaBase[$metaKey[$i]])) {
+                $metaBase[$metaKey[$i]] = '';
+            }
+            if (!isset($metaCompare[$metaKey[$i]])) {
+                $metaCompare[$metaKey[$i]] = '';
+            }
+        }
+
+        $data['metaBase'] = $metaBase;
+        $data['metaCompare'] = $metaCompare;
+        $data['metaKey'] = array_unique($metaKey);
+
+        return $this->successResponse($data, Response::HTTP_OK);
+    }
+
+   /**
+    * Display a listing of the resource.
+    *
+    * @param \Illuminate\Http\Request $request request
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function recommend(Request $request)
     {
         $productFilter = $request->product_id ? explode(',', $request->product_id) : [];
@@ -145,7 +191,7 @@ class ProductController extends ApiController
         }
 
         $result = $result->filter(function ($value, $key) {
-             return isset($value['point']);
+            return isset($value['point']);
         })->sortByDesc('order_details_count')->sortByDesc('point')->values()->all();
 
         return $this->successResponse($result, Response::HTTP_OK);

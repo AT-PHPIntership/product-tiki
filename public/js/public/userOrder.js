@@ -176,56 +176,57 @@ $(document).ready(function() {
     event.preventDefault();
     cancelOrder($(this).attr('order-id'));
     $('#note_cancel_order').modal('hide');
+  });
 
   $(document).on('click', '#update-order', function(event) {
-    event.preventDefault();
-    let data = [];
-    let i = 0;
-    let product_data;
-    order_detail.forEach(order => {
-        product_data = {};
-        product = order.product;
-        if ($(document).find('#product_id_'+ product.id).length > 0) {
-            product_data.id = product.id;
-            product_data.quantity = $('#quantity_'+ product.id).val();
-            data.push(product_data);
-        }
-    });
-    $.ajax({
-        type: 'POST',
-        url: '/api/orders/'+order_id,
-        headers: ({
-            Accept: 'application/json',
-            Authorization: 'Bearer ' + accessToken,
-        }),
-        data: {'products': data, '_method': 'PUT'},
-        success: function(response) {
-            alertStr = '';
+      event.preventDefault();
+      let data = [];
+      let i = 0;
+      let product_data;
+      order_detail.forEach(order => {
+          product_data = {};
+          product = order.product;
+          if ($(document).find('#product_id_'+ product.id).length > 0) {
+              product_data.id = product.id;
+              product_data.quantity = $('#quantity_'+ product.id).val();
+              data.push(product_data);
+          }
+      });
+      $.ajax({
+          type: 'POST',
+          url: '/api/orders/'+order_id,
+          headers: ({
+              Accept: 'application/json',
+              Authorization: 'Bearer ' + accessToken,
+          }),
+          data: {'products': data, '_method': 'PUT'},
+          success: function(response) {
+              alertStr = '';
 
-            if (typeof response.result.errors != undefined) {
-               response.result.errors.forEach(error => {
-                   alertStr += error + '\n';
-               });
-           } else {
-               alertStr = Lang.get('user/cart.submit_success');
-           }
-           alert(alertStr);
-           showOrderDetail('api/orders/'+order_id);
-        },
-        statusCode: {
-            401: function() {
-                alert(Lang.get('user/cart.need_login_alert'));
-                localStorage.removeItem('login-token');
-                window.location.pathname = '/login';
-            },
-            422: function (response) {
-                alertStr = '';
-                response.responseJSON.error.forEach(error => {
-                    alertStr += error + '\n';
-                })
-                alert(alertStr);
-            }
-        }
-    });
+              if (typeof response.result.errors != undefined) {
+                 response.result.errors.forEach(error => {
+                     alertStr += error + '\n';
+                 });
+             } else {
+                 alertStr = Lang.get('user/cart.submit_success');
+             }
+             alert(alertStr);
+             showOrderDetail('api/orders/'+order_id);
+          },
+          statusCode: {
+              401: function() {
+                  alert(Lang.get('user/cart.need_login_alert'));
+                  localStorage.removeItem('login-token');
+                  window.location.pathname = '/login';
+              },
+              422: function (response) {
+                  alertStr = '';
+                  response.responseJSON.error.forEach(error => {
+                      alertStr += error + '\n';
+                  })
+                  alert(alertStr);
+              }
+          }
+      });
   });
 });

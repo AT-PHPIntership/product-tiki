@@ -20,4 +20,8 @@ return [
     'four_star' => 'Four Stars',
     'five_star' => 'Five Stars',
     'edited_post_note' => 'It will appear after be approved',
+    'compare_product_title' => 'Compare Product',
+    'select_product' => 'Select Product',
+    'keys' => 'Keys',
+    'recommend_product' => 'Recommend Product',
 ];

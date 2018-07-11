@@ -50,7 +50,7 @@ $(document).on('click', '#submit-cart', function (event) {
         success: function(response) {
             alertStr = '';
 
-            if (typeof response.result.errors != undefined) {
+            if (response.result.errors.length) {
                 response.result.errors.forEach(error => {
                     alertStr += error + '\n';
                 });

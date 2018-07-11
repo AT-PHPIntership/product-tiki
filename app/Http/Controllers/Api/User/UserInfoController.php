@@ -11,6 +11,7 @@ use App\Models\User;
 use Validator;
 use Auth;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\AuthenticationException;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\AddressUser;
 
@@ -57,5 +58,26 @@ class UserInfoController extends ApiController
         $userInfo = $user->userInfo;
         $addressList = AddressUser::where('userinfo_id', $userInfo->id)->get();
         return $this->showAll($addressList, Response::HTTP_OK);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request request
+     * @param \App\Models\AddressUser  $address address to update
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateAddress(Request $request, AddressUser $address)
+    {
+        $user = Auth::user();
+
+        if ($user->userInfo->id == $address->userinfo_id) {
+            $address->address = $request->address;
+            $address->save();
+            return $this->showOne($address, Response::HTTP_OK);
+        } else {
+            throw new AuthenticationException();
+        }
     }
 }

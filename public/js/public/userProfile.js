@@ -85,4 +85,60 @@ $(document).ready(function () {
     event.preventDefault();
     editProfile();
   });
-})
+
+  $.ajax({
+     url: "api/users/profile/address",
+     type: "get",
+     headers: {
+         "Accept": "application/json",
+         "Authorization": "Bearer " + accessToken
+     },
+     success: function (response) {
+         showAddress(response.result);
+     }
+  });
+
+  $(document).on('click', '.btn-address', function () {
+      addr_id = $(this).attr('data-id');
+      action =$(this).attr('data-action');
+      if(action == 'view') {
+          $('#address-data-'+addr_id).replaceWith(function () {
+              return "<input class='form-control' id='input-"+ addr_id +"' type='text' value ='" + $('#address-data-'+addr_id).text() +"' />";
+          });
+          $(this).text(Lang.get('user/profile.edit_address'));
+          $(this).attr('data-action', 'edit');
+      } else if (action == 'edit') {
+          address = $('#input-'+addr_id).val();
+          $.ajax({
+              url: "api/users/profile/address/"+addr_id,
+              type: "post",
+              headers: {
+                  "Accept": "application/json",
+                  "Authorization": "Bearer " + accessToken
+              },
+              data: {
+                  "address": address,
+                  "_method": "PUT"
+              },
+              success: function (response){
+                  $('#input-'+addr_id).replaceWith(function () {
+                      return "<span class='address' id='address-data-"+ addr_id +"'> " + response.result.address +" </span>";
+                  });
+              }
+          });
+          $(this).text(Lang.get('user/profile.edit_address'));
+          $(this).attr('data-action', 'view');
+      }
+  })
+});
+
+function showAddress(address) {
+    address.forEach(addr => {
+        let idAddr="addr-"+addr.id;
+        $("#template-address").clone().attr({"style":"display: ","id":idAddr}).insertBefore('#template-address');
+        $("#"+idAddr +" .address").text(addr.address);
+        $("#"+idAddr +" .address").attr('id', 'address-data-'+addr.id);
+        $("#"+idAddr +" .btn").attr('data-id', addr.id);
+        $("#"+idAddr +" .btn").attr('data-action', 'view');
+    })
+}

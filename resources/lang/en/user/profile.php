@@ -33,4 +33,8 @@ return [
     'fullname_subcm' => 'Fullname',
     'cancel_order_confirm' => 'Do you want cancel this order?',
     'note_cancel_order' => 'Please provide a reason for this cancellation blow.',
+    'view_address_list' => 'View more address',
+    'address' => 'Address',
+    'edit_address' => 'Edit Address',
+    'submit_address' => 'Submit Change',
 ];
