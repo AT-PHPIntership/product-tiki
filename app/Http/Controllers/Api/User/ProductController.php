@@ -112,16 +112,19 @@ class ProductController extends ApiController
         $metaDataBase = [];
         $metaKeyCompare = [];
         $metaDataCompare = [];
+
         foreach ($productBase->metaData as $value) {
             array_push($metaKeyBase, $value->meta_key);
             array_push($metaDataBase, $value->meta_data);
         }
         $metaBase = array_combine($metaKeyBase, $metaDataBase);
+
         foreach ($productCompare->metaData as $value) {
             array_push($metaKeyCompare, $value->meta_key);
             array_push($metaDataCompare, $value->meta_data);
         }
         $metaCompare = array_combine($metaKeyCompare, $metaDataCompare);
+
         $metaKey = array_merge($metaKeyBase, $metaKeyCompare);
         $loopCount = count($metaKey);
 
@@ -133,10 +136,11 @@ class ProductController extends ApiController
                 $metaCompare[$metaKey[$i]] = '';
             }
         }
+
         $data['metaBase'] = $metaBase;
         $data['metaCompare'] = $metaCompare;
         $data['metaKey'] = array_unique($metaKey);
 
-        return $this->successResponse($data, 200);
+        return $this->successResponse($data, Response::HTTP_OK);
     }
 }

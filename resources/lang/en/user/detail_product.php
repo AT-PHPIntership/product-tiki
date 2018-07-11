@@ -23,4 +23,5 @@ return [
     'compare_product_title' => 'Compare Product',
     'select_product' => 'Select Product',
     'keys' => 'Keys',
+    'recommend_product' => 'Recommend Product',
 ];

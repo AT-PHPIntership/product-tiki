@@ -43,6 +43,34 @@ function loadPage() {
     });
 }
 
+function recommendProduct() {
+    $('.list-recomment-product').each(function(){
+        if ( $().owlCarousel ) {
+            $(this).find('.owl-carousel').owlCarousel({
+                loop: true,
+                nav: true,
+                dots: false,
+                margin: 15,
+                autoplay: true,
+                responsive:{
+                    0:{
+                        items: 1
+                    },
+                    767:{
+                        items: 2
+                    },
+                    991:{
+                        items: 3
+                    },
+                    1200: {
+                        items: 4
+                    }
+                }
+            });
+        }
+    });
+}
+
 function getCategories() {
     $.ajax({
         url: '/api/categories',
@@ -114,9 +142,19 @@ function getProductComparision(productCompareId) {
     });
 }
 
-$(document).ready(function () {
+$(document).ready(function() {
     loadPage();
     getCategories();
+
+    $(document).on('mousewheel', '.owl-stage', function (e) {
+        if (e.delta>0) {
+            $('.owl-stage').trigger('next.owl');
+        } else {
+            $('.owl-stage').trigger('prev.owl');
+        }
+        e.preventDefault();
+    });
+    recommendProduct();
 
     $(document).on('click', '#product_compare_btn', function(event) {
         event.preventDefault();
@@ -145,4 +183,4 @@ $(document).ready(function () {
         event.preventDefault();
         getProductList($(this).attr('category-id') ,$(this).attr('page'));
     });
-})
+});
