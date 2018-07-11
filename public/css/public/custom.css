@@ -186,3 +186,26 @@
   background: #ff0000;
   color: #fff;
 }
+
+.snipcart-details input.btn-success {
+  background: #4cae4c;
+}
+
+.product-list {
+  width: 800px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.product_select .product-list .multi-column-dropdown {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.width-50 {
+  width: 50% !important;
+}
+
+.width-49 {
+  width: 49% !important;
+}
