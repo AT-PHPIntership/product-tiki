@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TimeOrderStatus extends Model
+class TrackingOrder extends Model
 {
-    protected $table = 'time_order_status';
+    protected $table = 'tracking_orders';
 
     const APPROVED = 1;
     const UNAPPROVED = 0;

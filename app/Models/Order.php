@@ -66,6 +66,6 @@ class Order extends Model
      */
     public function trackingOrder()
     {
-        return $this->hasMany('App\Models\TimeOrderStatus', 'order_id', 'id');
+        return $this->hasMany('App\Models\TrackingOrder', 'order_id', 'id');
     }
 }
