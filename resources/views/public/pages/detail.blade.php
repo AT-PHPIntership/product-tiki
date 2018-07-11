@@ -325,7 +325,7 @@
                   </ul>
                 </div>
 
-                <div class="btn-group dropdown product_select">
+                <div class="btn-group dropdown product_select hidden">
                   <button class="btn btn-success btn-sm dropdown-toggle font-14" type="button" data-toggle="dropdown" aria-expanded="false"><span class="title">{{ __('messages.products') }}</span><span class="caret"></span></button>
                   <ul class="product-list dropdown-menu multi-column columns-3" role="menu">
 

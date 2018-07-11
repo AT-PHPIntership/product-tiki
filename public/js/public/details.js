@@ -166,6 +166,7 @@ $(document).ready(function() {
         $(this).addClass('selected');
         $(this).siblings().removeClass('selected');
         $(this).closest('.category_select').find('.title').text($(this).text());
+        $('#product_compare .modal-body .product_select').removeClass('hidden');
         getProductList($(this).attr('category-id'));
 
     });
