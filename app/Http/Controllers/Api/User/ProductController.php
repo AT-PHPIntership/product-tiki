@@ -103,26 +103,28 @@ class ProductController extends ApiController
     /**
      * Display a listing of the resource.
      *
-     * @param \App\Models\Product $product product
+     * @param \Illuminate\Http\Request $request request
      *
      * @return \Illuminate\Http\Response
      */
-    public function recommend(Product $product)
+    public function recommend(Request $request)
     {
+        $productFilter = $request->product_id ? explode(',', $request->product_id) : [];
+        $categoryFilter = $request->category_id ? explode(',', $request->category_id) : [];
+
         $allProducts = Product::withCount('orderDetails')->with('images')->get();
-        $category = $product->category()->first();
 
-        $parentCat = $category->parent_id;
-        $categoryId = $category->id;
-        $childCat = Category::where('parent_id', $parentCat)->where('id', '!=', $categoryId);
+        $categoryId = $allProducts->whereIn('id', $productFilter)->pluck('category_id')->merge($categoryFilter);
+        $parentCat = Category::whereIn('id', $categoryId)->pluck('parent_id');
+        $childCat = Category::whereIn('parent_id', $parentCat)->whereNotIn('id', $categoryId);
 
-        $order = OrderDetail::where('product_id', $product->id)->get();
-        $orderArr = OrderDetail::whereIn('order_id', $order->pluck('order_id'))->where('product_id', '!=', $product->id)->groupBy('product_id')->get(['product_id']);
+        $order = OrderDetail::whereIn('product_id', $productFilter)->get();
+        $orderArr = OrderDetail::whereIn('order_id', $order->pluck('order_id'))->whereNotIn('product_id', $productFilter)->groupBy('product_id')->get(['product_id']);
 
         $sameParentCat = $allProducts->whereIn('category_id', $childCat->pluck('id'));
-        $inParentCat = $allProducts->where('category_id', $parentCat);
-        $sameCat = $allProducts->where('category_id', $categoryId)->where('id', '!=', $product->id);
-        $sameOrder = $allProducts->whereIn('id', $orderArr->pluck('product_id'));
+        $inParentCat = $allProducts->whereIn('category_id', $parentCat);
+        $sameCat = $allProducts->whereIn('category_id', $categoryId)->whereNotIn('id', $productFilter);
+        $sameOrder = $allProducts->whereNotIn('id', $productFilter)->whereIn('id', $orderArr->pluck('product_id'));
 
         $result = collect();
 
@@ -136,15 +138,15 @@ class ProductController extends ApiController
             if ($sameOrder->contains($product->id)) {
                 $product['point'] += 1;
             }
-            if ($product->point) {
-                $product['price_formated'] = number_format($product['price']);
-                $urlEnd = ends_with(config('app.url'), '/') ? '' : '/';
-                $product['image_path'] = config('app.url') . $urlEnd . config('define.product.upload_image_url');
-                $result->push($product->toArray());
-            }
+            $product['price_formated'] = number_format($product['price']);
+            $urlEnd = ends_with(config('app.url'), '/') ? '' : '/';
+            $product['image_path'] = config('app.url') . $urlEnd . config('define.product.upload_image_url');
+            $result->push($product->toArray());
         }
 
-        $result = $result->sortByDesc('order_details_count')->sortByDesc('point')->values()->all();
+        $result = $result->filter(function ($value, $key) {
+             return isset($value['point']);
+        })->sortByDesc('order_details_count')->sortByDesc('point')->values()->all();
 
         return $this->successResponse($result, Response::HTTP_OK);
     }
