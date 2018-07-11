@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SocialNetwork extends Model
+class Meta extends Model
 {
-    protected $table = 'social_networks';
+    protected $table = 'meta';
 
     /**
      * The attributes that are mass assignable.
@@ -14,16 +14,16 @@ class SocialNetwork extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'type', 'social_id',
+        'key',
     ];
 
     /**
-     * Get User of social networks
+     * Get User of CancelOrder
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
-    public function user()
+    public function metaData()
     {
-        return $this->belongsTo('App\Models\User', 'user_id', 'id');
+        return $this->hasMany('App\Models\MetaData', 'meta_key', 'key');
     }
 }

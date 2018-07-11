@@ -3,40 +3,39 @@
 namespace App\Services;
 
 use Laravel\Socialite\Contracts\User as ProviderUser;
-use App\SocialNetwork;
-use App\User;
+use App\Models\User;
+use App\Models\UserInfo;
 
 class SocialAccountService
 {
+
+    /**
+         * Store User when user never login
+         *
+         * @param \Illuminate\Http\Request $providerUser providerUser
+         * @param \Illuminate\Http\Request $social       social
+         *
+         * @return data token
+         */
     public static function createOrGetUser(ProviderUser $providerUser, $social)
     {
-        $account = SocialNetwork::whereProvider($social)
-            ->whereProviderUserId($providerUser->getId())
-            ->first();
-
+        $account = User::where('social_id', $providerUser->id)->first();
         if ($account) {
-            return $account->user;
+            $data['token'] = $account->createToken('token')->accessToken;
+            $data['user'] = $account->load('userinfo');
         } else {
-            $email = $providerUser->getEmail() ?? $providerUser->getNickname();
-            $account = new SocialNetwork([
-                'social_id' => $providerUser->getId(),
-                'type' => $social
+            $user = User::create([
+                'email' => $providerUser->email,
+                'social_id' => $providerUser->id,
+                'type' => $social,
             ]);
-            $user = User::whereEmail($email)->first();
-
-            if (!$user) {
-
-                $user = User::create([
-                    'email' => $email,
-                    'name' => $providerUser->getName(),
-                    'password' => $providerUser->getName(),
-                ]);
-            }
-
-            $account->user()->associate($user);
-            $account->save();
-
-            return $user;
+            $user->userinfo()->create([
+                'full_name' => $providerUser->name,
+                'avatar' => $providerUser->avatar,
+            ]);
+            $data['token'] = $user->createToken('token')->accessToken;
+            $data['user'] = $user->load('userinfo');
         }
+        return $data;
     }
 }

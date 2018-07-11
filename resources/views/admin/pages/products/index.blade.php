@@ -118,12 +118,14 @@
                     <td class=" ">{{ number_format($product->price) }}</td>
                     <td class=" ">{{ $product->status >= 1 ? trans('common.available') : trans('common.unavailable') }}</td>
                     <td class=" last">
-                      <a class="btn btn-primary col-md-4" href="{!! route('admin.products.edit', ['id' => $product['id']]) !!}"><i class="fa fa-edit"></i></a>
-                      <form class="col-md-4" id="deleted{{ $product->id }}" action="{!! route('admin.products.destroy', ['id' => $product['id']]) !!}" method="post">
+                      <a class="btn btn-primary col-md-3" href="{!! route('admin.products.edit', ['id' => $product['id']]) !!}"><i class="fa fa-edit"></i></a>
+                      <a class="btn btn-primary col-md-3" href="{!! route('admin.products.editMeta', ['products' => $product['id']]) !!}"><i class="fa fa-stack-exchange"></i></a>
+                      <form class="col-md-3" id="deleted{{ $product->id }}" action="{!! route('admin.products.destroy', ['id' => $product['id']]) !!}" method="post">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-primary btn-danger" onclick="deleteRecord(event, {{ $product->id }})" type="submit"><i class="fa fa-trash"></i></button>
                       </form>
+
                     </td>
                   </tr>
                 @endforeach

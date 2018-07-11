@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSocialNetworks extends Migration
+class CreateMetaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateSocialNetworks extends Migration
      */
     public function up()
     {
-        Schema::create('social_networks', function (Blueprint $table) {
+        Schema::create('meta', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
-            $table->tinyInteger('type');
-            $table->string('social_id');
-            $table->foreign('user_id')
-                ->references('id')->on('users')
-                ->onDelete('no action');
+            $table->string('key')->unique();
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class CreateSocialNetworks extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('social_networks');
+        Schema::dropIfExists('meta');
     }
 }
