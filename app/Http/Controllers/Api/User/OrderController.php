@@ -10,11 +10,13 @@ use Illuminate\Auth\AuthenticationException;
 use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\NoteOrder;
+use App\Models\TrackingOrder;
 use Illuminate\Http\Response;
 use App\Http\Requests\CreateOrderRequest;
 use Auth;
 use Validator;
 use Exception;
+use DateTime;
 
 class OrderController extends ApiController
 {
@@ -132,6 +134,14 @@ class OrderController extends ApiController
                 'user_id' => $user->id,
                 'note' => request('note'),
             ]);
+            
+            $now = new DateTime();
+            TrackingOrder::create([
+                'order_id' => $order->id,
+                'status' => Order::CANCELED,
+                'date_changed' => $now->format('Y-m-d H:i:s')
+            ]);
+
             $order->status = Order::CANCELED;
             $order->save();
             return $this->showOne($order, Response::HTTP_OK);

@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\NoteOrder;
+use App\Models\TrackingOrder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Auth;
+use DateTime;
 
 class OrderController extends Controller
 {
@@ -92,6 +94,12 @@ class OrderController extends Controller
             'user_id' => Auth::id(),
             'order_id' => $id,
             'note' => $request->note
+        ]);
+        $now = new DateTime();
+        TrackingOrder::create([
+            'order_id' => $id,
+            'status' => $request->status,
+            'date_changed' => $now->format('Y-m-d H:i:s')
         ]);
         return redirect()->route('admin.orders.show', ['id' => $id])->with('message', __('orders.admin.show.update_status'));
     }
