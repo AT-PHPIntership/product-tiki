@@ -1,3 +1,5 @@
+var option = {};
+
 $( document ).ready(function() {
     accessToken = localStorage.getItem('login-token');
     if (accessToken) {
@@ -23,59 +25,104 @@ $( document ).ready(function() {
                 }
             });
         }
-    })
+    });
+
+    $.ajax({
+        url: '/api/users/profile/',
+        type: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + accessToken
+        },
+        success: function (response) {
+            option[response.result.userinfo.address] = response.result.userinfo.address;
+        }
+    });
+
+    $.ajax({
+        url: '/api/users/profile/address',
+        type: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer ' + accessToken
+        },
+        success: function (response) {
+            console.log(response.result);
+            response.result.forEach(addr => {
+                option[addr.address] = addr.address;
+            });
+        }
+    });
 });
 
 $(document).on('click', '#submit-cart', function (event) {
     event.preventDefault();
-    cart = localStorage.getItem('PPMiniCart');
-    cart = JSON.parse(unescape(cart));
-    products = cart.value.items;
-    let product_data;
-    let data = [];
-    products.forEach(function (product) {
-        product_data = {};
-        product_data.id = product.id;
-        product_data.quantity = product.quantity;
-        data.push(product_data);
-    });
-    $.ajax({
-        type: 'POST',
-        url: '/api/orders',
-        headers: ({
-            Accept: 'application/json',
-            Authorization: 'Bearer ' + accessToken,
-        }),
-        data: {'products': data},
-        success: function(response) {
-            alertStr = '';
+    let order_address;
+    swal({
+      title: 'Select Address',
+      input: 'select',
+      inputOptions: option,
+      showCancelButton: true,
+    }).then(function (result) {
+        if (result.value != undefined) {
+            order_address = result.value;
+            cart = localStorage.getItem('PPMiniCart');
+            cart = JSON.parse(unescape(cart));
+            products = cart.value.items;
+            let product_data;
+            let data = [];
+            products.forEach(function (product) {
+                product_data = {};
+                product_data.id = product.id;
+                product_data.quantity = product.quantity;
+                data.push(product_data);
+            });
+            console.log(order_address);
+            $.ajax({
+                type: 'POST',
+                url: '/api/orders',
+                headers: ({
+                    Accept: 'application/json',
+                    Authorization: 'Bearer ' + accessToken,
+                }),
+                data: {'products': data, 'address': order_address},
+                success: function(response) {
+                    alertStr = '';
 
-            if (response.result.errors.length) {
-                response.result.errors.forEach(error => {
-                    alertStr += error + '\n';
-                });
-            } else {
-                alertStr = Lang.get('user/cart.submit_success');
-            }
-            alert(alertStr);
-            localStorage.removeItem('PPMiniCart');
-            window.location.href = '/profile';
-        },
-        statusCode: {
-            401: function() {
-                alert(Lang.get('user/cart.need_login_alert'));
-                localStorage.removeItem('login-token');
-                window.location.pathname = '/login';
-            },
-            422: function (response) {
-                alertStr = '';
-                response.responseJSON.error.forEach(error => {
-                    alertStr += error + '\n';
-                })
-                alert(alertStr);
-            }
+                    if (response.result.errors.length) {
+                        response.result.errors.forEach(error => {
+                            alertStr += error + '\n';
+                        });
+                    } else {
+                        alertStr = Lang.get('user/cart.submit_success');
+                    }
+                    swal({
+                        type: 'success',
+                        html: alertStr,
+                    });
+                    localStorage.removeItem('PPMiniCart');
+                    window.location.href = '/profile';
+                },
+                statusCode: {
+                    401: function() {
+                        alert(Lang.get('user/cart.need_login_alert'));
+                        localStorage.removeItem('login-token');
+                        window.location.pathname = '/login';
+                    },
+                    422: function (response) {
+                        alertStr = '';
+                        response.responseJSON.error.forEach(error => {
+                            alertStr += error + '\n';
+                        })
+                        alert(alertStr);
+                    }
+                }
+            });
         }
+
     });
+
+
 })
 
 function checkLogin() {
