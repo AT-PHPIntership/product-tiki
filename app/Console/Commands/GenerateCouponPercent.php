@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Models\Coupon;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use App\Events\CouponGenerated;
 
 class GenerateCouponPercent extends Command
 {
@@ -49,5 +50,6 @@ class GenerateCouponPercent extends Command
             'date_end' => Carbon::now()->addDays($this->argument('day')),
         ];
         Coupon::create($coupon);
+        event(new CouponGenerated($coupon));
     }
 }
