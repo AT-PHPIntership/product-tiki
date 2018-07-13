@@ -16,6 +16,7 @@ use App\Http\Requests\CreateOrderRequest;
 use Auth;
 use Validator;
 use Exception;
+use DB;
 
 class OrderController extends ApiController
 {
@@ -123,26 +124,31 @@ class OrderController extends ApiController
     public function cancel(Order $order)
     {
         $user = Auth::user();
-
         if ($user->id == $order->user_id) {
             if ($order->status != Order::UNAPPROVED) {
                 throw new \Exception(config('define.exception.cancel_approve_order'));
             }
-            NoteOrder::create([
-                'order_id' => $order->id,
-                'user_id' => $user->id,
-                'note' => request('note'),
-            ]);
-            
-            TrackingOrder::create([
-                'order_id' => $order->id,
-                'old_status' => $order->status,
-                'new_status' => Order::CANCELED,
-                'date_changed' => date("Y-m-d H:i:s")
-            ]);
+            DB::beginTransaction();
+            try {
+                NoteOrder::create([
+                    'order_id' => $order->id,
+                    'user_id' => $user->id,
+                    'note' => request('note'),
+                ]);
+                
+                TrackingOrder::create([
+                    'order_id' => $order->id,
+                    'old_status' => $order->status,
+                    'new_status' => Order::CANCELED,
+                    'date_changed' => date("Y-m-d H:i:s")
+                ]);
 
-            $order->status = Order::CANCELED;
-            $order->save();
+                $order->status = Order::CANCELED;
+                $order->save();
+                DB::commit();
+            } catch (Exception $e) {
+                DB::rollback();
+            }
             return $this->showOne($order, Response::HTTP_OK);
         } else {
             throw new AuthenticationException();
