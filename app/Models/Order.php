@@ -58,4 +58,14 @@ class Order extends Model
     {
         return $this->hasMany('App\Models\NoteOrder', 'order_id', 'id');
     }
+
+    /**
+     * Get time changed status order
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function trackingOrder()
+    {
+        return $this->hasMany('App\Models\TrackingOrder', 'order_id', 'id');
+    }
 }
