@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coupon extends Model
 {
+    const PERCENT = 0;
+    const MONEY = 1;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -18,10 +21,10 @@ class Coupon extends Model
     /**
      * Get order for coupon
      *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\hasMany
      */
     public function order()
     {
-        return $this->belongsTo('App\Models\Order', 'coupon_id', 'id');
+        return $this->hasMany('App\Models\Order', 'coupon_id', 'id');
     }
 }

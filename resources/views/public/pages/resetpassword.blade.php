@@ -7,24 +7,22 @@
         <h2>{{ __('user/resetpassword.title') }}</h2>
 
         <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
-          <form>
-            <input type="hidden" name="token" value="{{ $token }}">
+          <form id="reset_password_form">
+            <div class="alert alert-success" hidden></div>
 
-            <input type="email" placeholder="{{ __('user/login.form.email_hint') }}" value="{{ $email }}" required="">
+            <input id="reset_token" type="hidden" name="token" value="{{ $token }}">
 
-            <span class="invalid-feedback-email" hidden>
-                <strong></strong>
-            </span>
+            <input id="email_account" type="email" placeholder="{{ __('user/login.form.email_hint') }}" value="{{ $email }}" required="">
 
-            <input type="password" placeholder="{{ __('user/login.form.password_hint') }}" required="">
+            <div class="alert alert-danger invalid-feedback-email" hidden></div>
 
-            <span class="invalid-feedback-password" hidden>
-                <strong></strong>
-            </span>
+            <input id="new_password" type="password" placeholder="{{ __('user/login.form.password_hint') }}" required="">
 
-            <input type="password" placeholder="{{ __('user/register.form.password_c') }}" required="">
+            <div class="alert alert-danger invalid-feedback-password" hidden></div>
 
-            <input type="submit" value="{{ __('user/resetpassword.reset_form.reset_password_btn') }}">
+            <input id="new_password_confirm" type="password" placeholder="{{ __('user/register.form.password_c') }}" required="">
+
+            <input id="reset_password_btn" type="submit" value="{{ __('user/resetpassword.reset_form.reset_password_btn') }}">
           </form>
         </div>
       </div>
@@ -32,5 +30,5 @@
   <!-- //mail -->
 @endsection
 @section('js')
-<script src=""></script>
+<script src="/js/public/resetpassword.js"></script>
 @endsection

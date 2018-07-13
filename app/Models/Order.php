@@ -62,10 +62,20 @@ class Order extends Model
     /**
      * Get coupon for order
      *
-     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
      */
     public function coupon()
     {
-        return $this->hasOne('App\Models\Coupon', 'coupon_id', 'id');
+        return $this->belongsTo('App\Models\Coupon', 'coupon_id', 'id');
+    }
+    
+    /**
+     * Get time changed status order
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function trackingOrder()
+    {
+        return $this->hasMany('App\Models\TrackingOrder', 'order_id', 'id');
     }
 }
