@@ -60,6 +60,16 @@ class Order extends Model
     }
 
     /**
+     * Get coupon for order
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsTo
+     */
+    public function coupon()
+    {
+        return $this->belongsTo('App\Models\Coupon', 'coupon_id', 'id');
+    }
+    
+    /**
      * Get time changed status order
      *
      * @return \Illuminate\Database\Eloquent\Relations\hasOne
