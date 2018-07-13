@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderDetail;
 use App\Models\NoteOrder;
+use App\Models\TrackingOrder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Auth;
+use DB;
 
 class OrderController extends Controller
 {
@@ -85,14 +87,28 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $order = Order::find($id);
-        $order->status = $request->status;
-        $order->save();
-        NoteOrder::create([
-            'user_id' => Auth::id(),
-            'order_id' => $id,
-            'note' => $request->note
-        ]);
-        return redirect()->route('admin.orders.show', ['id' => $id])->with('message', __('orders.admin.show.update_status'));
+        DB::beginTransaction();
+        try {
+            $order = Order::find($id);
+            NoteOrder::create([
+                'user_id' => Auth::id(),
+                'order_id' => $id,
+                'note' => $request->note
+            ]);
+            TrackingOrder::create([
+                'order_id' => $id,
+                'old_status' => $order->status,
+                'new_status' => $request->status,
+                'date_changed' => date("Y-m-d H:i:s")
+            ]);
+            $order->status = $request->status;
+            $order->save();
+            DB::commit();
+            session()->flash('message', trans('orders.admin.show.update_status'));
+        } catch (Exception $e) {
+            DB::rollback();
+            session()->flash('message', trans('orders.admin.show.update_status_fail'));
+        }
+        return back();
     }
 }
