@@ -16,7 +16,6 @@ use App\Http\Requests\CreateOrderRequest;
 use Auth;
 use Validator;
 use Exception;
-use DateTime;
 
 class OrderController extends ApiController
 {
@@ -135,11 +134,11 @@ class OrderController extends ApiController
                 'note' => request('note'),
             ]);
             
-            $now = new DateTime();
             TrackingOrder::create([
                 'order_id' => $order->id,
-                'status' => Order::CANCELED,
-                'date_changed' => $now->format('Y-m-d H:i:s')
+                'old_status' => $order->status,
+                'new_status' => Order::CANCELED,
+                'date_changed' => date("Y-m-d H:i:s")
             ]);
 
             $order->status = Order::CANCELED;

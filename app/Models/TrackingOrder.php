@@ -19,7 +19,7 @@ class TrackingOrder extends Model
      * @var array
      */
     protected $fillable = [
-        'order_id', 'status', 'date_changed',
+        'order_id', 'old_status', 'new_status', 'date_changed',
     ];
 
     /**
