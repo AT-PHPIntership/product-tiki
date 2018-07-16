@@ -47,7 +47,6 @@ $( document ).ready(function() {
             'Authorization': 'Bearer ' + accessToken
         },
         success: function (response) {
-            console.log(response.result);
             response.result.forEach(addr => {
                 option[addr.address] = addr.address;
             });
@@ -77,7 +76,6 @@ $(document).on('click', '#submit-cart', function (event) {
                 product_data.quantity = product.quantity;
                 data.push(product_data);
             });
-            console.log(order_address);
             $.ajax({
                 type: 'POST',
                 url: '/api/orders',
