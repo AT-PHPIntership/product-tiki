@@ -193,22 +193,22 @@ class OrderController extends ApiController
                     foreach ($request->products as $input) {
                         $input['product_id'] = $input['id'];
                         $input['order_id'] = $order->id;
-                        $product = OrderDetail::where('order_id', $order->id)->where('product_id', $input['product_id'])->first();
+                        $product = Product::where('id', $input['id'])->first();
+                        $details = OrderDetail::where('order_id', $order->id)->where('product_id', $input['product_id'])->first();
                         if ((int) $input['quantity'] <= $product->quantity) {
-                            $input['product_price'] = $product->price;
+                            $input['product_price'] = $details->product_price;
+                            $details->quantity = $input['quantity'];
+                            $details->save();
                             array_push($products, $input);
+                            $total += $input['product_price'] * $input['quantity'];
                         } else {
                             $error = $product->name . ': ' . config('define.product.exceed_quantity');
                             array_push($errors, $error);
                         }
-                        $product->quantity = $input['quantity'];
-                        $input['product_price'] = $product->product_price;
-
-                        $total += $input['product_price'] * $input['quantity'];
                     }
-                    $deleted = OrderDetail::where('order_id', $order->id)->whereNotIn('product_id', array_pluck($request->products, 'id'))->delete();
-                } else {
-                    $deleted = OrderDetail::where('order_id', $order->id)->delete();
+                    OrderDetail::where('order_id', $order->id)->whereNotIn('product_id', array_pluck($request->products, 'id'))->delete();
+                }
+                if (!$products) {
                     return $this->errorResponse($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
                 }
                 $order->total = $total;
