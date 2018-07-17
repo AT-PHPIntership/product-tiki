@@ -18,6 +18,7 @@ Route::group(['namespace' => 'Home'], function () {
     Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
     Route::get('/password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
     Route::get('profile', 'UserController@index')->name('user.info');
+    Route::get('/checkout/cart', 'CartController@index')->name('cart.info');
     Route::get('/locale/{locale}', function ($locale) {
         session(['locale' => $locale]);
 
