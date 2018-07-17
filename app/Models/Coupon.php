@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Coupon extends Model
 {
@@ -26,5 +27,15 @@ class Coupon extends Model
     public function order()
     {
         return $this->hasMany('App\Models\Order', 'coupon_id', 'id');
+    }
+
+    /**
+     * Validate Coupon
+     *
+     * @return boolean
+     */
+    public function isAvailable()
+    {
+        return Carbon::now()->between(Carbon::parse($this->date_begin), Carbon::parse($this->date_end));
     }
 }

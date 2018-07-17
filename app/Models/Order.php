@@ -14,7 +14,7 @@ class Order extends Model
     const UNAPPROVED = 0;
     const CANCELED = 3;
     const ON_DELIVERY = 2;
-    
+
     const ORDER_DESC = 'DESC';
     const ORDER_ASC = 'ASC';
 
@@ -28,6 +28,25 @@ class Order extends Model
     protected $fillable = [
         'user_id', 'total', 'status',
     ];
+
+    /**
+     * Get the order's discount.
+     *
+     * @param App\Models\Coupon $coupon coupon
+     *
+     * @return int
+     */
+    public function getDiscount(Coupon $coupon)
+    {
+        if ($coupon->discount_type == Coupon::PERCENT) {
+            $discountTotal = $this->total * ($coupon->discount / 100);
+            $discount = $discountTotal > $coupon->max_total ? $coupon->max_total : $discountTotal;
+        }
+        if ($coupon->discount_type == Coupon::MONEY) {
+            $discount = $this->total > $coupon->min_total ? $coupon->discount : 0;
+        }
+        return $discount;
+    }
 
     /**
      * Get User Object
@@ -68,7 +87,7 @@ class Order extends Model
     {
         return $this->belongsTo('App\Models\Coupon', 'coupon_id', 'id');
     }
-    
+
     /**
      * Get time changed status order
      *
