@@ -26,6 +26,7 @@ class CreateOrderRequest extends FormRequest
     public function rules()
     {
         return [
+            'products' => 'required',
             'products.*.quantity' => 'numeric',
         ];
     }

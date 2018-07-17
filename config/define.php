@@ -60,5 +60,7 @@ return [
         'change_approve_order' => 'Cannot Change APPROVED order',
         'expired_coupon_code' => 'Coupon code has been expired',
         'coupon_code_doesnt_exist' => 'Coupon code doesn\'t exist',
+        'coupon_code_used_before' => 'You have use this coupon code before',
+        'no_product_found' => 'You must submit at least 1 product',
     ],
 ];

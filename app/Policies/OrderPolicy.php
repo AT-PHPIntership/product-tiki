@@ -15,6 +15,7 @@ class OrderPolicy
      *
      * @param \App\Models\User  $user  user
      * @param \App\Models\Order $order order
+     *
      * @return bool
      */
     public function update(User $user, Order $order)

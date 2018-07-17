@@ -8,6 +8,8 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Coupon;
+use App\Models\Order;
 
 class User extends Authenticatable
 {
@@ -103,5 +105,22 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return $this->role == $this::ADMIN_ROLE;
+    }
+
+    /**
+     * Check user has used coupon code
+     *
+     * @param \App\Models\Coupon $coupon coupon
+     * @param \App\Models\Order  $order  order
+     *
+     * @return boolean
+     */
+    public function isUsed(Coupon $coupon, Order $order = null)
+    {
+        $userOrder = Order::where('user_id', $this->id);
+        if ($order) {
+            $userOrder->where('id', '!=', $order->id);
+        }
+        return $userOrder->get()->contains('coupon_id', $coupon->id);
     }
 }
