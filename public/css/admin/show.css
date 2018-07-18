@@ -15,3 +15,6 @@
 #showChild:hover .child {
   visibility: visible!important;
 }
+.border-0 {
+  border: none !important;
+}
