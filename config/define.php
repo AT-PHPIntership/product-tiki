@@ -60,4 +60,14 @@ return [
         'change_approve_order' => 'Cannot Change APPROVED order',
     ],
     'day_coupon_money' => 15,
+    'coupon_money_defaul' => [
+        'discount' => 10,
+        'min_total' => 20,
+        'date_end' => 3,
+    ],
+    'coupon_percent_defaul' => [
+        'discount' => 20,
+        'max_total' => 200,
+        'date_end' => 3,
+    ],
 ];

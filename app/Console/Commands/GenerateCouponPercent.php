@@ -14,7 +14,7 @@ class GenerateCouponPercent extends Command
      *
      * @var string
      */
-    protected $signature = 'coupon:percent {discount=20} {max=200} {day=3}';
+    protected $signature = 'coupon:percent {discount?} {max?} {day?}';
 
     /**
      * The console command description.
@@ -41,12 +41,12 @@ class GenerateCouponPercent extends Command
     public function handle()
     {
         $coupon = [
-            'discount' => $this->argument('discount'),
+            'discount' => $this->argument('discount') ? $this->argument('discount') : config('define.coupon_percent_defaul.discount'),
             'discount_type' => Coupon::PERCENT,
             'coupon_code' =>  Str::random(20),
-            'max_total' => $this->argument('max'),
-            'date_begin' => Carbon::now(),
-            'date_end' => Carbon::now()->addDays($this->argument('day')),
+            'max_total' => $this->argument('max') ? $this->argument('max') : config('define.coupon_percent_defaul.max_total'),
+            'date_begin' => Carbon::today(),
+            'date_end' => Carbon::today()->addDays($this->argument('day') ? $this->argument('day') : config('define.coupon_percent_defaul.date_end')),
         ];
         Coupon::create($coupon);
     }
