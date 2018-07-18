@@ -36,6 +36,9 @@ return [
             'note_content' => 'Content',
             'update_status' => 'Change Status Successfull!',
             'update_status_fail' => 'Change Status Fail! Please check connectionn!',
+            'order_total' => 'Order Total',
+            'coupon' => 'Coupon',
+            'discount_total' => 'Discount Total',
         ]
     ]
 ];
