@@ -14,7 +14,7 @@ class Order extends Model
     const UNAPPROVED = 0;
     const CANCELED = 3;
     const ON_DELIVERY = 2;
-    
+
     const ORDER_DESC = 'DESC';
     const ORDER_ASC = 'ASC';
 
@@ -26,7 +26,7 @@ class Order extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'total', 'status',
+        'user_id', 'total', 'status', 'address',
     ];
 
     /**
