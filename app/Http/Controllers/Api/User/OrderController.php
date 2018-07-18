@@ -89,7 +89,8 @@ class OrderController extends ApiController
 
         if (count($products)) {
             $order = Order::create([
-                'user_id' => $user->id
+                'user_id' => $user->id,
+                'address' => $request->address
             ]);
 
             $total = 0;
