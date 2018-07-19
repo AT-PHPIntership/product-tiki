@@ -33,6 +33,9 @@ Route::get('/api-doc-builders', function () {
     return view('api-doc-builders.index');
 });
 
+Route::get('/redirect/{social}', 'SocialAuthController@redirect');
+Route::get('/callback/{social}', 'SocialAuthController@callback');
+
 // Todo: add middleware for admin authenticate
 Route::group(['prefix' => 'admin', 'as' => 'admin.' , 'namespace' => 'Admin', 'middleware' => ['auth:web', 'admin']], function () {
     Route::get('/', 'HomeController@index')->name('homepage');
