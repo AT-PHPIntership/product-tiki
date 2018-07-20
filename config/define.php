@@ -63,4 +63,9 @@ return [
         'coupon_code_used_before' => 'You have use this coupon code before',
         'no_product_found' => 'You must submit at least 1 product',
     ],
+    'social' => [
+        'type' => [
+            'facebook' => 'Facebook',
+        ],
+    ],
 ];
