@@ -96,6 +96,16 @@ function showOrderDetail(url) {
                             </div>';
       });
       productListHtml += '<div class="form-group">\
+                            <div class="col-md-12 col-sm-6 col-xs-1">\
+                              <lable class="control-label col-md-7 col-sm-3 col-xs-1"><strong>' + Lang.get('messages.order_total') + '</strong></lable>\
+                              <lable class="control-label col-md-2 col-sm-3 col-xs-12"><strong>10,333,222</strong></lable>\
+                            </div>\
+                            <div class="col-md-12 col-sm-6 col-xs-1">\
+                              <lable class="control-label col-md-7 col-sm-3 col-xs-1"><strong>' + Lang.get('messages.order_total_discount') + '</strong></lable>\
+                              <lable class="control-label col-md-2 col-sm-3 col-xs-12"><strong>9,333,222</strong></lable>\
+                            </div>\
+                          </div>';
+      productListHtml += '<div class="form-group">\
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">\
                               <button id="update-order" class="btn btn-success btn-order-edit-submit">' + Lang.get('category.admin.add.submit') + '</button>\
                               <button class="btn btn-primary btn-order-detail-back">' + Lang.get('category.admin.add.back') + '</button>\
