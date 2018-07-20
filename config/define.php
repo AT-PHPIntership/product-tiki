@@ -59,4 +59,5 @@ return [
         'cancel_approve_order' => 'Cannot Cancel APPROVED order',
         'change_approve_order' => 'Cannot Change APPROVED order',
     ],
+    'day_coupon_money' => 15,
 ];
