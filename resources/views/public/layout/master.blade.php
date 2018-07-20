@@ -16,6 +16,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
       function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- //for-mobile-apps -->
+    <link rel="stylesheet" href="/css/public/sweetalert2.min.css">
+    <link rel="stylesheet" href="/css/public/sweetalert2.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="/css/public/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
@@ -30,6 +32,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- js -->
     <script src="/js/public/route.js"></script>
     <script src="/js/public/jquery-1.11.1.min.js"></script>
+    <script src="/js/public/sweetalert2.min.js"></script>
+    <script src="/js/public/sweetalert2.js"></script>
     <!-- //js -->
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,100,100italic,200,200italic,300,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
@@ -89,6 +93,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <input type="hidden" name="display" value="1">
             <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
           </form>
+          <a href="{{ route('cart.info') }}">{{ __('user/cart.title') }}</a>
         </div>
         <div class="clearfix"> </div>
       </div>
