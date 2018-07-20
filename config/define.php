@@ -70,4 +70,9 @@ return [
         'max_total' => 200,
         'date_end' => 3,
     ],
+    'social' => [
+        'type' => [
+            'facebook' => 'Facebook',
+        ],
+    ],
 ];

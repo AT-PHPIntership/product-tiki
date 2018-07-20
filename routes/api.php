@@ -32,12 +32,14 @@ Route::group(['as' => 'api.', 'namespace' => 'Api\User'], function () {
     Route::apiResource('categories', 'CategoryController');
     Route::apiResource('orders', 'OrderController')->middleware('auth:api');
     Route::get('products/{product}/posts', 'ProductController@getPosts');
+    Route::get('recommend/', 'ProductController@recommend');
     Route::post('products/{product}/posts', 'PostController@store')->middleware('auth:api');
     Route::get('products/{productBase}/compare/{productCompare}', 'ProductController@compare');
     Route::post('login', 'LoginController@login');
     Route::post('register', 'LoginController@register');
     Route::post('/password/reset', 'ForgotPasswordController@sendResetLinkEmail');
     Route::put('/password/reset', 'ResetPasswordController@reset');
+    Route::post('/login-facebook', 'LoginController@facebook');
     Route::group(['middleware' => 'auth:api'], function(){
         Route::post('posts/{post}/comments', 'CommentController@store');
         Route::put('comments/{comments}', 'CommentController@update');

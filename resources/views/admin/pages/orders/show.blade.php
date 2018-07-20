@@ -1,6 +1,13 @@
 @extends('admin.layout.master')
 @section('title', __('orders.admin.show.title') )
+@section('css')
+  <link href="/css/admin/show.css" rel="stylesheet">
+@endsection
 @section('content')
+<?php
+  $total = 0;
+  $newTotal = $orderInfo->total;
+?>
   <div class="right_col" role="main" class="index-main">
     <div class="">
       <div class="page-title">
@@ -53,7 +60,7 @@
               </table>
               <div class="clearfix"></div>
             </div>
-            <div class="col-md-offset-1" class="list-table">
+            <div class="col-md-offset-1 list-table">
               <table class="table table-hover">
                 <thead>
                   <tr>
@@ -77,8 +84,26 @@
                     <td>{{ $order->quantity }}</td>
                     <td>{{ number_format($order->product_price * $order->quantity) }}</td>
                   </tr>
+                    {{ $total += ($order->product_price * $order->quantity) }}
                   @endforeach
                 </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="2"></td>
+                    <td colspan="2"><strong>{{ __('orders.admin.show.order_total') }}</strong></td>
+                    <td>{{ number_format($total) }}</td>
+                  </tr>
+                  <tr class="text-success">
+                    <td colspan="2" class="border-0"></td>
+                    <td colspan="2"><strong>{{ __('orders.admin.show.coupon') }}</strong></td>
+                    <td>{{ ($newTotal > $total) ? number_format($newTotal - $total) : 0 }}</td>
+                  </tr>
+                  <tr class="text-danger">
+                    <td colspan="2" class="border-0"></td>
+                    <td colspan="2"><strong>{{ __('orders.admin.show.discount_total') }}</strong></td>
+                    <td>{{ number_format($newTotal) }}</td>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
