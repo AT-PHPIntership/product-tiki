@@ -265,3 +265,44 @@
 .list-recomment-product .owl-theme .owl-controls .owl-nav div.owl-prev:hover {
   background: url(/images/icon/icon2.png) no-repeat center center !important;
 }
+
+.checkout-left-basket a {
+  padding: 1em;
+  background:#3399cc;
+  font-size: 1.1em;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 1em;
+  display: block;
+  text-decoration: none;
+}
+
+.checkout-left-basket a:hover {
+  background: #fe9126;
+}
+
+.product_list_header a {
+  font-size: 1em;
+  text-transform: capitalize;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.product_list_header form {
+  display: inline-block;
+}
+
+.no-spinners::-webkit-inner-spin-button,
+.no-spinners::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+td.invert-image a img.image-product-cart {
+  width: 250px;
+  height: 150px;
+  margin: 0 auto;
+  object-fit: cover;
+}

@@ -92,6 +92,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <input type="hidden" name="display" value="1">
             <button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
           </form>
+          <a href="{{ route('cart.info') }}">{{ __('user/cart.title') }}</a>
         </div>
         <div class="clearfix"> </div>
       </div>
