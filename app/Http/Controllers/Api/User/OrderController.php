@@ -11,6 +11,7 @@ use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\NoteOrder;
 use App\Models\TrackingOrder;
+use App\Models\Coupon;
 use Illuminate\Http\Response;
 use App\Http\Requests\CreateOrderRequest;
 use Auth;
@@ -76,38 +77,48 @@ class OrderController extends ApiController
         $products = [];
         $errors = [];
 
+        $coupon = Coupon::where('coupon_code', $request->coupon)->first();
+
+        $order = Order::create([
+            'user_id' => $user->id
+        ]);
+
+        $total = 0;
+
         foreach ($request->products as $input) {
             $product = Product::find($input['id']);
+
             if ((int) $input['quantity'] <= $product->quantity) {
                 $input['product_price'] = $product->price;
+
+                $input['product_id'] = $input['id'];
+                $input['order_id'] = $order->id;
+                unset($input['id']);
                 array_push($products, $input);
+                OrderDetail::create($input);
+                $total += $input['product_price'] * $input['quantity'];
             } else {
                 $error = $product->name . ': ' . config('define.product.exceed_quantity');
                 array_push($errors, $error);
             }
         }
 
-        if (count($products)) {
-            $order = Order::create([
-                'user_id' => $user->id,
-                'address' => $request->address
-            ]);
-
-            $total = 0;
-
-            foreach ($products as $input) {
-                $input['product_id'] = $input['id'];
-                $input['order_id'] = $order->id;
-                unset($input['id']);
-
-                OrderDetail::create($input);
-                $total += $input['product_price'] * $input['quantity'];
-            }
-
-            $order->total = $total;
-            $order->save();
-            $order->load('orderDetails');
+        $order->total = $total;
+        if (!$coupon) {
+            array_push($errors, config('define.exception.coupon_code_doesnt_exist'));
+        } else if (!$coupon->isAvailable()) {
+            array_push($errors, config('define.exception.expired_coupon_code'));
+        } else if ($user->isUsed($coupon)) {
+            array_push($errors, config('define.exception.coupon_code_used_before'));
         } else {
+            $discount = $order->getDiscount($coupon);
+            $order->total = $total - $discount;
+            $order->coupon_id = $coupon->id;
+        }
+        $order->save();
+        $order->load('orderDetails', 'coupon');
+
+        if (!$products && $errors) {
             return $this->errorResponse($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         $data['order'] = $order;
@@ -136,7 +147,7 @@ class OrderController extends ApiController
                     'user_id' => $user->id,
                     'note' => request('note'),
                 ]);
-                
+
                 TrackingOrder::create([
                     'order_id' => $order->id,
                     'old_status' => $order->status,
@@ -166,59 +177,50 @@ class OrderController extends ApiController
     */
     public function update(CreateOrderRequest $request, Order $order)
     {
-        $user = Auth::user();
-        if ($user->id == $order->user_id) {
-            if ($order->status != Order::UNAPPROVED) {
-                throw new \Exception(config('define.exception.change_approve_order'));
-            }
+        $products = [];
+        $errors = [];
 
-            $products = [];
-            $errors = [];
+        $coupon = Coupon::where('coupon_code', $request->coupon)->first();
 
-            if ($request->products) {
-                foreach ($request->products as $input) {
-                    $product = Product::find($input['id']);
-                    if ((int) $input['quantity'] <= $product->quantity) {
-                        $input['product_price'] = $product->price;
-                        array_push($products, $input);
-                    } else {
-                        $error = $product->name . ': ' . config('define.product.exceed_quantity');
-                        array_push($errors, $error);
-                    }
-                }
-                $deleted = OrderDetail::where('order_id', $order->id)->whereNotIn('product_id', array_pluck($request->products, 'id'))->delete();
+        $total = 0;
+
+        foreach ($request->products as $input) {
+            $input['product_id'] = $input['id'];
+            $input['order_id'] = $order->id;
+            $product = Product::where('id', $input['id'])->first();
+            $details = OrderDetail::where('order_id', $order->id)->where('product_id', $input['product_id'])->first();
+            if ((int) $input['quantity'] <= $product->quantity) {
+                $input['product_price'] = $details->product_price;
+                $details->quantity = $input['quantity'];
+                $details->save();
+                array_push($products, $input);
+                $total += $input['product_price'] * $input['quantity'];
             } else {
-                $deleted = OrderDetail::where('order_id', $order->id)->delete();
+                $error = $product->name . ': ' . config('define.product.exceed_quantity');
+                array_push($errors, $error);
             }
-
-
-            $total = 0;
-
-            if (count($products)) {
-                foreach ($products as $input) {
-                    $input['product_id'] = $input['id'];
-                    $input['order_id'] = $order->id;
-                    $product = OrderDetail::where('order_id', $order->id)->where('product_id', $input['product_id'])->first();
-
-                    $product->quantity = $input['quantity'];
-                    $input['product_price'] = $product->product_price;
-                    $product->save();
-
-                    $total += $input['product_price'] * $input['quantity'];
-                }
-            } elseif (!$deleted) {
-                return $this->errorResponse($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
-            }
-
-            $order->total = $total;
-            $order->save();
-            $order->load('orderDetails');
-
-            $data['order'] = $order;
-            $data['errors'] = $errors;
-            return $this->successResponse($data, Response::HTTP_OK);
-        } else {
-            throw new AuthentictionException();
         }
+        OrderDetail::where('order_id', $order->id)->whereNotIn('product_id', array_pluck($request->products, 'id'))->delete();
+
+        if (!$products && $errors) {
+            return $this->errorResponse($errors, Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        $order->total = $total;
+
+        if (!$coupon) {
+            array_push($errors, config('define.exception.coupon_code_doesnt_exist'));
+        } else if (!$coupon->isAvailable()) {
+            array_push($errors, config('define.exception.expired_coupon_code'));
+        } else {
+            $discount = $order->getDiscount($coupon);
+            $order->total = $total - $discount;
+            $order->coupon_id = $coupon->id;
+        }
+        $order->save();
+        $order->load('orderDetails', 'coupon');
+
+        $data['order'] = $order;
+        $data['errors'] = $errors;
+        return $this->successResponse($data, Response::HTTP_OK);
     }
 }

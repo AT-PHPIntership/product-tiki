@@ -30,6 +30,25 @@ class Order extends Model
     ];
 
     /**
+     * Get the order's discount.
+     *
+     * @param App\Models\Coupon $coupon coupon
+     *
+     * @return int
+     */
+    public function getDiscount(Coupon $coupon)
+    {
+        if ($coupon->discount_type == Coupon::PERCENT) {
+            $discountTotal = $this->total * ($coupon->discount / 100);
+            $discount = $discountTotal > $coupon->max_total ? $coupon->max_total : $discountTotal;
+        }
+        if ($coupon->discount_type == Coupon::MONEY) {
+            $discount = $this->total > $coupon->min_total ? $coupon->discount : 0;
+        }
+        return $discount;
+    }
+
+    /**
      * Get User Object
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -68,7 +87,7 @@ class Order extends Model
     {
         return $this->belongsTo('App\Models\Coupon', 'coupon_id', 'id');
     }
-    
+
     /**
      * Get time changed status order
      *

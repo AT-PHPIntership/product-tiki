@@ -30,7 +30,8 @@ Route::group(['as' => 'api.', 'namespace' => 'Api\User'], function () {
     Route::apiResource('posts/{post}/comments', 'CommentController');
     Route::apiResource('posts', 'PostController')->middleware('auth:api');
     Route::apiResource('categories', 'CategoryController');
-    Route::apiResource('orders', 'OrderController')->middleware('auth:api');
+    Route::apiResource('orders', 'OrderController')->except('update')->middleware('auth:api');
+    Route::put('orders/{order}', 'OrderController@update')->middleware(['auth:api', 'updateOrder']);
     Route::get('products/{product}/posts', 'ProductController@getPosts');
     Route::get('recommend/', 'ProductController@recommend');
     Route::post('products/{product}/posts', 'PostController@store')->middleware('auth:api');
