@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        '\App\Console\Commands\GenerateCouponPercent',
+        '\App\Console\Commands\GenerateCouponMoney',
     ];
 
     /**
@@ -25,8 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->command('coupon:percent')->quarterly();
+        $schedule->command('coupon:money')->monthlyOn(config('define.day_coupon_money'));
     }
 
     /**
