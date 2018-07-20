@@ -2,7 +2,6 @@
 @section('title', __('user/master.title.detail'))
 @section('css')
   <link href="/css/public/custom.css" rel="stylesheet">
-  <link href="/css/public/owl.carousel.css" rel="stylesheet">
 @endsection
 @section('content')
 <!-- breadcrumbs -->
@@ -71,167 +70,6 @@
       </div>
     </div>
   </div>
-  <!-- new -->
-  <div class="newproducts-w3agile recomment-product">
-    <div class="container">
-      <h3>@lang('user/detail_product.recommend_product')</h3>
-        <div class="list-recomment-product">
-          <div class="owl-carousel">
-            <div class="top_brand_left" id="4" style="display:">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
-                  </div>
-                  <div class="agile_top_brand_left_grid1">
-                    <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>
-                          <p>Mrs. Daniella Satterfield</p>
-                          <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
-                          <h4>$ 9,787,960</h4>
-                        </div>
-                        <div class="snipcart-details top_brand_home_details">
-                          <a href="/products/4">
-                            <input type="submit" name="submit" value="Detail" class="button">
-                          </a>
-                        </div>
-                      </div>
-                    </figure>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="top_brand_left" id="4" style="display:">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
-                  </div>
-                  <div class="agile_top_brand_left_grid1">
-                    <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>
-                          <p>Mrs. Daniella Satterfield</p>
-                          <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
-                          <h4>$ 9,787,960</h4>
-                        </div>
-                        <div class="snipcart-details top_brand_home_details">
-                          <a href="/products/4">
-                            <input type="submit" name="submit" value="Detail" class="button">
-                          </a>
-                        </div>
-                      </div>
-                    </figure>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="top_brand_left" id="4" style="display:">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
-                  </div>
-                  <div class="agile_top_brand_left_grid1">
-                    <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>
-                          <p>Mrs. Daniella Satterfield</p>
-                          <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
-                          <h4>$ 9,787,960</h4>
-                        </div>
-                        <div class="snipcart-details top_brand_home_details">
-                          <a href="/products/4">
-                            <input type="submit" name="submit" value="Detail" class="button">
-                          </a>
-                        </div>
-                      </div>
-                    </figure>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="top_brand_left" id="4" style="display:">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
-                  </div>
-                  <div class="agile_top_brand_left_grid1">
-                    <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>
-                          <p>Mrs. Daniella Satterfield</p>
-                          <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
-                          <h4>$ 9,787,960</h4>
-                        </div>
-                        <div class="snipcart-details top_brand_home_details">
-                          <a href="/products/4">
-                            <input type="submit" name="submit" value="Detail" class="button">
-                          </a>
-                        </div>
-                      </div>
-                    </figure>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="top_brand_left" id="4" style="display:">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
-                  </div>
-                  <div class="agile_top_brand_left_grid1">
-                    <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>
-                          <p>Mrs. Daniella Satterfield</p>
-                          <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
-                          <h4>$ 9,787,960</h4>
-                        </div>
-                        <div class="snipcart-details top_brand_home_details">
-                          <a href="/products/4">
-                            <input type="submit" name="submit" value="Detail" class="button">
-                          </a>
-                        </div>
-                      </div>
-                    </figure>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="top_brand_left" id="4" style="display:">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
-                  </div>
-                  <div class="agile_top_brand_left_grid1">
-                    <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
-                          <a href="/products/4"><img title=" " alt=" " src="../images/upload/img.jpg"></a>
-                          <p>Mrs. Daniella Satterfield</p>
-                          <div class="stars"><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star blue-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i><i class="fa fa-star black-star" aria-hidden="true"></i></div>
-                          <h4>$ 9,787,960</h4>
-                        </div>
-                        <div class="snipcart-details top_brand_home_details">
-                          <a href="/products/4">
-                            <input type="submit" name="submit" value="Detail" class="button">
-                          </a>
-                        </div>
-                      </div>
-                    </figure>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-    </div>
-  </div>
-  <!-- //new -->
   <div class="review">
     <div class="container review-background">
       <h3 class="js-customer-h3" style="display: block;font-size: 30px;text-align:  center;">@lang('user/detail_product.send_cmt_message')</h3>
@@ -368,5 +206,4 @@
 @section('js')
 <script src="/js/public/details.js"></script>
 <script src="/js/public/posts.js"></script>
-<script src="/js/public/owl.carousel.js"></script>
 @endsection

@@ -23,6 +23,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <link href="/css/public/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/css/public/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/css/public/custom.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/css/public/owl.carousel.css" rel="stylesheet">
     @yield('css')
     <!-- font-awesome icons -->
     <link href="/css/public/font-awesome.css" rel="stylesheet">
@@ -147,6 +148,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   @yield('content')
     </div>
   </div>
+    <!-- new -->
+    <div class="newproducts-w3agile recomment-product">
+      <div class="container">
+        <h3>@lang('user/detail_product.recommend_product')</h3>
+          <div class="list-recomment-product">
+            <div class="owl-carousel">
+            </div>
+        </div>
+      </div>
+    </div>
+  <!-- //new -->
+  <div class="top_brand_left" id="item_recommend" style="display:none">
+    <div class="hover14 column">
+      <div class="agile_top_brand_left_grid">
+        <div class="agile_top_brand_left_grid_pos">
+        </div>
+        <div class="agile_top_brand_left_grid1">
+          <figure>
+            <div class="snipcart-item block">
+              <div class="snipcart-thumb">
+                <a href=""><img title=" " alt=" " src=""></a>
+                <p></p>
+                <div class="stars"></div>
+                <h4>$ </h4>
+              </div>
+              <div class="snipcart-details top_brand_home_details">
+                <a href="">
+                  <input type="submit" name="submit" value="{{ __('user/index.detail') }}" class="button">
+                </a>
+              </div>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- //footer -->
     <div class="footer">
       <div class="container">
@@ -259,6 +296,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   <script src="/js/public/master.js" charset="utf-8"></script>
   <script src="/js/public/category.js"></script>
   <script src="/js/public/masterpage.js"></script>
+  <script src="/js/public/owl.carousel.js"></script>
   @yield('js')
   </body>
 </html>

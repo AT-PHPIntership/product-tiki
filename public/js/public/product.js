@@ -1,4 +1,9 @@
 $(document).ready(function () {
+    var categoryRecommend = window.location.search;
+    var arrUrl = categoryRecommend.split("=");
+    var idCategoryRecommend =  arrUrl[(categoryRecommend.split("=").length-1)];
+
+    localStorage.setItem('idCategoryRecommend', idCategoryRecommend);
     var url = '';
     if (window.location.search == "") {
         url = api.api_products_index;
