@@ -7,7 +7,7 @@
         <h2>{{ __('user/login.login_form') }}</h2>
 
         <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
-          <form>
+          <form novalidate>
             <input type="email" placeholder="{{ __('user/login.form.email_hint') }}" required=" " >
             <input type="password" placeholder="{{ __('user/login.form.password_hint') }}" required=" " >
             <div class="forgot">
