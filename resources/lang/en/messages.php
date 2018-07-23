@@ -33,4 +33,6 @@ return [
     'delete_record' => 'Do you want to delete ?',
     'delete_fail' => 'Delete Failed',
     'delete_success' => 'Delete Successfully',
+    'order_total' => 'Order Total',
+    'order_total_discount' => 'Order Total Discount',
 ];

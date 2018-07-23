@@ -5,6 +5,8 @@ const ON_DELIVERY = 2;
 const CANCELED = 3;
 var order_detail;
 var order_id;
+var total = 0;
+var order_total;
 
 function showOrder(url) {
   $.ajax({
@@ -82,8 +84,11 @@ function showOrderDetail(url) {
       productListHtml = '';
       order_detail = orderDetailList;
       order_id = response.result.id;
+      order_total = response.result.total;
       orderDetailList.forEach(orderDetail => {
+        
         product = orderDetail.product;
+        total += (orderDetail.product_price * orderDetail.quantity);
         productListHtml += '<div id="items_'+ product.id +'" class="form-group">\
                               <input type="number" id="product_id_' + product.id + '" value="' + product.id + '" class="product_id_" hidden>\
                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="full_name">' + product.name + '</label>\
@@ -95,6 +100,16 @@ function showOrderDetail(url) {
                               <button onclick="deleteProduct(event,'+ product.id +')" class="btn btn-danger"><i class="fa fa-trash"></i></button>\
                             </div>';
       });
+      productListHtml += '<div class="form-group">\
+                            <div class="col-md-12 col-sm-6 col-xs-1">\
+                              <lable class="control-label col-md-7 col-sm-3 col-xs-1"><strong>' + Lang.get('messages.order_total') + '</strong></lable>\
+                              <lable class="control-label col-md-2 col-sm-3 col-xs-12"><strong>'+ total.toLocaleString() +'</strong></lable>\
+                            </div>\
+                            <div class="col-md-12 col-sm-6 col-xs-1">\
+                              <lable class="control-label col-md-7 col-sm-3 col-xs-1"><strong>' + Lang.get('messages.order_total_discount') + '</strong></lable>\
+                              <lable class="control-label col-md-2 col-sm-3 col-xs-12"><strong>' + order_total.toLocaleString() + '</strong></lable>\
+                            </div>\
+                          </div>';
       productListHtml += '<div class="form-group">\
                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">\
                               <button id="update-order" class="btn btn-success btn-order-edit-submit">' + Lang.get('category.admin.add.submit') + '</button>\
