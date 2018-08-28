@@ -13,6 +13,7 @@ function loadPage() {
             if (response.result.images.length > 0) {
                 let imagePri = '<img id="example" src="' + imagePath + response.result.images[0].img_url + '" alt=" " class="img-responsive">';
                 $('.agileinfo_single .col-md-4 .agileinfo_single_left').append(imagePri);
+                $('.agileinfo_single_right .agileinfo_single_right_details form fieldset').append('<input type="hidden" name="image_src" value="' + imagePath + response.result.images[0].img_url + '">');
                 response.result.images.forEach(image => {
                     imageSub = '<li class="col-md-4 sub-images-item"><div><img id="example" src="' + imagePath + image.img_url + '" alt=" " class="img-responsive"></div></li>';
                     $('.sub-images .sub-images-list').append(imageSub);
@@ -20,6 +21,7 @@ function loadPage() {
             } else {
                 let imagePri = '<img id="example" src="' + imagePath + 'img.jpg' + '" alt=" " class="img-responsive">';
                 $('.agileinfo_single .col-md-4 .agileinfo_single_left').append(imagePri);
+                $('.agileinfo_single_right .agileinfo_single_right_details form fieldset').append('<input type="hidden" name="image_src" value="' + imagePath + 'img.jpg' + '">');
             }
 
             for (i = 1; i <= maxStar; i++) {
